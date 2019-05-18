@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shelters/src/blocs/blocs.dart';
 
 class SearchSh extends StatelessWidget {
@@ -21,9 +22,10 @@ class SearchSh extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.search),
+                icon: Icon(MdiIcons.magnify),
                 onPressed: () => searchBloc.dispatch(SearchEvent.show),
               ),
+              VerticalDivider(),
               IconButton(
                 icon: Icon(Icons.close),
                 onPressed: () => searchBloc.dispatch(SearchEvent.hide),

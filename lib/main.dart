@@ -13,6 +13,7 @@ class AppSh extends StatefulWidget {
 
 class _AppShState extends State<AppSh> {
   final NavigationBloc _navigationBloc = NavigationBloc();
+  final SortBloc _sortBloc = SortBloc();
   final SearchBloc _searchBloc = SearchBloc();
 
   @override
@@ -20,6 +21,7 @@ class _AppShState extends State<AppSh> {
     return BlocProviderTree(
       blocProviders: [
         BlocProvider<NavigationBloc>(bloc: _navigationBloc),
+        BlocProvider<SortBloc>(bloc: _sortBloc),
         BlocProvider<SearchBloc>(bloc: _searchBloc)
       ],
       child: MaterialApp(
@@ -37,6 +39,7 @@ class _AppShState extends State<AppSh> {
   void dispose() {
     _navigationBloc.dispose();
     _searchBloc?.dispose();
+    _sortBloc?.dispose();
     super.dispose();
   }
 

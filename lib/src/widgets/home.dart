@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shelters/src/widgets/grid.dart';
-import 'package:shelters/src/widgets/list_compare.dart';
 
 class HomeSh extends StatelessWidget {
   final List<String> petsList = ['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];
-
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,14 +39,6 @@ class HomeSh extends StatelessWidget {
           ),
           ListTile(
             title: Text('Найти питомцев'),
-            trailing: IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () => Navigator.push<dynamic>(context, 
-                CupertinoPageRoute<dynamic>(
-                  builder: (BuildContext context) => ListCompareSh()
-                )
-              ),
-            )
           ),
           GridSh(),
           Card(
