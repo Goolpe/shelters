@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shelters/src/widgets/categories.dart';
 
 import 'package:shelters/src/widgets/list_compare.dart';
 
@@ -59,7 +60,9 @@ class HomeSh extends StatelessWidget {
                   ),
                   onTap: () => Navigator.push<dynamic>(context, 
                     CupertinoPageRoute<dynamic>(
-                      builder: (BuildContext context) => ListCompareSh(title: petsList[i])
+                      builder: (BuildContext context) => i == petsList.length - 1
+                      ? CategoriesSh()
+                      : ListCompareSh(title: petsList[i])
                     )
                   )
                 ),

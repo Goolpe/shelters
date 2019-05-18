@@ -29,6 +29,13 @@ class _AppShState extends State<AppSh> {
         title: 'Shelters',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          primaryTextTheme: Theme
+          .of(context)
+          .primaryTextTheme
+          .apply(bodyColor: Colors.black),
+          primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
+            color: Colors.black
+          ),
         ),
         home:  NavigationSh(),
       ),

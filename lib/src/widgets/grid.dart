@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shelters/src/widgets/list_compare.dart';
-import 'package:shelters/src/widgets/search.dart';
 
 class GridSh extends StatelessWidget {
   GridSh({
