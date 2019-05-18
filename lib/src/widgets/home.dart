@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/src/widgets/grid.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import 'package:shelters/src/widgets/list_compare.dart';
 
 class HomeSh extends StatelessWidget {
   final List<String> petsList = ['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];
@@ -11,6 +14,7 @@ class HomeSh extends StatelessWidget {
         shrinkWrap: true,
         children: <Widget>[
           ListTile(
+            trailing: Icon(MdiIcons.cat, color: Colors.blue,),
             title: Text('Новые питомцы')
           ),
           Container(
@@ -38,9 +42,30 @@ class HomeSh extends StatelessWidget {
             ),
           ),
           ListTile(
+            trailing: Icon(MdiIcons.magnify, color: Colors.green,),
             title: Text('Найти питомцев'),
           ),
-          GridSh(),
+          GridView.count(
+            physics: BouncingScrollPhysics(),
+            shrinkWrap: true,
+            crossAxisCount: 3,
+            children: List.generate(petsList.length, (int i) {
+              return Card(
+                child: InkWell(
+                  child: Container(
+                    margin: EdgeInsets.all(5),
+                    alignment: Alignment.center,
+                    child: Text(petsList[i], softWrap: true, textAlign: TextAlign.center,),
+                  ),
+                  onTap: () => Navigator.push<dynamic>(context, 
+                    CupertinoPageRoute<dynamic>(
+                      builder: (BuildContext context) => ListCompareSh(title: petsList[i])
+                    )
+                  )
+                ),
+              );
+            }),
+          ),
           Card(
             child: ListTile(
               leading: Icon(Icons.place),

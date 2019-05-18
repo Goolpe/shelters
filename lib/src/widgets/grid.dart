@@ -4,6 +4,12 @@ import 'package:shelters/src/widgets/list_compare.dart';
 import 'package:shelters/src/widgets/search.dart';
 
 class GridSh extends StatelessWidget {
+  GridSh({
+    Key key, 
+    this.url,
+  }) : super(key:key);
+
+  final String url;
   final List<String> petsList = ['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];
 
   @override
@@ -15,10 +21,13 @@ class GridSh extends StatelessWidget {
       children: List.generate(petsList.length, (int i) {
         return Card(
           child: InkWell(
-            child: Container(
-              margin: EdgeInsets.all(5),
-              alignment: Alignment.center,
-              child: Text(petsList[i], softWrap: true, textAlign: TextAlign.center,),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Image.network(
+                url,
+                alignment: Alignment.topCenter,
+                fit: BoxFit.cover,
+              )
             ),
             onTap: () => Navigator.push<dynamic>(context, 
               CupertinoPageRoute<dynamic>(

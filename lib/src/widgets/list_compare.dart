@@ -6,6 +6,7 @@ import 'package:shelters/src/blocs/blocs.dart';
 import 'package:shelters/src/widgets/grid.dart';
 import 'package:shelters/src/widgets/list.dart';
 import 'package:shelters/src/widgets/search.dart';
+import 'package:shelters/src/widgets/search_filter.dart';
 
 class ListCompareSh extends StatelessWidget {
   ListCompareSh({
@@ -49,22 +50,16 @@ class ListCompareSh extends StatelessWidget {
                     )
                     : SearchSh(searchBloc: searchBloc),
                     AnimatedCrossFade(
-                      firstChild: ListTile(
-                        title: FlatButton(
-                          color: Colors.grey[300],
-                          child: Text('Параметры поиска'),
-                          onPressed: (){},
-                        )
-                      ),
+                      firstChild: SearchFilterSh(sortBloc: sortBloc, stateSort: stateSort),
                       secondChild: Container(height: 0),
                       duration: Duration(milliseconds: 300),
                       crossFadeState: stateSearch
                       ? CrossFadeState.showFirst
                       : CrossFadeState.showSecond
                     ),
-                    !stateSort
-                    ? GridSh()
-                    : ListSh()
+                    stateSort
+                    ? GridSh(url: 'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg')
+                    : ListSh(url: 'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg')
                   ],
                 )
               )

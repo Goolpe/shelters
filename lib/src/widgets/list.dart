@@ -1,8 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/src/widgets/search.dart';
 
 class ListSh extends StatelessWidget {
+  ListSh({
+    Key key, 
+    this.url,
+  }) : super(key:key);
+
+  final String url;
   final List<String> petsList = ['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];
 
   @override
@@ -18,7 +23,7 @@ class ListSh extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: Image.network(
-                'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg',
+                url,
                 alignment: Alignment.topCenter,
                 fit: BoxFit.cover,
               )
