@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shelters/src/widgets/home.dart';
+import 'package:shelters/src/widgets/map.dart';
 import 'package:shelters/src/widgets/profile.dart';
 import 'package:shelters/src/widgets/donor.dart';
 import 'package:shelters/src/localization/ru.dart';

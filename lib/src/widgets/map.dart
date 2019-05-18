@@ -19,7 +19,6 @@ class _MapShState extends State<MapSh> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-        mapType: MapType.hybrid,
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
