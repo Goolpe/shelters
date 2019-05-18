@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:shelters/src/widgets/home.dart';
+import 'package:shelters/src/widgets/map.dart';
 import 'package:shelters/src/widgets/profile.dart';
 import 'package:shelters/src/widgets/donor.dart';
 import 'package:shelters/src/localization/ru.dart';
-import 'package:shelters/src/blocs/navigation_bloc.dart';
+import 'package:shelters/src/blocs/blocs.dart';
 
 class NavigationSh extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final NavigationBloc _navigationBloc = BlocProvider.of<NavigationBloc>(context);
+    final NavigationBloc navigationBloc = BlocProvider.of<NavigationBloc>(context);
 
     return BlocBuilder<NavigationEvent, int>(
-      bloc: _navigationBloc,
+      bloc: navigationBloc,
       builder: (BuildContext context, int currentPage) {
         return Scaffold(
           body: showPage(currentPage),
@@ -26,8 +27,8 @@ class NavigationSh extends StatelessWidget {
                 title: Text(HOME_STR),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                title: Text(DONOR_STR),
+                icon: Icon(Icons.place),
+                title: Text(MAP_STR),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle),
@@ -36,7 +37,7 @@ class NavigationSh extends StatelessWidget {
             ],
             currentIndex: currentPage,
             selectedItemColor: choiseColor(currentPage),
-            onTap: (int index) => choisePage(index, _navigationBloc),
+            onTap: (int index) => choisePage(index, navigationBloc),
           ),
         );
       }
@@ -46,7 +47,7 @@ class NavigationSh extends StatelessWidget {
   Widget showPage(int currentPage){
     switch(currentPage){
       case 0: return HomeSh();
-      case 1: return DonorSh();
+      case 1: return MapSh();
       case 2: return ProfileSh();
       default: return HomeSh();
     }
