@@ -22,7 +22,7 @@ dependencies:
   equatable: ^0.2.3
   material_design_icons_flutter: ^3.2.3595
   google_maps_flutter: ^0.5.13
-
+  
   flutter:
     sdk: flutter
     
