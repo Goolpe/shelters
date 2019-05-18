@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HomePageSh extends StatelessWidget {
+class DonorSh extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {

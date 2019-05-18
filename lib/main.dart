@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:shelters/src/components/navigation.dart';
+import 'package:shelters/src/widgets/navigation.dart';
 import 'package:shelters/src/blocs/navigation_bloc.dart';
 
 void main() => runApp(AppSh());

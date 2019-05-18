@@ -89,12 +89,19 @@ packages:
     source: hosted
     version: "1.6.2"
   pedantic:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.0"
+  perfectionist:
+    dependency: "direct dev"
+    description:
+      name: perfectionist
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   quiver:
     dependency: transitive
     description:
