@@ -15,6 +15,9 @@ class ProfileSh extends StatelessWidget {
               leading: Icon(Icons.place),
               title: Text('Указать местоположение'),
             )
+          ),
+          ListTile(
+            title: Text('О приложении'),
           )
         ],
       )

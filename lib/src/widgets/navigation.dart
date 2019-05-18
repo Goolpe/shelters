@@ -26,8 +26,8 @@ class NavigationSh extends StatelessWidget {
                 title: Text(HOME_STR),
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.favorite),
-                title: Text(DONOR_STR),
+                icon: Icon(Icons.place),
+                title: Text(MAP_STR),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle),
@@ -46,7 +46,7 @@ class NavigationSh extends StatelessWidget {
   Widget showPage(int currentPage){
     switch(currentPage){
       case 0: return HomeSh();
-      case 1: return DonorSh();
+      case 1: return MapSh();
       case 2: return ProfileSh();
       default: return HomeSh();
     }
