@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/src/widgets/search.dart';
+import 'package:shelters/src/widgets/grid.dart';
+import 'package:shelters/src/widgets/list_compare.dart';
 
 class HomeSh extends StatelessWidget {
   final List<String> petsList = ['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];
@@ -44,24 +45,12 @@ class HomeSh extends StatelessWidget {
               icon: Icon(Icons.search),
               onPressed: () => Navigator.push<dynamic>(context, 
                 CupertinoPageRoute<dynamic>(
-                  builder: (BuildContext context) => SearchSh()
+                  builder: (BuildContext context) => ListCompareSh()
                 )
               ),
             )
           ),
-          GridView.count(
-            shrinkWrap: true,
-            crossAxisCount: 3,
-            children: List.generate(petsList.length, (int i) {
-              return Card(
-                child: Container(
-                  margin: EdgeInsets.all(5),
-                  alignment: Alignment.center,
-                  child: Text(petsList[i], softWrap: true, textAlign: TextAlign.center,)
-                )
-              );
-            }),
-          ),
+          GridSh(),
           Card(
             child: ListTile(
               leading: Icon(Icons.place),
