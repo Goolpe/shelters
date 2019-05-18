@@ -44,6 +44,7 @@ class SearchListSh extends StatelessWidget {
             trailing: Icon(MdiIcons.magnify, color: Colors.green,),
             title: Text('Питомники'),
             subtitle: Text('Находите любимцев и друзей'),
+            onTap: () => Navigator.pushNamed(context, '/shelters'),
           ),
         ),
         Card(
@@ -51,6 +52,7 @@ class SearchListSh extends StatelessWidget {
               trailing: Icon(MdiIcons.dog, color: Colors.purple,),
               title: Text('Потеряшки'),
               subtitle: Text('Найдем питомца вместе!'),
+              onTap: () => Navigator.pushNamed(context, '/lost'),
             ),
           ),
           Card(
@@ -58,6 +60,7 @@ class SearchListSh extends StatelessWidget {
               trailing: Icon(MdiIcons.dogSide, color: Colors.blue,),
               title: Text('Выставки'),
               subtitle: Text('Куда сходить, что посмотреть'),
+              onTap: () => Navigator.pushNamed(context, '/exhibitions'),
             ),
           ),
           Card(
@@ -65,6 +68,7 @@ class SearchListSh extends StatelessWidget {
               trailing: Icon(MdiIcons.heartCircleOutline, color: Colors.red,),
               title: Text('Донорство'),
               subtitle: Text('Спасти жизнь может каждый!'),
+              onTap: () => Navigator.pushNamed(context, '/donor'),
             ),
           ),
       ]

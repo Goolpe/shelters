@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:shelters/src/widgets/home.dart';
 import 'package:shelters/src/widgets/map.dart';
-import 'package:shelters/src/widgets/profile.dart';
-import 'package:shelters/src/widgets/donor.dart';
-import 'package:shelters/src/localization/ru.dart';
 import 'package:shelters/src/blocs/blocs.dart';
-import 'package:shelters/src/widgets/search_list.dart';
+import './home.dart';
+import './profile.dart';
+import './search_list.dart';
 
 class NavigationSh extends StatelessWidget {
 
@@ -42,7 +40,7 @@ class NavigationSh extends StatelessWidget {
                 title: Container(height: 0)
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
+                icon: Icon(MdiIcons.accountCircle),
                 title: Container(height: 0)
               ),
             ],

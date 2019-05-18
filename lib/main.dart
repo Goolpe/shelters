@@ -1,8 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shelters/src/widgets/donor.dart';
+import 'package:shelters/src/widgets/exhibitions.dart';
+import 'package:shelters/src/widgets/lost.dart';
 
-import 'package:shelters/src/widgets/navigation.dart';
+import 'package:shelters/src/widgets/navigation/navigation.dart';
 import 'package:shelters/src/blocs/blocs.dart';
+import 'package:shelters/src/widgets/shelters.dart';
 
 void main() => runApp(AppSh());
 
@@ -37,6 +42,20 @@ class _AppShState extends State<AppSh> {
             color: Colors.black
           ),
         ),
+        onGenerateRoute: (RouteSettings settings){
+          switch (settings.name){
+            case '/shelters': 
+              return _goTo(SheltersSh());
+            case '/lost': 
+              return _goTo(LostSh());
+            case '/exhibitions':
+              return _goTo(ExhibitionsSh());
+            case '/donor': 
+              return _goTo(DonorSh());
+            default:
+              return null;
+          }
+        },
         home:  NavigationSh(),
       ),
     );
@@ -50,4 +69,9 @@ class _AppShState extends State<AppSh> {
     super.dispose();
   }
 
+  Route<dynamic> _goTo(StatelessWidget widget){
+    return CupertinoPageRoute<dynamic>(
+      builder: (BuildContext context) => widget
+    );
+  }
 }
