@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:shelters/src/components/home_page.dart';
+import 'package:shelters/src/components/navigation.dart';
+import 'package:shelters/src/blocs/navigation_bloc.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(AppSh());
 
-class MyApp extends StatelessWidget {
+class AppSh extends StatefulWidget {
+  @override
+  _AppShState createState() =>  _AppShState();
+}
+
+class _AppShState extends State<AppSh> {
+  final NavigationBloc _navigationBloc = NavigationBloc();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -12,7 +21,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePageSh(),
+      home: BlocProvider<NavigationBloc>(
+        bloc: _navigationBloc,
+        child: NavigationSh(),
+      ),
     );
   }
+
+  @override
+  void dispose() {
+    _navigationBloc.dispose();
+    super.dispose();
+  }
+
 }
