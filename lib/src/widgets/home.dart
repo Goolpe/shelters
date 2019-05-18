@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shelters/src/widgets/search.dart';
 
 class HomeSh extends StatelessWidget {
   final List<String> petsList = ['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];
@@ -37,7 +39,15 @@ class HomeSh extends StatelessWidget {
             ),
           ),
           ListTile(
-            title: Text('Найти питомцев')
+            title: Text('Найти питомцев'),
+            trailing: IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () => Navigator.push<dynamic>(context, 
+                CupertinoPageRoute<dynamic>(
+                  builder: (BuildContext context) => SearchSh()
+                )
+              ),
+            )
           ),
           GridView.count(
             shrinkWrap: true,
