@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shelters/src/blocs/blocs.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 
+import 'package:shelters/src/blocs/blocs.dart';
+import 'package:shelters/src/components/profile/my_location.dart';
 import 'package:shelters/src/components/search_list/donor.dart';
 import 'package:shelters/src/components/search_list/exhibitions.dart';
 import 'package:shelters/src/components/search_list/lost.dart';
@@ -31,21 +33,33 @@ class _AppShState extends State<AppSh> {
         BlocProvider<SortBloc>(bloc: _sortBloc),
         BlocProvider<SearchBloc>(bloc: _searchBloc)
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Shelters',
-        theme: ThemeData(
+      child: DynamicTheme(
+        defaultBrightness: Brightness.light,
+        data: (Brightness brightness) => ThemeData(
+          brightness: brightness,
           primarySwatch: Colors.blue,
           primaryTextTheme: Theme
           .of(context)
           .primaryTextTheme
-          .apply(bodyColor: Colors.black),
-          primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
-            color: Colors.black
-          ),
+          .apply(bodyColor: brightness == Brightness.light
+              ? Colors.black
+              : Colors.white),
+          primaryIconTheme: 
+            Theme.of(context).primaryIconTheme.copyWith(
+              color: brightness == Brightness.light
+              ? Colors.black
+              : Colors.white
+            )
         ),
-        onGenerateRoute: (RouteSettings settings) => _handleRoute(settings),
-        home:  NavigationSh(),
+        themedWidgetBuilder: (BuildContext context, ThemeData theme) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Shelters',
+            theme: theme,
+            onGenerateRoute: (RouteSettings settings) => _handleRoute(settings),
+            home:  NavigationSh(),
+          );
+        }
       ),
     );
   }
@@ -78,6 +92,8 @@ class _AppShState extends State<AppSh> {
         return _goTo(AboutAppSh());
       case '/my_pets': 
         return _goTo(MyPetsSh());
+      case '/my_location': 
+        return _goTo(MyLocationSh());
       default:
         return null;
     }

@@ -1,3 +1,4 @@
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -49,7 +50,7 @@ class ProfileSh extends StatelessWidget {
                 )
               ),
               Positioned(
-                top: 50,
+                top: 40,
                 right: 20,
                 child: CircleAvatar(
                   radius: 50,
@@ -64,15 +65,21 @@ class ProfileSh extends StatelessWidget {
               ),
             ],
           ),
+          Card(
+            child: ListTile(
+              title: Text('Тема'),
+              trailing: Text(Theme.of(context).brightness == Brightness.dark ? 'Темная': 'Светлая'),
+              onTap: () => changeBrightness(context),
+            ),
+          ),
           Column(
             children: List.generate(settingsList.length, (int i) {
               return Card(
                 child: ListTile(
-                  title: Text(settingsList[i]['title'], style: TextStyle(
-                    color: i == settingsList.length - 1
-                    ? Colors.red
-                    : Colors.black),
-                  ),
+                  title: i == settingsList.length - 1
+                    ? Text(settingsList[i]['title'], style: TextStyle(
+                      color: Colors.red))
+                    : Text(settingsList[i]['title']),
                   trailing: Text(settingsList[i]['trailing']),
                   onTap: () => Navigator.pushNamed(context, settingsList[i]['tap']),
                 ),
@@ -82,5 +89,9 @@ class ProfileSh extends StatelessWidget {
         ],
       )
     );
+  }
+
+  void changeBrightness(BuildContext context) {
+    DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
   }
 }
