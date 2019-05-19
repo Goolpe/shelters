@@ -7,6 +7,8 @@ import 'package:shelters/src/widgets/lost.dart';
 
 import 'package:shelters/src/widgets/navigation/navigation.dart';
 import 'package:shelters/src/blocs/blocs.dart';
+import 'package:shelters/src/widgets/profile/about_app.dart';
+import 'package:shelters/src/widgets/profile/my_pets.dart';
 import 'package:shelters/src/widgets/shelters.dart';
 
 void main() => runApp(AppSh());
@@ -42,20 +44,7 @@ class _AppShState extends State<AppSh> {
             color: Colors.black
           ),
         ),
-        onGenerateRoute: (RouteSettings settings){
-          switch (settings.name){
-            case '/shelters': 
-              return _goTo(SheltersSh());
-            case '/lost': 
-              return _goTo(LostSh());
-            case '/exhibitions':
-              return _goTo(ExhibitionsSh());
-            case '/donor': 
-              return _goTo(DonorSh());
-            default:
-              return null;
-          }
-        },
+        onGenerateRoute: (RouteSettings settings) => _handleRoute(settings),
         home:  NavigationSh(),
       ),
     );
@@ -73,5 +62,24 @@ class _AppShState extends State<AppSh> {
     return CupertinoPageRoute<dynamic>(
       builder: (BuildContext context) => widget
     );
+  }
+
+  Route<dynamic> _handleRoute(RouteSettings settings){
+    switch (settings.name){
+      case '/shelters': 
+        return _goTo(SheltersSh());
+      case '/lost': 
+        return _goTo(LostSh());
+      case '/exhibitions':
+        return _goTo(ExhibitionsSh());
+      case '/donor': 
+        return _goTo(DonorSh());
+      case '/about_app': 
+        return _goTo(AboutAppSh());
+      case '/my_pets': 
+        return _goTo(MyPetsSh());
+      default:
+        return null;
+    }
   }
 }

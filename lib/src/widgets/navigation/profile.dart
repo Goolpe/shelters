@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ProfileSh extends StatelessWidget {
@@ -11,19 +12,19 @@ class ProfileSh extends StatelessWidget {
     {
       'title' : 'Мои питомцы',
       'trailing': '',
-      'tap': '/shelters'
+      'tap': '/my_pets'
     },
     {
       'title' : 'О приложении',
       'trailing': '',
-      'tap': '/shelters'
+      'tap': '/about_app'
     },
     {
       'title' : 'Выйти',
       'trailing': '',
       'tap': '/shelters'
     }
-    ];
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +40,12 @@ class ProfileSh extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(
+                      image: CachedNetworkImageProvider(
                         'https://image.freepik.com/free-vector/seamless-dogs-pattern_1284-3639.jpg'
                       ),
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: ListTile()
                 )
               ),
               Positioned(
