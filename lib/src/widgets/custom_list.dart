@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/src/widgets/list_compare.dart';
-import 'package:shelters/src/widgets/search.dart';
 
-class GridSh extends StatelessWidget {
-  GridSh({
+class CustomListSh extends StatelessWidget {
+  CustomListSh({
     Key key, 
     this.url,
   }) : super(key:key);
@@ -14,13 +12,14 @@ class GridSh extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      physics: BouncingScrollPhysics(),
+    return ListView.builder(
       shrinkWrap: true,
-      crossAxisCount: 3,
-      children: List.generate(petsList.length, (int i) {
-        return Card(
-          child: InkWell(
+      physics: BouncingScrollPhysics(),
+      itemCount: 10,
+      itemBuilder: (BuildContext context, int i) {
+        return Container(
+          width: 150,
+          child: Card(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: Image.network(
@@ -29,14 +28,9 @@ class GridSh extends StatelessWidget {
                 fit: BoxFit.cover,
               )
             ),
-            onTap: () => Navigator.push<dynamic>(context, 
-              CupertinoPageRoute<dynamic>(
-                builder: (BuildContext context) => ListCompareSh(title: petsList[i])
-              )
-            )
           ),
         );
-      }),
+      },
     );
   }
 }

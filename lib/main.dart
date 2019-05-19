@@ -1,8 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:shelters/src/widgets/navigation.dart';
 import 'package:shelters/src/blocs/blocs.dart';
+
+import 'package:shelters/src/components/search_list/donor.dart';
+import 'package:shelters/src/components/search_list/exhibitions.dart';
+import 'package:shelters/src/components/search_list/lost.dart';
+import 'package:shelters/src/components/search_list/shelters.dart';
+import 'package:shelters/src/components/navigation.dart';
+import 'package:shelters/src/components/profile/about_app.dart';
+import 'package:shelters/src/components/profile/my_pets.dart';
 
 void main() => runApp(AppSh());
 
@@ -29,7 +36,15 @@ class _AppShState extends State<AppSh> {
         title: 'Shelters',
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          primaryTextTheme: Theme
+          .of(context)
+          .primaryTextTheme
+          .apply(bodyColor: Colors.black),
+          primaryIconTheme: Theme.of(context).primaryIconTheme.copyWith(
+            color: Colors.black
+          ),
         ),
+        onGenerateRoute: (RouteSettings settings) => _handleRoute(settings),
         home:  NavigationSh(),
       ),
     );
@@ -43,4 +58,28 @@ class _AppShState extends State<AppSh> {
     super.dispose();
   }
 
+  Route<dynamic> _goTo(StatelessWidget widget){
+    return CupertinoPageRoute<dynamic>(
+      builder: (BuildContext context) => widget
+    );
+  }
+
+  Route<dynamic> _handleRoute(RouteSettings settings){
+    switch (settings.name){
+      case '/shelters': 
+        return _goTo(SheltersSh());
+      case '/lost': 
+        return _goTo(LostSh());
+      case '/exhibitions':
+        return _goTo(ExhibitionsSh());
+      case '/donor': 
+        return _goTo(DonorSh());
+      case '/about_app': 
+        return _goTo(AboutAppSh());
+      case '/my_pets': 
+        return _goTo(MyPetsSh());
+      default:
+        return null;
+    }
+  }
 }
