@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shelters/src/blocs/blocs.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import 'package:shelters/src/widgets/map.dart';
-import 'package:shelters/src/blocs/blocs.dart';
-import './home.dart';
-import './profile.dart';
-import './search_list.dart';
+import 'package:shelters/src/components/common/map.dart';
+import 'package:shelters/src/components/profile/profile.dart';
+import 'package:shelters/src/components/search_list/search_list.dart';
+import 'package:shelters/src/components/home/home.dart';
 
 class NavigationSh extends StatelessWidget {
 

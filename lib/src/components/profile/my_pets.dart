@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shelters/src/components/custom_app_bar.dart';
+import 'package:shelters/src/widgets/widgets.dart';
 
 class MyPetsSh extends StatelessWidget{
 

@@ -3,9 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:shelters/src/blocs/blocs.dart';
-import 'package:shelters/src/widgets/grid.dart';
-import 'package:shelters/src/widgets/list.dart';
-import 'package:shelters/src/widgets/search_filter.dart';
+import 'package:shelters/src/widgets/widgets.dart';
+import 'package:shelters/src/components/common/search_filter.dart';
 
 class ListCompareSh extends StatelessWidget {
   ListCompareSh({
@@ -86,8 +85,8 @@ class ListCompareSh extends StatelessWidget {
                       : CrossFadeState.showSecond
                     ),
                     stateSort
-                    ? GridSh(url: 'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg')
-                    : ListSh(url: 'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg')
+                    ? CustomGridSh(url: 'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg')
+                    : CustomListSh(url: 'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg')
                   ],
                 )
               )

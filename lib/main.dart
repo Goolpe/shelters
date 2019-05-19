@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shelters/src/widgets/donor.dart';
-import 'package:shelters/src/widgets/exhibitions.dart';
-import 'package:shelters/src/widgets/lost.dart';
-
-import 'package:shelters/src/widgets/navigation/navigation.dart';
 import 'package:shelters/src/blocs/blocs.dart';
-import 'package:shelters/src/widgets/profile/about_app.dart';
-import 'package:shelters/src/widgets/profile/my_pets.dart';
-import 'package:shelters/src/widgets/shelters.dart';
+
+import 'package:shelters/src/components/search_list/donor.dart';
+import 'package:shelters/src/components/search_list/exhibitions.dart';
+import 'package:shelters/src/components/search_list/lost.dart';
+import 'package:shelters/src/components/search_list/shelters.dart';
+import 'package:shelters/src/components/navigation.dart';
+import 'package:shelters/src/components/profile/about_app.dart';
+import 'package:shelters/src/components/profile/my_pets.dart';
 
 void main() => runApp(AppSh());
 
