@@ -33,6 +33,8 @@ dependencies:
 
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter  
     
   # icons
   material_design_icons_flutter: ^3.2.3595

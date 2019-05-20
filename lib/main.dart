@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:shelters/src/blocs/blocs.dart';
 import 'package:shelters/src/components/profile/my_location.dart';
@@ -12,6 +13,7 @@ import 'package:shelters/src/components/search_list/shelters.dart';
 import 'package:shelters/src/components/navigation.dart';
 import 'package:shelters/src/components/profile/about_app.dart';
 import 'package:shelters/src/components/profile/my_pets.dart';
+import 'package:shelters/src/localization/localization.dart';
 
 void main() => runApp(AppSh());
 
@@ -53,8 +55,17 @@ class _AppShState extends State<AppSh> {
         ),
         themedWidgetBuilder: (BuildContext context, ThemeData theme) {
           return MaterialApp(
+            localizationsDelegates: [
+              const CustomLocalizationsDelegate(),
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: [
+              const Locale('en', ''),
+              const Locale('ru', ''),
+            ],
             debugShowCheckedModeBanner: false,
-            title: 'Shelters',
+            onGenerateTitle: (BuildContext context) => CustomLocalizations.of(context).apptTitle,
             theme: theme,
             onGenerateRoute: (RouteSettings settings) => _handleRoute(settings),
             home:  NavigationSh(),

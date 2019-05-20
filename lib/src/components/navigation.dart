@@ -80,7 +80,7 @@ class NavigationSh extends StatelessWidget {
       case 1: return Colors.red;
       case 2: return Colors.green;
       case 3: return Colors.blue;
-      case 4: return Colors.purple;
+      case 4: return Colors.indigo;
       default: return Colors.amber[800];
     }
   }
