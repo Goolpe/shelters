@@ -18,7 +18,7 @@ class NavigationSh extends StatelessWidget {
       bloc: navigationBloc,
       builder: (BuildContext context, int currentPage) {
         return Scaffold(
-          body: showPage(currentPage),
+          body: _showPage(currentPage),
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             selectedFontSize: 12,
@@ -45,15 +45,15 @@ class NavigationSh extends StatelessWidget {
               ),
             ],
             currentIndex: currentPage,
-            selectedItemColor: choiseColor(currentPage),
-            onTap: (int index) => choisePage(index, navigationBloc),
+            selectedItemColor: _currentColor(currentPage),
+            onTap: (int index) => _currentPage(index, navigationBloc),
           ),
         );
       }
     );
   }
 
-  Widget showPage(int currentPage){
+  Widget _showPage(int currentPage){
     switch(currentPage){
       case 0: return HomeSh();
       case 1: return SearchListSh();
@@ -64,7 +64,7 @@ class NavigationSh extends StatelessWidget {
     }
   }
 
-  void choisePage(int index, dynamic _navigationBloc){
+  void _currentPage(int index, dynamic _navigationBloc){
     switch(index){
       case 0: return _navigationBloc.dispatch(NavigationEvent.one);
       case 1: return _navigationBloc.dispatch(NavigationEvent.two);
@@ -74,13 +74,13 @@ class NavigationSh extends StatelessWidget {
     }
   }
 
-  Color choiseColor(int currentPage){
+  Color _currentColor(int currentPage){
     switch(currentPage){
       case 0: return Colors.amber[800];
       case 1: return Colors.red;
       case 2: return Colors.green;
       case 3: return Colors.blue;
-      case 4: return Colors.purple;
+      case 4: return Colors.indigo;
       default: return Colors.amber[800];
     }
   }
