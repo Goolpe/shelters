@@ -53,7 +53,7 @@ class CustomListSh extends StatelessWidget {
             ),
           onTap: () => Navigator.push<dynamic>(context, 
               CupertinoPageRoute<dynamic>(
-                builder: (BuildContext context) => ArticleSh(url: url, text: text)
+                builder: (BuildContext context) => ArticleSh(text: text)
               )
             )
           )
