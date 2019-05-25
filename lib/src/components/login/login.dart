@@ -6,13 +6,14 @@ class LoginSh extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarSh(title: 'Мои питомцы'),
-      body: Center(
-        child: Text(
-          'Shelters',
-          style: Theme.of(context).textTheme.display1,
-        ),
-      ),
+      body: ListView(
+        children: <Widget>[
+          RaisedButton(
+            child: Text('lol'),
+            onPressed: () => Navigator.pushReplacementNamed(context, '/home'),
+          )
+        ],
+      )
     );
   }
 }

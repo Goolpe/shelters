@@ -82,7 +82,7 @@ class ProfileSh extends StatelessWidget {
                 color: Colors.red
               )
             ),
-            onTap: (){},
+            onTap: () => Navigator.pushNamedAndRemoveUntil(context, '/login', (Route<dynamic> route) => false),
           ),
         ),
       ],
