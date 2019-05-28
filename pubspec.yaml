@@ -21,7 +21,7 @@ dependencies:
   bloc: ^0.13.0
   flutter_bloc: ^0.13.0
   equatable: ^0.2.3
-
+  flutter_tindercard: ^0.1.4
   # map
   google_maps_flutter: ^0.5.13
 

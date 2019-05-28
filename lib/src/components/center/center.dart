@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tindercard/flutter_tindercard.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -14,14 +16,11 @@ class CenterSh extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(),
-      body: PageView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (BuildContext context, int i) {
-          return Card(
-            child: Text('lool')
-          );
-        },
+      body: TinderSwapCard(
+        totalNum: 10,
+        cardBuilder: (context, index) => Card(
+          child: Image.network('https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg'),
+        ),
       )
     );
   }

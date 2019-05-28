@@ -78,7 +78,7 @@ class _AppShState extends State<AppSh> {
 
   @override
   void dispose() {
-    _navigationBloc.dispose();
+    _navigationBloc?.dispose();
     _searchBloc?.dispose();
     _sortBloc?.dispose();
     super.dispose();
