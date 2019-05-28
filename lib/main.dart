@@ -5,6 +5,7 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:shelters/src/blocs/blocs.dart';
+import 'package:shelters/src/components/login/login.dart';
 import 'package:shelters/src/components/profile/my_location.dart';
 import 'package:shelters/src/components/search_list/donor.dart';
 import 'package:shelters/src/components/search_list/exhibitions.dart';
@@ -68,7 +69,7 @@ class _AppShState extends State<AppSh> {
             onGenerateTitle: (BuildContext context) => CustomLocalizations.of(context).apptTitle,
             theme: theme,
             onGenerateRoute: (RouteSettings settings) => _handleRoute(settings),
-            home:  NavigationSh(),
+            home: LoginSh()
           );
         }
       ),
@@ -77,7 +78,7 @@ class _AppShState extends State<AppSh> {
 
   @override
   void dispose() {
-    _navigationBloc.dispose();
+    _navigationBloc?.dispose();
     _searchBloc?.dispose();
     _sortBloc?.dispose();
     super.dispose();
@@ -105,6 +106,10 @@ class _AppShState extends State<AppSh> {
         return _goTo(MyPetsSh());
       case '/my_location': 
         return _goTo(MyLocationSh());
+      case '/home': 
+        return _goTo(NavigationSh());
+      case '/login': 
+        return _goTo(LoginSh());
       default:
         return null;
     }

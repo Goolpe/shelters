@@ -1,12 +1,16 @@
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:shelters/src/blocs/blocs.dart';
 
 class ProfileSh extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final NavigationBloc _navigationBloc = BlocProvider.of<NavigationBloc>(context);
+
     return Column(
       children: <Widget>[
         Stack(
@@ -82,7 +86,10 @@ class ProfileSh extends StatelessWidget {
                 color: Colors.red
               )
             ),
-            onTap: (){},
+            onTap: () {
+              _navigationBloc.dispatch(NavigationEvent.one);
+              Navigator.pushNamedAndRemoveUntil(context, '/login', (Route<dynamic> route) => false);
+            },
           ),
         ),
       ],
