@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:shelters/src/blocs/blocs.dart';
-import 'package:shelters/src/widgets/widgets.dart';
+import 'package:shelters/src/components/components.dart';
 
 class HomeSh extends StatelessWidget {
   final List<String> petsList = ['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];

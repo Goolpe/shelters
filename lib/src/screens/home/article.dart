@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:shelters/src/widgets/widgets.dart';
+import 'package:shelters/src/components/components.dart';
 
 class ArticleSh extends StatelessWidget {
   ArticleSh({

@@ -5,15 +5,16 @@ import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:shelters/src/blocs/blocs.dart';
-import 'package:shelters/src/components/login/login.dart';
-import 'package:shelters/src/components/profile/my_location.dart';
-import 'package:shelters/src/components/search_list/donor.dart';
-import 'package:shelters/src/components/search_list/exhibitions.dart';
-import 'package:shelters/src/components/search_list/lost.dart';
-import 'package:shelters/src/components/search_list/shelters.dart';
-import 'package:shelters/src/components/navigation.dart';
-import 'package:shelters/src/components/profile/about_app.dart';
-import 'package:shelters/src/components/profile/my_pets.dart';
+import 'package:shelters/src/components/components.dart';
+import 'package:shelters/src/screens/login/login.dart';
+import 'package:shelters/src/screens/profile/my_location.dart';
+import 'package:shelters/src/screens/search_list/donor.dart';
+import 'package:shelters/src/screens/search_list/exhibitions.dart';
+import 'package:shelters/src/screens/search_list/lost.dart';
+import 'package:shelters/src/screens/search_list/shelters.dart';
+import 'package:shelters/src/screens/navigation.dart';
+import 'package:shelters/src/screens/profile/about_app.dart';
+import 'package:shelters/src/screens/profile/my_pets.dart';
 import 'package:shelters/src/localization/localization.dart';
 
 void main() => runApp(AppSh());
@@ -56,6 +57,12 @@ class _AppShState extends State<AppSh> {
         ),
         themedWidgetBuilder: (BuildContext context, ThemeData theme) {
           return MaterialApp(
+            builder: (context, child){
+              return ScrollConfiguration(
+                behavior: CustomBehaviorSh(),
+                child: child
+              );
+            },
             localizationsDelegates: [
               const CustomLocalizationsDelegate(),
               GlobalMaterialLocalizations.delegate,
@@ -66,9 +73,11 @@ class _AppShState extends State<AppSh> {
               const Locale('ru', ''),
             ],
             debugShowCheckedModeBanner: false,
-            onGenerateTitle: (BuildContext context) => CustomLocalizations.of(context).apptTitle,
+            onGenerateTitle: (BuildContext context) => 
+              CustomLocalizations.of(context).apptTitle,
             theme: theme,
-            onGenerateRoute: (RouteSettings settings) => _handleRoute(settings),
+            onGenerateRoute: (RouteSettings settings) => 
+              _handleRoute(settings),
             home: LoginSh()
           );
         }
@@ -107,9 +116,13 @@ class _AppShState extends State<AppSh> {
       case '/my_location': 
         return _goTo(MyLocationSh());
       case '/home': 
-        return _goTo(NavigationSh());
+        return MaterialPageRoute<dynamic>(
+          builder: (BuildContext context) => NavigationSh()
+        );
       case '/login': 
-        return _goTo(LoginSh());
+        return CupertinoPageRoute<dynamic>(
+          builder: (BuildContext context) => LoginSh()
+        );
       default:
         return null;
     }

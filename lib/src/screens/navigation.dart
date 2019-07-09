@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'package:shelters/src/blocs/blocs.dart';
-import 'package:shelters/src/components/center/center.dart';
-import 'package:shelters/src/components/common/map.dart';
-import 'package:shelters/src/components/profile/profile.dart';
-import 'package:shelters/src/components/search_list/search_list.dart';
-import 'package:shelters/src/components/home/home.dart';
+import 'package:shelters/src/screens/center/center.dart';
+import 'package:shelters/src/screens/common/map.dart';
+import 'package:shelters/src/screens/profile/profile.dart';
+import 'package:shelters/src/screens/search_list/search_list.dart';
+import 'package:shelters/src/screens/home/home.dart';
 
 class NavigationSh extends StatelessWidget {
 

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/src/components/home/article.dart';
+import 'package:shelters/src/screens/home/article.dart';
 
 class CustomListSh extends StatelessWidget {
   CustomListSh({

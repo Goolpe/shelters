@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/src/components/common/list_compare.dart';
+import 'package:shelters/src/screens/common/list_compare.dart';
 
 class CustomGridSh extends StatelessWidget {
   CustomGridSh({
