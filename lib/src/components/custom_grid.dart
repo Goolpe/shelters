@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/src/screens/common/list_compare.dart';
+
+import 'package:shelters/shelf.dart';
 
 class CustomGridSh extends StatelessWidget {
   CustomGridSh({
@@ -14,7 +15,6 @@ class CustomGridSh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      physics: BouncingScrollPhysics(),
       shrinkWrap: true,
       crossAxisCount: 3,
       children: List.generate(petsList.length, (int i) {

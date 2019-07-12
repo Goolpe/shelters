@@ -8,9 +8,7 @@ class NavigationBloc extends Bloc<NavigationEvent, int> {
   int get initialState => 0;
 
   @override
-  Stream<int> mapEventToState(
-    NavigationEvent event,
-  ) async* {
+  Stream<int> mapEventToState(NavigationEvent event) async* {
     switch (event) {
       case NavigationEvent.one:
         yield 0;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shelters/src/screens/common/map.dart';
-import 'package:shelters/src/components/components.dart';
+
+import 'package:shelters/shelf.dart';
 
 class MyLocationSh extends StatelessWidget{
 

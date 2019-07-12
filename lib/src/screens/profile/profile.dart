@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:shelters/src/blocs/blocs.dart';
+
+import 'package:shelters/shelf.dart';
 
 class ProfileSh extends StatelessWidget {
 
@@ -39,7 +40,7 @@ class ProfileSh extends StatelessWidget {
                 child: Icon(MdiIcons.paw, size: 50, color: Colors.white),
               )
             ),
-            Positioned(
+            const Positioned(
               top: 120,
               left: 15,
               child: Text('HopeHey')

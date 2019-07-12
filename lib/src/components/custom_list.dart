@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/src/screens/home/article.dart';
+
+import 'package:shelters/shelf.dart';
 
 class CustomListSh extends StatelessWidget {
-  CustomListSh({
+  const CustomListSh({
     Key key, 
     this.url,
   }) : super(key:key);

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/src/blocs/blocs.dart';
+
+import 'package:shelters/shelf.dart';
 
 class SearchFilterSh extends StatelessWidget {
   SearchFilterSh({
