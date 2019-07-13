@@ -7,6 +7,7 @@ export 'common/search_filter.dart';
 export 'home/home.dart';
 export 'login/login.dart';
 export 'navigation.dart';
+export 'pet_card.dart';
 export 'profile/about_app.dart';
 export 'profile/my_location.dart';
 export 'profile/my_pets.dart';

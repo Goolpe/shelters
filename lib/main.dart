@@ -6,21 +6,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:shelters/shelf.dart';
 
-void main() => runApp(AppSh());
+void main(){
 
-class AppSh extends StatefulWidget {
-  @override
-  _AppShState createState() =>  _AppShState();
-}
+  final UserRepository userRepository = UserRepository();
 
-class _AppShState extends State<AppSh> {
-  final NavigationBloc _navigationBloc = NavigationBloc();
-  final SortBloc _sortBloc = SortBloc();
-  final SearchBloc _searchBloc = SearchBloc();
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
+  runApp(
+    MultiBlocProvider(
       providers: [
         BlocProvider<NavigationBloc>(
           builder: (BuildContext context) =>
@@ -33,9 +24,36 @@ class _AppShState extends State<AppSh> {
         BlocProvider<SearchBloc>(
           builder: (BuildContext context) =>
             SearchBloc()
-        )
+        ),
+        BlocProvider<AuthenticationBloc>(
+          builder: (BuildContext context) =>
+              AuthenticationBloc(userRepository: userRepository)..dispatch(AppStarted())
+        ),
+        BlocProvider<LoginBloc>(
+          builder: (BuildContext context) =>
+            LoginBloc(
+              authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
+              userRepository: userRepository,
+            )
+        ),
+        BlocProvider<RegistrationBloc>(
+          builder: (BuildContext context) =>
+            RegistrationBloc(
+              authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
+              userRepository: userRepository,
+            )
+        ),
       ],
-      child: DynamicTheme(
+      child: AppSh()
+    )
+  );
+}
+
+class AppSh extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (Brightness brightness) => ThemeData(
           brightness: brightness,
@@ -55,7 +73,7 @@ class _AppShState extends State<AppSh> {
         ),
         themedWidgetBuilder: (BuildContext context, ThemeData theme) {
           return MaterialApp(
-            builder: (context, child){
+            builder: (BuildContext context, Widget child){
               return ScrollConfiguration(
                 behavior: CustomBehaviorSh(),
                 child: child
@@ -76,19 +94,21 @@ class _AppShState extends State<AppSh> {
             theme: theme,
             onGenerateRoute: (RouteSettings settings) => 
               _handleRoute(settings),
-            home: LoginSh()
+            home: BlocBuilder<AuthenticationEvent, AuthenticationState>(
+              bloc: BlocProvider.of<AuthenticationBloc>(context),
+              builder: (BuildContext context, AuthenticationState state) {
+                if (state is AuthenticationAuthenticated) {
+                  return NavigationSh();
+                }
+                if (state is AuthenticationUnauthenticated) {
+                  return LoginSh();
+                }
+                return Container(color: Colors.white);
+              }
+            )
           );
         }
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _navigationBloc?.dispose();
-    _searchBloc?.dispose();
-    _sortBloc?.dispose();
-    super.dispose();
+      );
   }
 
   Route<dynamic> _goTo(StatelessWidget widget){

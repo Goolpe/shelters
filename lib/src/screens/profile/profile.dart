@@ -11,6 +11,8 @@ class ProfileSh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final NavigationBloc _navigationBloc = BlocProvider.of<NavigationBloc>(context);
+    final AuthenticationBloc _authenticationBloc =
+      BlocProvider.of<AuthenticationBloc>(context);
 
     return Column(
       children: <Widget>[
@@ -89,7 +91,8 @@ class ProfileSh extends StatelessWidget {
             ),
             onTap: () {
               _navigationBloc.dispatch(NavigationEvent.one);
-              Navigator.pushNamedAndRemoveUntil(context, '/login', (Route<dynamic> route) => false);
+              // Navigator.pushNamedAndRemoveUntil(context, '/login', (Route<dynamic> route) => false);
+              _authenticationBloc.dispatch(LoggedOut());
             },
           ),
         ),
@@ -98,6 +101,10 @@ class ProfileSh extends StatelessWidget {
   }
 
   void changeBrightness(BuildContext context) {
-    DynamicTheme.of(context).setBrightness(Theme.of(context).brightness == Brightness.dark? Brightness.light: Brightness.dark);
+    DynamicTheme.of(context).setBrightness(
+      Theme.of(context).brightness == Brightness.dark
+      ? Brightness.light
+      : Brightness.dark
+    );
   }
 }
