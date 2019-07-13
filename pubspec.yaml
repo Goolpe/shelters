@@ -22,7 +22,6 @@ dependencies:
   # state
   bloc: ^0.14.4
   flutter_bloc: ^0.19.0
-  flutter_tindercard: ^0.1.4
 
   # map
   google_maps_flutter: ^0.5.13

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +30,8 @@ class CustomListSh extends StatelessWidget {
                   Container(
                     height: 80,
                     width: 80,
-                    child: Image.network(
-                      url
+                    child: CachedNetworkImage(
+                      imageUrl: URL
                     )
                   ),
                   Flexible(

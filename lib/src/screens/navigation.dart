@@ -54,7 +54,7 @@ class NavigationSh extends StatelessWidget {
       case 0: return HomeSh();
       case 1: return SearchListSh();
       case 2: return CenterSh();
-      case 3: return ProfileSh();
+      case 3: return ArticlesSh();
       case 4: return ProfileSh();
       default: return HomeSh();
     }

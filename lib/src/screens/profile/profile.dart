@@ -24,7 +24,7 @@ class ProfileSh extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: CachedNetworkImageProvider(
-                      'https://image.freepik.com/free-vector/seamless-dogs-pattern_1284-3639.jpg'
+                      URL
                     ),
                     fit: BoxFit.cover,
                   ),

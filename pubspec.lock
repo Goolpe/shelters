@@ -100,13 +100,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_tindercard:
-    dependency: "direct main"
-    description:
-      name: flutter_tindercard
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.5"
   google_maps_flutter:
     dependency: "direct main"
     description:
@@ -176,7 +169,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.0"
+    version: "1.8.0+1"
   provider:
     dependency: transitive
     description:

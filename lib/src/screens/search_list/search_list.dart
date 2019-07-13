@@ -1,6 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import 'package:shelters/shelf.dart';
 
 class SearchListSh extends StatelessWidget {
   final List<String> petsList = ['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];
@@ -26,8 +29,8 @@ class SearchListSh extends StatelessWidget {
                 child: Card(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(4),
-                    child: Image.network(
-                      'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg',
+                    child: CachedNetworkImage(
+                      imageUrl: URL,
                       alignment: Alignment.topCenter,
                       fit: BoxFit.cover,
                     )

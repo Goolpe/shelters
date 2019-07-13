@@ -1,8 +1,9 @@
+export 'articles/article.dart';
+export 'articles/articles.dart';
 export 'center/center.dart';
 export 'common/list_compare.dart';
 export 'common/map.dart';
 export 'common/search_filter.dart';
-export 'home/article.dart';
 export 'home/home.dart';
 export 'login/login.dart';
 export 'navigation.dart';

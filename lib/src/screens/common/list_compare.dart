@@ -5,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shelters/shelf.dart';
 
 class ListCompareSh extends StatelessWidget {
-  ListCompareSh({
+  const ListCompareSh({
     Key key, 
     @required this.title
   }) : super(key:key);
@@ -83,8 +83,8 @@ class ListCompareSh extends StatelessWidget {
                       : CrossFadeState.showSecond
                     ),
                     stateSort
-                    ? CustomGridSh(url: 'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg')
-                    : CustomListSh(url: 'https://www.flashnews.bg/wp-content/uploads/2018/11/5654150584307663008b4ed8-750-563.jpg')
+                    ? CustomGridSh(url: URL)
+                    : CustomListSh(url: URL)
                   ],
                 )
               )
