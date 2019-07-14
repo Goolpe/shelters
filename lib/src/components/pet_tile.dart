@@ -40,30 +40,27 @@ class PetTileSh extends StatelessWidget {
                         children: <Widget>[
                             Text('Джими'),
                             Divider(),
-                            Container(
-                              margin: EdgeInsets.symmetric(vertical: 5),
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(right: 10),
-                                    child: Icon(MdiIcons.paw)
-                                  ),
-                                  Text('Собака'),
-                                  Text(' | Йоркширский терьер')
-                                ],
-                              ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  child: Icon(MdiIcons.paw)
+                                ),
+                                Text('Собака'),
+                                Text(' | Йоркширский терьер')
+                              ],
                             ),
                             Container(
-                              margin: EdgeInsets.symmetric(vertical: 5),
-                              child: Row(
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(right: 10),
-                                    child: Icon(MdiIcons.mapMarker),
-                                  ),
-                                  Text('Санкт-Петербург')
-                                ],
-                              ),
+                              height: 10
+                            ),
+                            Row(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  child: Icon(MdiIcons.mapMarker),
+                                ),
+                                Text('Санкт-Петербург')
+                              ],
                             ),
                         ]
                       )

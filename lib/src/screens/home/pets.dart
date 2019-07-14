@@ -22,39 +22,36 @@ class _PetsShState extends State<PetsSh> {
       child: BlocBuilder<SearchEvent, bool>(
         bloc: _searchBloc,
         builder: (BuildContext context, bool stateSearch) {
-          return Scaffold(
-            appBar: CustomAppBarSh(
-              title:'Животные',
-              actions: <Widget>[
-                Container(
-                  width: 50,
-                  child: InkWell(
-                    child: Icon(stateSearch
-                        ? MdiIcons.close 
-                        : MdiIcons.filterOutline),
-                    onTap: () =>
-                      stateSearch
-                      ? _pc.close()
-                      : _pc.open()
-                  )
-                )
-              ],
+          return SlidingUpPanel(
+            onPanelOpened: () => _searchBloc.dispatch(SearchEvent.show),
+            onPanelClosed: () => _searchBloc.dispatch(SearchEvent.hide),
+            backdropEnabled: true,
+            minHeight: 0,
+            controller: _pc,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15), 
+              topRight: Radius.circular(15)
             ),
-            body: SlidingUpPanel(
-              onPanelOpened: () => _searchBloc.dispatch(SearchEvent.show),
-              onPanelClosed: () => _searchBloc.dispatch(SearchEvent.hide),
-              backdropEnabled: true,
-              minHeight: 0,
-              controller: _pc,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(15), 
-                topRight: Radius.circular(15)
-              ),
-              panel: Container(
+            panel: Scaffold(
+              body: Container(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 child: ListTile(
                   title: Text("This is the sliding Widget")
                 ),
+              ),
+            ),
+            body: Scaffold(
+              appBar: CustomAppBarSh(
+                title:'Животные',
+                actions: <Widget>[
+                  Container(
+                    width: 50,
+                    child: InkWell(
+                      child: Icon(MdiIcons.filterOutline),
+                      onTap: () => _pc.open()
+                    )
+                  )
+                ],
               ),
               body: _petList()
             ),
@@ -66,9 +63,7 @@ class _PetsShState extends State<PetsSh> {
 
   Widget _petList(){
     return ListView.builder(
-      shrinkWrap: true,
-      physics: BouncingScrollPhysics(),
-      itemCount: 10,
+      itemCount: 5,
       itemBuilder: (BuildContext context, int i) {
         return PetTileSh();
       }

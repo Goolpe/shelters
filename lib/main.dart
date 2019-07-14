@@ -110,7 +110,7 @@ class AppSh extends StatelessWidget {
       );
   }
 
-  Route<dynamic> _goTo(StatelessWidget widget){
+  Route<dynamic> _goTo(Widget widget){
     return CupertinoPageRoute<dynamic>(
       builder: (BuildContext context) => widget
     );
@@ -119,9 +119,7 @@ class AppSh extends StatelessWidget {
   Route<dynamic> _handleRoute(RouteSettings settings){
     switch (settings.name){
       case '/pets': 
-        return CupertinoPageRoute<dynamic>(
-          builder: (BuildContext context) => PetsSh()
-      );
+        return _goTo(PetsSh());
       case '/lost': 
         return _goTo(LostSh());
       case '/pet_card': 
@@ -134,14 +132,6 @@ class AppSh extends StatelessWidget {
         return _goTo(MyPetsSh());
       case '/my_location': 
         return _goTo(MyLocationSh());
-      case '/home': 
-        return MaterialPageRoute<dynamic>(
-          builder: (BuildContext context) => NavigationSh()
-        );
-      case '/login': 
-        return CupertinoPageRoute<dynamic>(
-          builder: (BuildContext context) => LoginSh()
-        );
       default:
         return null;
     }
