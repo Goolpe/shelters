@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 import 'package:shelters/shelf.dart';
 
@@ -20,10 +21,6 @@ void main(){
         BlocProvider<SortBloc>(
           builder: (BuildContext context) =>
             SortBloc()
-        ),
-        BlocProvider<SearchBloc>(
-          builder: (BuildContext context) =>
-            SearchBloc()
         ),
         BlocProvider<AuthenticationBloc>(
           builder: (BuildContext context) =>
@@ -72,39 +69,41 @@ class AppSh extends StatelessWidget {
             )
         ),
         themedWidgetBuilder: (BuildContext context, ThemeData theme) {
-          return MaterialApp(
-            builder: (BuildContext context, Widget child){
-              return ScrollConfiguration(
-                behavior: CustomBehaviorSh(),
-                child: child
-              );
-            },
-            localizationsDelegates: [
-              const CustomLocalizationsDelegate(),
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            supportedLocales: [
-              const Locale('en', ''),
-              const Locale('ru', ''),
-            ],
-            debugShowCheckedModeBanner: false,
-            onGenerateTitle: (BuildContext context) => 
-              CustomLocalizations.of(context).apptTitle,
-            theme: theme,
-            onGenerateRoute: (RouteSettings settings) => 
-              _handleRoute(settings),
-            home: BlocBuilder<AuthenticationEvent, AuthenticationState>(
-              bloc: BlocProvider.of<AuthenticationBloc>(context),
-              builder: (BuildContext context, AuthenticationState state) {
-                if (state is AuthenticationAuthenticated) {
-                  return NavigationSh();
+          return  OverlaySupport(
+            child: MaterialApp(
+              builder: (BuildContext context, Widget child){
+                return ScrollConfiguration(
+                  behavior: CustomBehaviorSh(),
+                  child: child
+                );
+              },
+              localizationsDelegates: [
+                const CustomLocalizationsDelegate(),
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              supportedLocales: [
+                const Locale('en', ''),
+                const Locale('ru', ''),
+              ],
+              debugShowCheckedModeBanner: false,
+              onGenerateTitle: (BuildContext context) => 
+                CustomLocalizations.of(context).apptTitle,
+              theme: theme,
+              onGenerateRoute: (RouteSettings settings) => 
+                _handleRoute(settings),
+              home: BlocBuilder<AuthenticationEvent, AuthenticationState>(
+                bloc: BlocProvider.of<AuthenticationBloc>(context),
+                builder: (BuildContext context, AuthenticationState state) {
+                  if (state is AuthenticationAuthenticated) {
+                    return NavigationSh();
+                  }
+                  if (state is AuthenticationUnauthenticated) {
+                    return LoginSh();
+                  }
+                  return Container(color: Colors.white);
                 }
-                if (state is AuthenticationUnauthenticated) {
-                  return LoginSh();
-                }
-                return Container(color: Colors.white);
-              }
+              )
             )
           );
         }
@@ -119,16 +118,16 @@ class AppSh extends StatelessWidget {
 
   Route<dynamic> _handleRoute(RouteSettings settings){
     switch (settings.name){
-      case '/shelters': 
-        return _goTo(SheltersSh());
+      case '/pets': 
+        return CupertinoPageRoute<dynamic>(
+          builder: (BuildContext context) => PetsSh()
+      );
       case '/lost': 
         return _goTo(LostSh());
       case '/exhibitions':
         return _goTo(ExhibitionsSh());
       case '/donor': 
         return _goTo(DonorSh());
-      case '/about_app': 
-        return _goTo(AboutAppSh());
       case '/my_pets': 
         return _goTo(MyPetsSh());
       case '/my_location': 

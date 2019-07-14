@@ -23,10 +23,10 @@ class NavigationSh extends StatelessWidget {
                 icon: Icon(MdiIcons.viewDashboard),
                 title: Container(height: 0)
               ),
-              BottomNavigationBarItem(
-                icon: Icon(MdiIcons.magnify),
-                title: Container(height: 0)
-              ),
+              // BottomNavigationBarItem(
+              //   icon: Icon(MdiIcons.magnify),
+              //   title: Container(height: 0)
+              // ),
               BottomNavigationBarItem(
                 icon: Icon(MdiIcons.paw),
                 title: Container(height: 0)
@@ -52,10 +52,9 @@ class NavigationSh extends StatelessWidget {
   Widget _showPage(int currentPage){
     switch(currentPage){
       case 0: return HomeSh();
-      case 1: return SearchListSh();
-      case 2: return CenterSh();
-      case 3: return ArticlesSh();
-      case 4: return ProfileSh();
+      case 1: return CenterSh();
+      case 2: return ArticlesSh();
+      case 3: return ProfileSh();
       default: return HomeSh();
     }
   }
@@ -66,7 +65,6 @@ class NavigationSh extends StatelessWidget {
       case 1: return _navigationBloc.dispatch(NavigationEvent.two);
       case 2: return _navigationBloc.dispatch(NavigationEvent.three);
       case 3: return _navigationBloc.dispatch(NavigationEvent.four);
-      case 4: return _navigationBloc.dispatch(NavigationEvent.five);
     }
   }
 
@@ -76,7 +74,6 @@ class NavigationSh extends StatelessWidget {
       case 1: return Colors.red;
       case 2: return Colors.green;
       case 3: return Colors.blue;
-      case 4: return Colors.indigo;
       default: return Colors.amber[800];
     }
   }
