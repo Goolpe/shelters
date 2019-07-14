@@ -8,10 +8,12 @@ import 'package:shelters/shelf.dart';
 class PetTileSh extends StatelessWidget {
   const PetTileSh({
     Key key, 
+    this.onTap,
     this.text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae viverra purus, non iaculis neque. ',
   }) : super(key:key);
 
   final String text;
+  final Function onTap;
   
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class PetTileSh extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(right: 15, bottom: 10),
+                    margin: EdgeInsets.only(right: 15),
                     height: 100,
                     width: 80,
                     child: CachedNetworkImage(
@@ -68,14 +70,10 @@ class PetTileSh extends StatelessWidget {
                   )
                 ],
               ),
-              Text(text,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 5,
-              ),
             ]
           )
         ),   
-      onTap: () => Navigator.pushNamed(context, '/pet_card')
+        onTap: onTap
       )
     );
   }

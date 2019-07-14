@@ -65,7 +65,9 @@ class _PetsShState extends State<PetsSh> {
     return ListView.builder(
       itemCount: 5,
       itemBuilder: (BuildContext context, int i) {
-        return PetTileSh();
+        return PetTileSh(
+          onTap: () => Navigator.pushNamed(context, '/pet_card')
+        );
       }
     );
   }

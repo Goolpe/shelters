@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomAppBarSh extends StatefulWidget implements PreferredSizeWidget {
     CustomAppBarSh({
       Key key, 
-      this.title,
+      this.title = '',
       this.actions
     }) : preferredSize = Size.fromHeight(56.0), super(key: key);
 

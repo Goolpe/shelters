@@ -75,7 +75,9 @@ class _LostShState extends State<LostSh> {
     return ListView.builder(
       itemCount: 5,
       itemBuilder: (BuildContext context, int i) {
-        return PetTileSh();
+        return PetTileSh(
+          onTap: () => Navigator.pushNamed(context, '/pet_card')
+        );
       }
     );
   }
