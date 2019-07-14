@@ -56,13 +56,22 @@ class _PetsShState extends State<PetsSh> {
                   title: Text("This is the sliding Widget")
                 ),
               ),
-              body: Center(
-                child: Text("This is the Widget behind the sliding panel"),
-              ),
+              body: _petList()
             ),
           );
         }
       )
+    );
+  }
+
+  Widget _petList(){
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: BouncingScrollPhysics(),
+      itemCount: 10,
+      itemBuilder: (BuildContext context, int i) {
+        return PetTileSh();
+      }
     );
   }
 }

@@ -124,6 +124,8 @@ class AppSh extends StatelessWidget {
       );
       case '/lost': 
         return _goTo(LostSh());
+      case '/pet_card': 
+        return _goTo(PetCardSh());
       case '/exhibitions':
         return _goTo(ExhibitionsSh());
       case '/donor': 
