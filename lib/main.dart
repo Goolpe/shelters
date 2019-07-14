@@ -13,10 +13,14 @@ void main(){
 
   runApp(
     MultiBlocProvider(
-      providers: [
+      providers: <BlocProvider>[
         BlocProvider<NavigationBloc>(
           builder: (BuildContext context) =>
             NavigationBloc()
+        ),
+        BlocProvider<ExitBloc>(
+          builder: (BuildContext context) =>
+            ExitBloc()
         ),
         BlocProvider<SortBloc>(
           builder: (BuildContext context) =>
@@ -71,20 +75,14 @@ class AppSh extends StatelessWidget {
         themedWidgetBuilder: (BuildContext context, ThemeData theme) {
           return  OverlaySupport(
             child: MaterialApp(
-              builder: (BuildContext context, Widget child){
-                return ScrollConfiguration(
-                  behavior: CustomBehaviorSh(),
-                  child: child
-                );
-              },
               localizationsDelegates: [
                 const CustomLocalizationsDelegate(),
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              supportedLocales: [
-                const Locale('en', ''),
-                const Locale('ru', ''),
+              supportedLocales: const <Locale>[
+                Locale('en', ''),
+                Locale('ru', ''),
               ],
               debugShowCheckedModeBanner: false,
               onGenerateTitle: (BuildContext context) => 
@@ -119,9 +117,9 @@ class AppSh extends StatelessWidget {
   Route<dynamic> _handleRoute(RouteSettings settings){
     switch (settings.name){
       case '/pets': 
-        return _goTo(PetsSh());
+        return _goTo(const PetsListSh(title: 'Животные'));
       case '/lost': 
-        return _goTo(LostSh());
+        return _goTo(const PetsListSh(title: 'Потеряшки'));
       case '/pet_card': 
         return _goTo(PetCardSh());
       case '/exhibitions':

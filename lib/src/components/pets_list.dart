@@ -5,13 +5,19 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import 'package:shelters/shelf.dart';
 
-class PetsSh extends StatefulWidget {
+class PetsListSh extends StatefulWidget {
+  const PetsListSh({
+    Key key,
+    @required this.title
+  }) : super(key:key);
+
+  final String title;
 
   @override
-  _PetsShState createState() => _PetsShState();
+  _PetsListShState createState() => _PetsListShState();
 }
 
-class _PetsShState extends State<PetsSh> {
+class _PetsListShState extends State<PetsListSh> {
   final PanelController _pc = PanelController();
   final SearchBloc _searchBloc = SearchBloc();
 
@@ -28,7 +34,7 @@ class _PetsShState extends State<PetsSh> {
             backdropEnabled: true,
             minHeight: 0,
             controller: _pc,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(15), 
               topRight: Radius.circular(15)
             ),
@@ -36,14 +42,24 @@ class _PetsShState extends State<PetsSh> {
               body: Container(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 child: ListTile(
-                  title: Text("This is the sliding Widget")
+                  title: const Text('This is the sliding Widget')
                 ),
               ),
             ),
             body: Scaffold(
               appBar: CustomAppBarSh(
-                title:'Животные',
+                title: widget.title,
                 actions: <Widget>[
+                  Container(
+                    width: 50,
+                    child: InkWell(
+                      child: Icon(MdiIcons.plus),
+                      onTap: (){}
+                    )
+                  ),
+                  const VerticalDivider(
+                    width: 0
+                  ),
                   Container(
                     width: 50,
                     child: InkWell(

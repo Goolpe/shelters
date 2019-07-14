@@ -18,66 +18,51 @@ class PetTileSh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
-        child: Container(
-          margin: EdgeInsets.all(10),
-          child: Column(
-            children: <Widget>[
-              Row(
+        child: Row(
+          children: <Widget>[
+            Container(
+              margin: const EdgeInsets.only(right: 15),
+              height: 110,
+              width: 80,
+              child: CachedNetworkImage(
+                imageUrl: URL,
+                fit: BoxFit.cover,
+              )
+            ),
+            Flexible(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(right: 15),
-                    height: 100,
-                    width: 80,
-                    child: Card(
-                      margin: EdgeInsets.all(0),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                      child: CachedNetworkImage(
-                        imageUrl: URL,
-                        fit: BoxFit.cover,
-                      )
-                    )
+                  const Text('Джими'),
+                  Divider(),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        child: Icon(MdiIcons.paw)
+                      ),
+                      const Text('Собака'),
+                      const Text(' | Йоркширский терьер')
+                    ],
                   ),
-                  Flexible(
-                    child: Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                            Text('Джими'),
-                            Divider(),
-                            Row(
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  child: Icon(MdiIcons.paw)
-                                ),
-                                Text('Собака'),
-                                Text(' | Йоркширский терьер')
-                              ],
-                            ),
-                            Container(
-                              height: 10
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(right: 10),
-                                  child: Icon(MdiIcons.mapMarker),
-                                ),
-                                Text('Санкт-Петербург')
-                              ],
-                            ),
-                        ]
-                      )
-                    )
-                  )
-                ],
-              ),
-            ]
-          )
+                  Container(
+                    height: 10
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        child: Icon(MdiIcons.mapMarker),
+                      ),
+                      const Text('Санкт-Петербург')
+                    ],
+                  ),
+                ]
+              )
+            )
+          ],
         ),   
         onTap: onTap
       )

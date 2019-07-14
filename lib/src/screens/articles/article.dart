@@ -10,7 +10,7 @@ class ArticleSh extends StatelessWidget {
   }) : super(key:key);
 
   final String text;
-  final List<String> petsList = ['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];
+  final List<String> petsList = <String>['Все животные', 'Кошки', 'Собаки', 'Птицы', 'Грызуны', 'Полный список'];
   
   @override
   Widget build(BuildContext context) {
@@ -23,14 +23,14 @@ class ArticleSh extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(left: 15, top: 10, right: 10, bottom: 10),
+              margin: const EdgeInsets.only(left: 15, top: 10, right: 10, bottom: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text('#donor'),
+                        const Text('#donor'),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[

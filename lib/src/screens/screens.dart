@@ -1,14 +1,9 @@
 export 'articles/article.dart';
 export 'articles/articles.dart';
-export 'center/center.dart';
-export 'common/list_compare.dart';
-export 'common/map.dart';
 export 'home/donor.dart';
 export 'home/exhibitions.dart';
 export 'home/home.dart';
-export 'home/lost.dart';
-export 'home/pets.dart';
-export 'login/login.dart';
+export 'login.dart';
 export 'navigation.dart';
 export 'pet_card.dart';
 export 'profile/my_location.dart';

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 
-enum NavigationEvent { one, two, three, four, five }
+enum NavigationEvent { one, two, three }
 
 class NavigationBloc extends Bloc<NavigationEvent, int> {
   @override
@@ -19,12 +19,12 @@ class NavigationBloc extends Bloc<NavigationEvent, int> {
       case NavigationEvent.three:
         yield 2;
         break;
-      case NavigationEvent.four:
-        yield 3;
-        break;
-      case NavigationEvent.five:
-        yield 4;
-        break;
+      // case NavigationEvent.four:
+      //   yield 3;
+      //   break;
+      // case NavigationEvent.five:
+      //   yield 4;
+      //   break;
     }
   }
 }

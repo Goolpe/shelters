@@ -12,11 +12,11 @@ class CustomLocalizations {
     return Localizations.of<CustomLocalizations>(context, CustomLocalizations);
   }
 
-  static Map<String, Map<String, String>> _localizedValues = {
-    'en': {
+  final Map<String, Map<String, String>> _localizedValues = <String, Map<String,String>>{
+    'en': <String, String>{
       'apptTitle': 'Shelters',
     },
-    'ru': {
+    'ru': <String, String>{
       'apptTitle': 'Приюты',
     },
   };
@@ -30,7 +30,7 @@ class CustomLocalizationsDelegate extends LocalizationsDelegate<CustomLocalizati
   const CustomLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => ['en', 'ru'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'ru'].contains(locale.languageCode);
 
   @override
   Future<CustomLocalizations> load(Locale locale) {

@@ -20,26 +20,26 @@ class PetCardSh extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: 3,
               itemBuilder: (BuildContext context, int i) {
-                return Container(
-                  height: 150,
-                  width: 150,
-                  child: InkWell(
-                    child: Card(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                return Card(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                  child: Container(
+                    height: 150,
+                    width: 150,
+                    child: InkWell(
                       child: CachedNetworkImage(
-                        imageUrl: URL,
-                        fit: BoxFit.cover,
-                      )
-                    ),
-                    onTap: () => Navigator.push<dynamic>(
-                      context, MaterialPageRoute<dynamic>(
-                        builder: (BuildContext context) => PhotoGallerySh(
-                          index: i,
-                          itemCount: 3,
-                        )
-                      )
-                    ),
+                          imageUrl: URL,
+                          fit: BoxFit.cover,
+                        ),
+                        onTap: () => Navigator.push<dynamic>(
+                          context, MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) => PhotoGallerySh(
+                              index: i,
+                              itemCount: 3,
+                            )
+                          )
+                        ),
+                      ),
                   ),
                 );
               },
@@ -47,93 +47,33 @@ class PetCardSh extends StatelessWidget {
           ),
           Card(
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.title.color
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(text: 'Кличка: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'Клеопатра'),
-                        ],
-                      ),
-                    )
+                children: const <Widget>[
+                  RichTextTileSh(
+                    firstText: 'Кличка: ',
+                    secondText: 'Клеопатра',
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.title.color
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(text: 'Тип: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'Собака'),
-                        ],
-                      ),
-                    )
+                  RichTextTileSh(
+                    firstText: 'Тип: ',
+                    secondText: 'Собака',
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.title.color
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(text: 'Порода: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'Йоркширский терьер'),
-                        ],
-                      ),
-                    )
+                  RichTextTileSh(
+                    firstText: 'Порода: ',
+                    secondText: 'Терьер',
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.title.color
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(text: 'Пол: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'мужской'),
-                        ],
-                      ),
-                    )
+                  RichTextTileSh(
+                    firstText: 'Пол: ',
+                    secondText: 'мужской',
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.title.color
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(text: 'Цвет: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'черный'),
-                        ],
-                      ),
-                    )
+                  RichTextTileSh(
+                    firstText: 'Цвет: ',
+                    secondText: 'черный',
                   ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Theme.of(context).textTheme.title.color
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(text: 'Дополнительно: ', style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae viverra purus'),
-                        ],
-                      ),
-                    )
+                  RichTextTileSh(
+                    firstText: 'Дополнительно: ',
+                    secondText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae viverra purus',
                   )
                 ],
               )
@@ -141,31 +81,31 @@ class PetCardSh extends StatelessWidget {
           ),
           Card(
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(right: 10),
+                          margin: const EdgeInsets.only(right: 10),
                           child: Icon(MdiIcons.mapMarker),
                         ),
-                        Text('Санкт-Петербург')
+                        const Text('Санкт-Петербург')
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(vertical: 5),
                     child: Row(
                       children: <Widget>[
                         Container(
-                          margin: EdgeInsets.only(right: 10),
+                          margin: const EdgeInsets.only(right: 10),
                           child: Icon(MdiIcons.cellphoneIphone),
                         ),
-                        Text('+7 (999) 999-99-99')
+                        const Text('+7 (999) 999-99-99')
                       ],
                     ),
                   )

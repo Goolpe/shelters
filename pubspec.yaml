@@ -11,7 +11,7 @@ description: App for animals.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.0.2
+version: 0.1.0
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -19,7 +19,6 @@ environment:
 dependencies:
   overlay_support: ^1.0.0
   sliding_up_panel: ^0.3.4
-  rect_getter: ^0.0.1
   # state
   bloc: ^0.14.4
   flutter_bloc: ^0.19.0

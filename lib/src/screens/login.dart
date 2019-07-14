@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:rect_getter/rect_getter.dart';
 
 import 'package:shelters/shelf.dart';
 
@@ -12,11 +11,6 @@ class LoginSh extends StatefulWidget{
 }
 
 class _LoginShState extends State<LoginSh>{
-
-  final Duration animationDuration = Duration(milliseconds: 300);
-  final Duration delay = Duration(milliseconds: 300);
-  GlobalKey rectLoginKey = RectGetter.createGlobalKey();
-  Rect rect;  
 
   final FocusNode _loginFocus = FocusNode(); 
   final FocusNode _passFocus = FocusNode(); 
@@ -40,7 +34,7 @@ class _LoginShState extends State<LoginSh>{
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
                       end: Alignment.bottomLeft,
-                      colors: [
+                      colors: <Color>[
                         Colors.indigo[800],
                         Colors.indigo[700],
                         Colors.indigo[600],
@@ -50,7 +44,7 @@ class _LoginShState extends State<LoginSh>{
                   ),
                   child: Center(
                     child: SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: Column(
                         children: <Widget>[
                           CircleAvatar(
@@ -71,7 +65,7 @@ class _LoginShState extends State<LoginSh>{
                             textInputAction: TextInputAction.done
                           ),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 30),
+                            margin: const EdgeInsets.symmetric(vertical: 30),
                             width: MediaQuery.of(context).size.width,
                             child: loginState is LoginLoading
                             ? RawMaterialButton(
@@ -83,16 +77,13 @@ class _LoginShState extends State<LoginSh>{
                               ),
                               onPressed: () => _onTap(_loginBloc),
                             )
-                            :  RectGetter(           
-                              key: rectLoginKey,                       
-                              child: FloatingActionButton.extended(
+                            :  FloatingActionButton.extended(
                                 heroTag: '#login',
                                 elevation: 5,
                                 backgroundColor: Colors.green,
                                 icon: Icon(MdiIcons.paw, color: Colors.white),
                                 label: Text('Войти', style: TextStyle(color: Colors.white)),
-                                onPressed: () => _onTap(_loginBloc),
-                              )
+                                onPressed: () => _onTap(_loginBloc)
                             ),
                           ),
                           Row(
@@ -118,13 +109,13 @@ class _LoginShState extends State<LoginSh>{
                               FlatButton.icon(
                                 textColor: Colors.white,
                                 icon: Icon(MdiIcons.vk, color: Colors.white),
-                                label: Text('Вконтакте'),
+                                label: const Text('Вконтакте'),
                                 onPressed: () => _onTap(_loginBloc),
                               ),
                               FlatButton.icon(
                                 textColor: Colors.white,
                                 icon: Icon(MdiIcons.facebook, color: Colors.white),
-                                label: Text('Facebook'),
+                                label: const Text('Facebook'),
                                 onPressed: () => _onTap(_loginBloc),
                               ),
                             ]
@@ -135,7 +126,6 @@ class _LoginShState extends State<LoginSh>{
                   ),
                 )
               ),
-              // _ripple(loginState),
             ]
           )
         );
@@ -153,37 +143,4 @@ class _LoginShState extends State<LoginSh>{
       )
     );
   }
-
-  // Widget _ripple(LoginState _loginState) {
-
-  //   rect = RectGetter.getRectFromKey(rectLoginKey);
-  //   if (_loginState.toString() == 'LoginAuthenticated') {
-  //     Future<dynamic>.delayed(animationDuration + delay,
-  //     () {
-  //       Navigator.of(context)
-  //         .pushReplacement<dynamic, dynamic>(
-  //           FadeRouteBuilder<dynamic>(page: NavigationSh()))
-  //         .then((dynamic _) => setState(() => rect = null));
-  //     }
-  // );
-  //     rect = rect.inflate(1.3 * MediaQuery.of(context).size.longestSide);
-
-  //     return AnimatedPositioned(
-  //       duration: animationDuration,
-  //       left: rect.left,
-  //       right: MediaQuery.of(context).size.width - rect.right,
-  //       top: rect.top,
-  //       bottom: MediaQuery.of(context).size.height - rect.bottom,
-  //       child: Container(
-  //         decoration: BoxDecoration(
-  //           shape: BoxShape.circle,
-  //           color: Colors.green,
-  //         ),
-  //       ),
-  //     );
-  //   }
-  //   else{
-  //     return Container();
-  //   }
-  // }
 }

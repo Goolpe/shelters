@@ -31,8 +31,8 @@ class _ProfileShState extends State<ProfileSh> {
         child: Container(
           color: Theme.of(context).scaffoldBackgroundColor,
           child: ListTile(
-            title: Text("О приложении"),
-            trailing: Text('v 0.5'),
+            title: const Text('О приложении'),
+            trailing: const Text('v 0.1.0'),
           ),
         ),
         onTap: () => _pc.open(),
@@ -53,7 +53,7 @@ class _ProfileShState extends State<ProfileSh> {
           children: <Widget>[
             Container(
               height: 150,
-              padding: EdgeInsets.only(bottom: 50),
+              padding: const EdgeInsets.only(bottom: 50),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
@@ -84,43 +84,31 @@ class _ProfileShState extends State<ProfileSh> {
         ),
         Card(
           child: ListTile(
-            title: Text('Тема'),
+            title: const Text('Тема'),
             trailing: Text(Theme.of(context).brightness == Brightness.dark ? 'Темная': 'Светлая'),
             onTap: () => changeBrightness(context),
           ),
         ),
         Card(
           child: ListTile(
-            title: Text('Язык'),
-            trailing: Text('Русский'),
+            title: const Text('Язык'),
+            trailing: const Text('Русский'),
             onTap: (){},
           ),
         ),
         Card(
           child: ListTile(
-            title: Text('Местоположение'),
-            trailing: Text('Санкт-Петербург'),
+            title: const Text('Местоположение'),
+            trailing: const Text('Санкт-Петербург'),
             onTap: () => Navigator.pushNamed(context, '/my_location'),
           ),
         ),
         Card(
           child: ListTile(
-            title: Text('Мои питомцы'),
+            title: const Text('Мои питомцы'),
             onTap: () => Navigator.pushNamed(context, '/my_pets'),
           ),
         ),
-        // Card(
-        //   child: ListTile(
-        //     title: Text('О приложении'),
-        //     onTap: () {
-        //       try{
-        //         toast('isPanelShown: ${_pc.isPanelShown().toString()}');
-        //       } catch(error){
-        //         toast('isPanelShown: ${error.toString()}');
-        //       }
-        //     }
-        //   ),
-        // ),
         Card(
           child: ListTile(
             title: Text('Выйти', 
@@ -144,5 +132,4 @@ class _ProfileShState extends State<ProfileSh> {
       : Brightness.dark
     );
   }
-  
 }
