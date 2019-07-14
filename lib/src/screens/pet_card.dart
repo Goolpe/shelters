@@ -20,27 +20,26 @@ class PetCardSh extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount: 3,
               itemBuilder: (BuildContext context, int i) {
-                return InkWell(
-                  child: Container(
-                    height: 150,
-                    width: 150,
+                return Container(
+                  height: 150,
+                  width: 150,
+                  child: InkWell(
                     child: Card(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: CachedNetworkImage(
-                          imageUrl: URL,
-                          fit: BoxFit.cover,
-                        )
-                      ),
-                    ),
-                  ),
-                  onTap: () => Navigator.push<dynamic>(
-                    context, MaterialPageRoute<dynamic>(
-                      builder: (BuildContext context) => PhotoGallerySh(
-                        index: i,
-                        itemCount: 3,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                      child: CachedNetworkImage(
+                        imageUrl: URL,
+                        fit: BoxFit.cover,
                       )
-                    )
+                    ),
+                    onTap: () => Navigator.push<dynamic>(
+                      context, MaterialPageRoute<dynamic>(
+                        builder: (BuildContext context) => PhotoGallerySh(
+                          index: i,
+                          itemCount: 3,
+                        )
+                      )
+                    ),
                   ),
                 );
               },
@@ -56,6 +55,9 @@ class PetCardSh extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 5),
                     child: RichText(
                       text: TextSpan(
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.title.color
+                        ),
                         children: <TextSpan>[
                           TextSpan(text: 'Кличка: ', style: TextStyle(fontWeight: FontWeight.bold)),
                           TextSpan(text: 'Клеопатра'),
@@ -67,6 +69,9 @@ class PetCardSh extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 5),
                     child: RichText(
                       text: TextSpan(
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.title.color
+                        ),
                         children: <TextSpan>[
                           TextSpan(text: 'Тип: ', style: TextStyle(fontWeight: FontWeight.bold)),
                           TextSpan(text: 'Собака'),
@@ -78,6 +83,9 @@ class PetCardSh extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 5),
                     child: RichText(
                       text: TextSpan(
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.title.color
+                        ),
                         children: <TextSpan>[
                           TextSpan(text: 'Порода: ', style: TextStyle(fontWeight: FontWeight.bold)),
                           TextSpan(text: 'Йоркширский терьер'),
@@ -89,6 +97,9 @@ class PetCardSh extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 5),
                     child: RichText(
                       text: TextSpan(
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.title.color
+                        ),
                         children: <TextSpan>[
                           TextSpan(text: 'Пол: ', style: TextStyle(fontWeight: FontWeight.bold)),
                           TextSpan(text: 'мужской'),
@@ -100,6 +111,9 @@ class PetCardSh extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 5),
                     child: RichText(
                       text: TextSpan(
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.title.color
+                        ),
                         children: <TextSpan>[
                           TextSpan(text: 'Цвет: ', style: TextStyle(fontWeight: FontWeight.bold)),
                           TextSpan(text: 'черный'),
@@ -111,6 +125,9 @@ class PetCardSh extends StatelessWidget {
                     margin: EdgeInsets.symmetric(vertical: 5),
                     child: RichText(
                       text: TextSpan(
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.title.color
+                        ),
                         children: <TextSpan>[
                           TextSpan(text: 'Дополнительно: ', style: TextStyle(fontWeight: FontWeight.bold)),
                           TextSpan(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae viverra purus'),

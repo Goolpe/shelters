@@ -30,9 +30,15 @@ class PetTileSh extends StatelessWidget {
                     margin: EdgeInsets.only(right: 15),
                     height: 100,
                     width: 80,
-                    child: CachedNetworkImage(
-                      imageUrl: URL,
-                      fit: BoxFit.cover,
+                    child: Card(
+                      margin: EdgeInsets.all(0),
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                      child: CachedNetworkImage(
+                        imageUrl: URL,
+                        fit: BoxFit.cover,
+                      )
                     )
                   ),
                   Flexible(

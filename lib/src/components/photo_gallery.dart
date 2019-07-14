@@ -7,7 +7,7 @@ import 'package:photo_view/photo_view_gallery.dart';
 import 'package:shelters/shelf.dart';
 
 class PhotoGallerySh extends StatelessWidget {
-  PhotoGallerySh({
+  const PhotoGallerySh({
     Key key, 
     this.index,
     this.itemCount
@@ -25,7 +25,7 @@ class PhotoGallerySh extends StatelessWidget {
           Container(
             width: 50,
             child: InkWell(
-              child: Icon(Icons.close, size: 24),
+              child: Icon(Icons.close, color: Colors.white, size: 24),
               onTap: () => Navigator.pop(context),
             ),
           )
