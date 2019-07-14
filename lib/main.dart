@@ -3,40 +3,58 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:overlay_support/overlay_support.dart';
 
-import 'package:shelters/src/blocs/blocs.dart';
-import 'package:shelters/src/components/login/login.dart';
-import 'package:shelters/src/components/profile/my_location.dart';
-import 'package:shelters/src/components/search_list/donor.dart';
-import 'package:shelters/src/components/search_list/exhibitions.dart';
-import 'package:shelters/src/components/search_list/lost.dart';
-import 'package:shelters/src/components/search_list/shelters.dart';
-import 'package:shelters/src/components/navigation.dart';
-import 'package:shelters/src/components/profile/about_app.dart';
-import 'package:shelters/src/components/profile/my_pets.dart';
-import 'package:shelters/src/localization/localization.dart';
+import 'package:shelters/shelf.dart';
 
-void main() => runApp(AppSh());
+void main(){
 
-class AppSh extends StatefulWidget {
-  @override
-  _AppShState createState() =>  _AppShState();
+  final UserRepository userRepository = UserRepository();
+
+  runApp(
+    MultiBlocProvider(
+      providers: <BlocProvider>[
+        BlocProvider<NavigationBloc>(
+          builder: (BuildContext context) =>
+            NavigationBloc()
+        ),
+        BlocProvider<ExitBloc>(
+          builder: (BuildContext context) =>
+            ExitBloc()
+        ),
+        BlocProvider<SortBloc>(
+          builder: (BuildContext context) =>
+            SortBloc()
+        ),
+        BlocProvider<AuthenticationBloc>(
+          builder: (BuildContext context) =>
+              AuthenticationBloc(userRepository: userRepository)..dispatch(AppStarted())
+        ),
+        BlocProvider<LoginBloc>(
+          builder: (BuildContext context) =>
+            LoginBloc(
+              authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
+              userRepository: userRepository,
+            )
+        ),
+        BlocProvider<RegistrationBloc>(
+          builder: (BuildContext context) =>
+            RegistrationBloc(
+              authenticationBloc: BlocProvider.of<AuthenticationBloc>(context),
+              userRepository: userRepository,
+            )
+        ),
+      ],
+      child: AppSh()
+    )
+  );
 }
 
-class _AppShState extends State<AppSh> {
-  final NavigationBloc _navigationBloc = NavigationBloc();
-  final SortBloc _sortBloc = SortBloc();
-  final SearchBloc _searchBloc = SearchBloc();
+class AppSh extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProviderTree(
-      blocProviders: [
-        BlocProvider<NavigationBloc>(bloc: _navigationBloc),
-        BlocProvider<SortBloc>(bloc: _sortBloc),
-        BlocProvider<SearchBloc>(bloc: _searchBloc)
-      ],
-      child: DynamicTheme(
+    return DynamicTheme(
         defaultBrightness: Brightness.light,
         data: (Brightness brightness) => ThemeData(
           brightness: brightness,
@@ -55,36 +73,42 @@ class _AppShState extends State<AppSh> {
             )
         ),
         themedWidgetBuilder: (BuildContext context, ThemeData theme) {
-          return MaterialApp(
-            localizationsDelegates: [
-              const CustomLocalizationsDelegate(),
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-            ],
-            supportedLocales: [
-              const Locale('en', ''),
-              const Locale('ru', ''),
-            ],
-            debugShowCheckedModeBanner: false,
-            onGenerateTitle: (BuildContext context) => CustomLocalizations.of(context).apptTitle,
-            theme: theme,
-            onGenerateRoute: (RouteSettings settings) => _handleRoute(settings),
-            home: LoginSh()
+          return  OverlaySupport(
+            child: MaterialApp(
+              localizationsDelegates: [
+                const CustomLocalizationsDelegate(),
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              supportedLocales: const <Locale>[
+                Locale('en', ''),
+                Locale('ru', ''),
+              ],
+              debugShowCheckedModeBanner: false,
+              onGenerateTitle: (BuildContext context) => 
+                CustomLocalizations.of(context).apptTitle,
+              theme: theme,
+              onGenerateRoute: (RouteSettings settings) => 
+                _handleRoute(settings),
+              home: BlocBuilder<AuthenticationEvent, AuthenticationState>(
+                bloc: BlocProvider.of<AuthenticationBloc>(context),
+                builder: (BuildContext context, AuthenticationState state) {
+                  if (state is AuthenticationAuthenticated) {
+                    return NavigationSh();
+                  }
+                  if (state is AuthenticationUnauthenticated) {
+                    return LoginSh();
+                  }
+                  return Container(color: Colors.white);
+                }
+              )
+            )
           );
         }
-      ),
-    );
+      );
   }
 
-  @override
-  void dispose() {
-    _navigationBloc?.dispose();
-    _searchBloc?.dispose();
-    _sortBloc?.dispose();
-    super.dispose();
-  }
-
-  Route<dynamic> _goTo(StatelessWidget widget){
+  Route<dynamic> _goTo(Widget widget){
     return CupertinoPageRoute<dynamic>(
       builder: (BuildContext context) => widget
     );
@@ -92,24 +116,20 @@ class _AppShState extends State<AppSh> {
 
   Route<dynamic> _handleRoute(RouteSettings settings){
     switch (settings.name){
-      case '/shelters': 
-        return _goTo(SheltersSh());
+      case '/pets': 
+        return _goTo(const PetsListSh(title: 'Животные'));
       case '/lost': 
-        return _goTo(LostSh());
+        return _goTo(const PetsListSh(title: 'Потеряшки'));
+      case '/pet_card': 
+        return _goTo(PetCardSh());
       case '/exhibitions':
         return _goTo(ExhibitionsSh());
       case '/donor': 
         return _goTo(DonorSh());
-      case '/about_app': 
-        return _goTo(AboutAppSh());
       case '/my_pets': 
         return _goTo(MyPetsSh());
       case '/my_location': 
         return _goTo(MyLocationSh());
-      case '/home': 
-        return _goTo(NavigationSh());
-      case '/login': 
-        return _goTo(LoginSh());
       default:
         return null;
     }
