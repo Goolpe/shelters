@@ -25,14 +25,10 @@ class _CustomAppBarShState extends State<CustomAppBarSh>{
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      leading: InkWell(
-        child: Icon(Icons.arrow_back_ios, size: 20),
-        onTap: () => Navigator.pop(context),
-      ),
+      automaticallyImplyLeading: false,
       actions: actions,
       elevation: 0,
       backgroundColor: Colors.transparent,
-      titleSpacing: 0,
     );
   }
 }

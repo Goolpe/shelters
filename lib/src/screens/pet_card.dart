@@ -6,6 +6,8 @@ import 'package:shelters/shelf.dart';
 
 class PetCardSh extends StatelessWidget {
 
+  final List<String> _info = <String>['Собака', 'Терьер', '5 месяцев', 'Самец', 'Черный', 'Кек'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,39 +47,19 @@ class PetCardSh extends StatelessWidget {
               },
             ),
           ),
-          Card(
-            child: Container(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
-                  RichTextTileSh(
-                    firstText: 'Кличка: ',
-                    secondText: 'Клеопатра',
-                  ),
-                  RichTextTileSh(
-                    firstText: 'Тип: ',
-                    secondText: 'Собака',
-                  ),
-                  RichTextTileSh(
-                    firstText: 'Порода: ',
-                    secondText: 'Терьер',
-                  ),
-                  RichTextTileSh(
-                    firstText: 'Пол: ',
-                    secondText: 'мужской',
-                  ),
-                  RichTextTileSh(
-                    firstText: 'Цвет: ',
-                    secondText: 'черный',
-                  ),
-                  RichTextTileSh(
-                    firstText: 'Дополнительно: ',
-                    secondText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae viverra purus',
-                  )
-                ],
-              )
-            ),
+          GridView.builder(
+            shrinkWrap: true,
+            itemCount: _info.length,
+            padding: EdgeInsets.zero,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemBuilder: ( BuildContext context, int i){
+              return Card(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(_info[i])
+                )
+              );
+            },
           ),
           Card(
             child: Container(

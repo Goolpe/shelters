@@ -19,34 +19,25 @@ class PhotoGallerySh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: <Widget>[
-          Container(
-            width: 50,
-            child: InkWell(
-              child: Icon(Icons.close, color: Colors.white, size: 24),
-              onTap: () => Navigator.pop(context),
-            ),
-          )
-        ],
-        backgroundColor: Colors.black,
-      ),
-      body: PhotoViewGallery.builder(
-        pageController: PageController(initialPage: index),
-        scrollPhysics: const BouncingScrollPhysics(),
-        builder: (BuildContext context, int i) {
-          return PhotoViewGalleryPageOptions(
-            imageProvider: CachedNetworkImageProvider(
-              URL
-            ),
-            initialScale: PhotoViewComputedScale.contained * 0.8,
-            minScale: PhotoViewComputedScale.contained * 1,
-            maxScale: PhotoViewComputedScale.contained * 5,
-            heroTag: 'photo$i',
-          );
+       body: GestureDetector(
+        onVerticalDragUpdate: (dragUpdateDetails) {
+          Navigator.of(context).pop();
         },
-        itemCount: itemCount,
+        behavior: HitTestBehavior.translucent, 
+        child: PhotoViewGallery.builder(
+          pageController: PageController(initialPage: index),
+          scrollPhysics: const BouncingScrollPhysics(),
+          builder: (BuildContext context, int i) {
+            return PhotoViewGalleryPageOptions(
+              imageProvider: CachedNetworkImageProvider(URL),
+              initialScale: PhotoViewComputedScale.contained * 0.8,
+              minScale: PhotoViewComputedScale.contained * 1,
+              maxScale: PhotoViewComputedScale.contained * 5,
+              heroTag: 'photo$i',
+            );
+          },
+          itemCount: itemCount,
+        )
       )
     );
   }

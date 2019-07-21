@@ -23,7 +23,6 @@ class PetTileSh extends StatelessWidget {
         child: Row(
           children: <Widget>[
             Container(
-              margin: const EdgeInsets.only(right: 15),
               height: 110,
               width: 80,
               child: CachedNetworkImage(
@@ -32,34 +31,43 @@ class PetTileSh extends StatelessWidget {
               )
             ),
             Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const Text('Джими'),
-                  Divider(),
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        child: Icon(MdiIcons.paw)
-                      ),
-                      const Text('Собака'),
-                      const Text(' | Йоркширский терьер')
-                    ],
-                  ),
-                  Container(
-                    height: 10
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        child: Icon(MdiIcons.mapMarker),
-                      ),
-                      const Text('Санкт-Петербург')
-                    ],
-                  ),
-                ]
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text('Джими'),
+                        Text('5 месяцев'),
+                      ],
+                    ),
+                    Divider(),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          child: Icon(MdiIcons.paw)
+                        ),
+                        const Text('Собака'),
+                        const Text(' | Йоркширский терьер')
+                      ],
+                    ),
+                    Container(
+                      height: 10
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          child: Icon(MdiIcons.mapMarker),
+                        ),
+                        const Text('Санкт-Петербург')
+                      ],
+                    ),
+                  ]
+                )
               )
             )
           ],
