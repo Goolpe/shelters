@@ -1,11 +1,2 @@
-export 'articles/article.dart';
-export 'articles/articles.dart';
-export 'home/donor.dart';
-export 'home/exhibitions.dart';
-export 'home/home.dart';
-export 'login.dart';
+export 'home.dart';
 export 'navigation.dart';
-export 'pet_card.dart';
-export 'profile/my_location.dart';
-export 'profile/my_pets.dart';
-export 'profile/profile.dart';

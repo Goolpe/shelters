@@ -1,1 +1,0 @@
-const String URL = 'https://www.dailydot.com/wp-content/uploads/2018/10/olli-the-polite-cat.jpg';
