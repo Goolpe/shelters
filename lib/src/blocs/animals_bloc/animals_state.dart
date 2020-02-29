@@ -9,7 +9,7 @@ abstract class AnimalsState extends Equatable{
   List get props => [];
 }
 
-class AnimalsUninitilized extends AnimalsState{}
+class AnimalsUninitial extends AnimalsState{}
 
 class AnimalsLoading extends AnimalsState{}
 

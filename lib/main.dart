@@ -9,14 +9,19 @@ void main(){
 
   runApp(
     MultiBlocProvider(
-    providers: [
-      BlocProvider<AnimalsBloc>(
-        builder: (context) => AnimalsBloc(
-          animalsModel: animalsModel
+      providers: [
+        BlocProvider<SlidingPanelBloc>(
+          create: (context) => SlidingPanelBloc()..add(SlidingPanelStarted()),
         ),
-      )
-    ],
-    child: App()));
+        BlocProvider<AnimalsBloc>(
+          create: (context) => AnimalsBloc(
+            animalsModel: animalsModel
+          ),
+        )
+      ],
+      child: App()
+    )
+  );
 }
 
 class App extends StatelessWidget {
@@ -25,7 +30,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Navigation()
+      home: AnimalsApp()
       );
   }
 }

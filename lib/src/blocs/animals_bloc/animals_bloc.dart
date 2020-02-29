@@ -12,7 +12,7 @@ class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState>{
   AnimalsModel listOld;
 
   @override
-  AnimalsState get initialState => AnimalsUninitilized();
+  AnimalsState get initialState => AnimalsUninitial();
 
   @override
   Stream<AnimalsState> mapEventToState(AnimalsEvent event) async* {

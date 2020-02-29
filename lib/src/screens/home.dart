@@ -3,21 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shelters/shelf.dart';
 import 'package:shimmer/shimmer.dart';
 
-class Home extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home>{
-  
-  @override
-  void initState() {
-    super.initState();
-  }
+class Home extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<AnimalsBloc>(context).dispatch(AnimalsFetch());
+    BlocProvider.of<AnimalsBloc>(context).add(AnimalsFetch());
 
     return BlocBuilder(
       bloc: BlocProvider.of<AnimalsBloc>(context),
@@ -27,35 +17,6 @@ class _HomeState extends State<Home>{
         }
         return Container();
       }
-    );
-  }
-
-  Widget buildLoading(){
-    return GridView.builder(
-      padding: EdgeInsets.only(bottom: 20),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-      ),
-      itemCount: 12,
-      itemBuilder: (context, index) => Shimmer.fromColors(
-        baseColor: Colors.grey[200],
-        highlightColor: Colors.grey[300],
-        enabled: false,
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: CircleAvatar(
-                  radius: MediaQuery.of(context).size.width/6,
-                  backgroundColor: Colors.black,
-                )
-              ),
-            ),
-            Text('')
-          ]
-        )
-      )
     );
   }
 
