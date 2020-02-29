@@ -2,9 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shelters/shelf.dart';
 
+class SimpleBlocDelegate extends BlocDelegate {
+  @override
+  void onEvent(Bloc bloc, Object event) {
+    super.onEvent(bloc, event);
+    print(event);
+  }
+
+  @override
+  void onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    print(transition);
+  }
+
+  @override
+  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
+    super.onError(bloc, error, stacktrace);
+    print(error);
+  }
+}
+
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
-  
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+
   final animalsModel = AnimalsModel();
 
   runApp(
@@ -12,6 +33,9 @@ void main(){
       providers: [
         BlocProvider<SlidingPanelBloc>(
           create: (context) => SlidingPanelBloc()..add(SlidingPanelStarted()),
+        ),
+        BlocProvider<SettingsPanelBloc>(
+          create: (context) => SettingsPanelBloc()..add(SettingsPanelStarted()),
         ),
         BlocProvider<AnimalsBloc>(
           create: (context) => AnimalsBloc(
@@ -30,7 +54,15 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AnimalsApp()
-      );
+      home: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            Navigation(),
+            AnimalPanel(),
+            SettingsPanel()
+          ]
+        )
+      )
+    );
   }
 }
