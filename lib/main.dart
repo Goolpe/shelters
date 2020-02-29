@@ -34,6 +34,9 @@ void main(){
         BlocProvider<SlidingPanelBloc>(
           create: (context) => SlidingPanelBloc()..add(SlidingPanelStarted()),
         ),
+        BlocProvider<NavigationBloc>(
+          create: (context) => NavigationBloc(),
+        ),
         BlocProvider<SettingsPanelBloc>(
           create: (context) => SettingsPanelBloc()..add(SettingsPanelStarted()),
         ),

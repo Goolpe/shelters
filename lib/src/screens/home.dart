@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shelters/shelf.dart';
 
-class Home extends StatelessWidget{
+class HomeScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
