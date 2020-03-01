@@ -24,7 +24,7 @@ class SimpleBlocDelegate extends BlocDelegate {
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
-  BlocSupervisor.delegate = SimpleBlocDelegate();
+  // BlocSupervisor.delegate = SimpleBlocDelegate();
 
   final animalsModel = AnimalsModel();
 
@@ -36,6 +36,12 @@ void main(){
         ),
         BlocProvider<NavigationBloc>(
           create: (context) => NavigationBloc(),
+        ),
+        BlocProvider<FindBloc>(
+          create: (context) => FindBloc(),
+        ),
+        BlocProvider<FindPersonBloc>(
+          create: (context) => FindPersonBloc()..add(FindPersonStarted()),
         ),
         BlocProvider<SettingsPanelBloc>(
           create: (context) => SettingsPanelBloc()..add(SettingsPanelStarted()),

@@ -6,7 +6,7 @@ abstract class SettingsPanelState extends Equatable{
   SettingsPanelState();
 
   @override
-  List<String> get props => <String>[];
+  List<Object> get props => [];
 }
 
 class SettingsPanelUninitial extends SettingsPanelState{}
@@ -17,4 +17,10 @@ class SettingsPanelInitial extends SettingsPanelState{
   });
 
   final PanelController controller;
+
+  @override
+  List<Object> get props => [controller];
+
+  @override
+  String toString() => 'SettingsPanelInitial: {controller: $controller}';
 }

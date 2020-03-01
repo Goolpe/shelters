@@ -5,7 +5,7 @@ import 'package:shelters/shelf.dart';
 class AnimalsBloc extends Bloc<AnimalsEvent, AnimalsState>{
   AnimalsBloc({
     @required this.animalsModel
-  });
+  }) : assert(animalsModel != null);
 
   final AnimalsModel animalsModel;
 

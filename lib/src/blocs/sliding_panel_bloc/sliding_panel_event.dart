@@ -16,4 +16,10 @@ class SlidingPanelOpened extends SlidingPanelEvent{
   });
   
   final String url;
+
+  @override
+  List<Object> get props => [url];
+
+  @override
+  String toString() => 'SlidingPanelOpened: {url: $url}';
 }

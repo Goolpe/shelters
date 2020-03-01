@@ -17,4 +17,10 @@ class AnimalsSuccess extends AnimalsState{
   AnimalsSuccess({@required this.data});
 
   AnimalsModel data;
+
+  @override
+  List<Object> get props => [data];
+
+  @override
+  String toString() => 'AnimalsSuccess: {data: $data}';
 }
