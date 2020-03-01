@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 
 class Avatar extends StatelessWidget{
@@ -32,7 +32,7 @@ class Avatar extends StatelessWidget{
                 backgroundColor: Colors.grey[200],
               ),
             ),
-            onTap: () => BlocProvider.of<SlidingPanelBloc>(context).add(SlidingPanelOpened(url: url)),
+            onTap: () => Provider.of<AnimalPanelModel>(context, listen: false).open(url)
           ),
         ),
         Text(title)

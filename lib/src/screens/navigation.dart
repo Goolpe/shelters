@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 
 class Navigation extends StatelessWidget{
@@ -9,8 +9,8 @@ class Navigation extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NavigationBloc, int>(
-      builder: (context, int state){
+    return Consumer<NavigationModel>(
+      builder: (context, state, _){
         return Scaffold(
           appBar: AppBar(
             title: Text('shelters', style: TextStyle(color: Colors.blueAccent)),
@@ -18,7 +18,7 @@ class Navigation extends StatelessWidget{
             backgroundColor: Colors.transparent,
             elevation: 0,
             actions: <Widget>[
-              _rightButtons(state, context)
+              _rightButtons(state.index, context)
             ],
           ),
           body: [
@@ -26,14 +26,14 @@ class Navigation extends StatelessWidget{
             FindScreen(),
             FindScreen(),
             FindScreen(),
-            HomeScreen()
-          ][state],
+            FindScreen(),
+          ][state.index],
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             showUnselectedLabels: false,
             showSelectedLabels: false,
-            onTap: (int value) => BlocProvider.of<NavigationBloc>(context).add(value),
-            currentIndex: state,
+            onTap: (int value) => Provider.of<NavigationModel>(context, listen: false).change(value),
+            currentIndex: state.index,
             selectedItemColor: Colors.blue,
             items: _icons.map((IconData icon) => 
               BottomNavigationBarItem(
@@ -51,7 +51,7 @@ class Navigation extends StatelessWidget{
     if(state==0){
       return IconButton(
         icon: Icon(MdiIcons.settings, color: Colors.black),
-        onPressed: () => BlocProvider.of<SettingsPanelBloc>(context).add(SettingsPanelOpened()),
+        onPressed: () => Provider.of<SettingsPanelModel>(context, listen: false).open(),
       );
     }
     return SizedBox();

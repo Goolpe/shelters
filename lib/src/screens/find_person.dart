@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 
 class FindPersonScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FindPersonBloc, FindPersonState>(
-      builder: (context, FindPersonState state){
-        if(state is FindPersonInitial){
+    return Consumer<FindPersonModel>(
+        builder: (context, state, _) {
           return _findPersonList(context, state.person);
         }
-        return SizedBox();
-      },
     );
   }
 
@@ -32,7 +29,7 @@ class FindPersonScreen extends StatelessWidget {
             ),
             initialValue: person.firstName,
             onChanged: (String value){
-              BlocProvider.of<FindPersonBloc>(context).add(FindPersonFirstNameUpdated(firstName: value));
+              Provider.of<FindPersonModel>(context, listen: false).changeFirstName(value);
             },
             inputFormatters:[
               LengthLimitingTextInputFormatter(20),
@@ -46,8 +43,9 @@ class FindPersonScreen extends StatelessWidget {
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration.collapsed(hintText: ''),
             initialValue: person.lastName,
-            onChanged: (String value) => 
-              BlocProvider.of<FindPersonBloc>(context).add(FindPersonLastNameUpdated(lastName: value)),
+            onChanged: (String value){
+              Provider.of<FindPersonModel>(context, listen: false).changeLastName(value);
+            },
             inputFormatters:[
               LengthLimitingTextInputFormatter(20),
             ]
@@ -77,13 +75,13 @@ class FindPersonScreen extends StatelessWidget {
   void _showDateOfBirth(BuildContext context, PersonModel person) async{
     final DateTime date = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1990),
-      lastDate: DateTime.now(),
+      initialDate: person.dateOfBirth ?? person.dateOfLoss ?? DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: person.dateOfLoss ?? DateTime.now(),
     );
 
     if(date != null && date != person.dateOfBirth){
-      BlocProvider.of<FindPersonBloc>(context).add(FindPersonDateOfBirthUpdated(dateOfBirth: date));
+      Provider.of<FindPersonModel>(context, listen: false).changeDateOfBirth(date);
     }
   }
 
@@ -91,12 +89,12 @@ class FindPersonScreen extends StatelessWidget {
     final DateTime date = await showDatePicker(
       context: context,
       initialDate: person.dateOfLoss ?? DateTime.now(),
-      firstDate: person.dateOfBirth ?? DateTime(1990),
+      firstDate: person.dateOfBirth ?? DateTime(1900),
       lastDate: DateTime.now(),
     );
 
     if(date != null && date != person.dateOfLoss){
-      BlocProvider.of<FindPersonBloc>(context).add(FindPersonDateOfLossUpdated(dateOfLoss: date));
+      Provider.of<FindPersonModel>(context, listen: false).changeDateOfLoss(date);
     }
   }
 

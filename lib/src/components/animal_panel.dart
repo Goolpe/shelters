@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -11,21 +11,18 @@ class AnimalPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return BlocBuilder<SlidingPanelBloc, SlidingPanelState>  (
-      builder: (context, SlidingPanelState state){
-        if(state is SlidingPanelInitial){
-          return SlidingUpPanel(
-            renderPanelSheet: false,
-            maxHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
-            minHeight: 0,
-            panelBuilder: (ScrollController sc) => 
-              state.url.isEmpty 
-              ? SizedBox() 
-              : _animalPage(state.url, sc),
-            controller: state.controller,
-          );
-        }
-        return SizedBox();
+    return Consumer<AnimalPanelModel>(
+      builder: (context, state, _){
+        return SlidingUpPanel(
+          renderPanelSheet: false,
+          maxHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
+          minHeight: 0,
+          panelBuilder: (ScrollController sc) => 
+            state.url.isEmpty 
+            ? SizedBox() 
+            : _animalPage(state.url, sc),
+          controller: state.controller,
+        );
       }
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 
 class FindScreen extends StatelessWidget {
@@ -8,12 +8,12 @@ class FindScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-      child: BlocBuilder<FindBloc,FindType>(
-        builder: (context, FindType state){
+      child: Consumer<FindModel>(
+        builder: (context, state, _){
           return ListView(
             children: <Widget>[
-              _showChoice(context, state),
-              _showScreen(state)
+              _showChoice(context, state.findType),
+              _showScreen(state.findType)
             ]
           );
         },
@@ -29,10 +29,6 @@ class FindScreen extends StatelessWidget {
         value: state,
         items: [
           DropdownMenuItem(
-            child: Text('Choise'),
-            value: FindType.none,
-          ),
-          DropdownMenuItem(
             child: Text('Person'),
             value: FindType.person,
           ),
@@ -42,7 +38,7 @@ class FindScreen extends StatelessWidget {
           )
         ],
         onChanged: (FindType val){
-          BlocProvider.of<FindBloc>(context).add(val);
+          Provider.of<FindModel>(context, listen: false).change(val);
         },
       ),
     );

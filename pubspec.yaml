@@ -17,16 +17,14 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  bloc: ^3.0.0
   cached_network_image: ^2.0.0
-  equatable: ^0.2.6
   flutter:
     sdk: flutter
   flutter_localizations:
-    sdk: flutter  
-  flutter_bloc: ^3.2.0
+    sdk: flutter
   flutter_swiper: ^1.1.6
   material_design_icons_flutter: ^3.2.3595
+  provider: ^4.0.4
   shimmer: ^1.0.1
   sliding_up_panel: ^1.0.0
 
