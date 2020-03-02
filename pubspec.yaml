@@ -18,12 +18,14 @@ environment:
 
 dependencies:
   cached_network_image: ^2.0.0
+  equatable: ^1.1.0
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
   flutter_swiper: ^1.1.6
   material_design_icons_flutter: ^3.2.3595
+  multi_image_picker: ^4.6.1
   provider: ^4.0.4
   shimmer: ^1.0.1
   sliding_up_panel: ^1.0.0

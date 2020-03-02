@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 
@@ -19,7 +22,33 @@ class FindPersonScreen extends StatelessWidget {
     return ListView(
       shrinkWrap: true,
       children: <Widget>[
-        Divider(height: 1),
+        Container(
+          height: 150,
+          child: ListView.builder(
+            itemCount: person.pictures == null ? 1 : person.pictures.length + 1,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, int i){
+
+              return InkWell(
+                child: Container(
+                  width: 120,
+                  decoration: BoxDecoration(
+                    color: Color(0xffdbe2ef),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  margin: EdgeInsets.only(left: 10, right: i == 4 ? 10 : 0, top: 10, bottom: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: person.pictures != null && i < person.pictures.length 
+                    ? Image.memory(person.pictures[i], fit: BoxFit.cover)
+                    : Icon(MdiIcons.imagePlus, color: Colors.blueGrey,),
+                  )
+                ),
+                onTap: () => Provider.of<FindPersonModel>(context, listen: false).changePictures(),
+              );
+            },
+          )
+        ),
         CustomListTile(
           title: Text('firstName'),
           trailing: TextFormField(
