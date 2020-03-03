@@ -5,4 +5,5 @@ export 'find_person.dart';
 export 'find.dart';
 export 'navigation.dart';
 export 'person.dart';
+export 'picture.dart';
 export 'settings_panel.dart';

@@ -7,10 +7,12 @@ class AnimalsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<AnimalsListModel>(context, listen: false).fetchData();
 
     return Consumer<AnimalsListModel>(
       builder: (context, state, _){
+        if(state.animals.isEmpty){
+          Provider.of<AnimalsListModel>(context, listen: false).fetchData();
+        }
         return GridView.builder(
           padding: EdgeInsets.only(bottom: 20),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

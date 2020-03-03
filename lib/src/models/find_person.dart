@@ -7,6 +7,7 @@ import 'package:shelters/shelf.dart';
 
 class FindPersonModel with ChangeNotifier{
   PersonModel _person = PersonModel();
+  List<Asset> _oldPictures = [];
 
   PersonModel get person => _person;
 
@@ -32,18 +33,35 @@ class FindPersonModel with ChangeNotifier{
 
   void changePictures() async{
     try{
+      
       List<Asset> _pictures = await MultiImagePicker.pickImages(
         maxImages: 4,
-        selectedAssets: _person.picturesAssets
+        selectedAssets: _oldPictures
       );
-      List<Uint8List> _newPictures = [];
+
+      _person.pictures = [];
+
       for(Asset pic in _pictures){
+        PictureModel picture = PictureModel();
+
         ByteData byteData = await pic.getByteData();
-        Uint8List imageData = byteData.buffer.asUint8List();
-        _newPictures.add(imageData);
+        picture.id = pic.identifier;
+        picture.uint8 = byteData.buffer.asUint8List();
+        picture.asset = pic;
+        _person.pictures.add(picture);
+        _oldPictures.add(pic);
       }
-      _person.pictures = List.from(_newPictures);
-      _person.picturesAssets = List.from(_pictures);
+
+      notifyListeners();
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+
+  void removePicture(PictureModel picture) async{
+    try{
+      _person.pictures.remove(picture);
+      _oldPictures.remove(picture.asset);
 
       notifyListeners();
     } on Exception catch (e) {

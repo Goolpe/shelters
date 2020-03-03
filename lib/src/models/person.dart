@@ -1,7 +1,4 @@
-
-import 'dart:typed_data';
-
-import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:shelters/shelf.dart';
 
 class PersonModel{
 
@@ -9,8 +6,7 @@ class PersonModel{
   String lastName = '';
   DateTime dateOfBirth;
   DateTime dateOfLoss;
-  List<Uint8List> pictures = [];
-  List<Asset> picturesAssets = [];
+  List<PictureModel> pictures = [];
 
   PersonModel({
     this.firstName,

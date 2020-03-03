@@ -12,6 +12,7 @@ class Navigation extends StatelessWidget{
     return Consumer<NavigationModel>(
       builder: (context, state, _){
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           appBar: AppBar(
             title: Text('shelters', style: TextStyle(color: Colors.blueAccent)),
             centerTitle: true,

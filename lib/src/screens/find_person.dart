@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -28,23 +26,53 @@ class FindPersonScreen extends StatelessWidget {
             itemCount: person.pictures == null ? 1 : person.pictures.length + 1,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, int i){
-
-              return InkWell(
-                child: Container(
-                  width: 120,
-                  decoration: BoxDecoration(
-                    color: Color(0xffdbe2ef),
-                    borderRadius: BorderRadius.circular(8),
+              
+              return person.pictures != null && i < person.pictures.length 
+              ? Stack(
+                children: <Widget>[
+                  Container(
+                    width: 120,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: Color(0xffdbe2ef),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    margin: EdgeInsets.only(left: 10, right: i == 4 ? 10 : 0, top: 10, bottom: 10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.memory(person.pictures[i].uint8, fit: BoxFit.cover)
+                    ),
                   ),
-                  margin: EdgeInsets.only(left: 10, right: i == 4 ? 10 : 0, top: 10, bottom: 10),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(16),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(MdiIcons.closeCircle, color: Colors.red, size: 30,),
+                      ),
+                      onTap: () => Provider.of<FindPersonModel>(context, listen: false).removePicture(person.pictures[i]),
+                    )
+                  )
+                ]
+              )
+              : Container(
+                width: 120,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Color(0xffdbe2ef),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                margin: EdgeInsets.only(left: 10, right: i == 4 ? 10 : 0, top: 10, bottom: 10),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(8),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: person.pictures != null && i < person.pictures.length 
-                    ? Image.memory(person.pictures[i], fit: BoxFit.cover)
-                    : Icon(MdiIcons.imagePlus, color: Colors.blueGrey,),
-                  )
+                    child: Icon(MdiIcons.imagePlus, color: Colors.blueGrey,),
+                  ),
+                  onTap: () => Provider.of<FindPersonModel>(context, listen: false).changePictures(),
                 ),
-                onTap: () => Provider.of<FindPersonModel>(context, listen: false).changePictures(),
               );
             },
           )
@@ -100,7 +128,7 @@ class FindPersonScreen extends StatelessWidget {
       ]
     );
   }
-
+  
   void _showDateOfBirth(BuildContext context, PersonModel person) async{
     final DateTime date = await showDatePicker(
       context: context,
