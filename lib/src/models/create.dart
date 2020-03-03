@@ -5,50 +5,58 @@ import 'package:flutter/services.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:shelters/shelf.dart';
 
-class FindPersonModel with ChangeNotifier{
-  PersonModel _person = PersonModel();
+class CreateModel with ChangeNotifier{
+
+  String _name = '';
+  String _type = '';
+  DateTime _dateOfBirth;
+  String _breed;
+  List<PictureModel> _pictures = [];
   List<Asset> _oldPictures = [];
 
-  PersonModel get person => _person;
+  String get name => _name;
+  String get type => _type;
+  DateTime get dateOfBirth => _dateOfBirth;
+  String get breed => _breed;
+  List<PictureModel> get pictures => _pictures;
 
-  void changeFirstName(String firstName){
-    _person.firstName = firstName;
+  void changeName(String name){
+    _name = name;
     notifyListeners();
   }
 
-  void changeLastName(String lastName){
-    _person.lastName = lastName;
+  void changeType(String type){
+    _type = type;
     notifyListeners();
   }
 
   void changeDateOfBirth(DateTime dateOfBirth){
-    _person.dateOfBirth = dateOfBirth;
+    _dateOfBirth = dateOfBirth;
     notifyListeners();
   }
 
-  void changeDateOfLoss(DateTime dateOfLoss){
-    _person.dateOfLoss = dateOfLoss;
+  void changeBreed(String breed){
+    _breed = breed;
     notifyListeners();
   }
 
   void changePictures() async{
     try{
       
-      List<Asset> _pictures = await MultiImagePicker.pickImages(
+      List<Asset> _newPictures = await MultiImagePicker.pickImages(
         maxImages: 4,
         selectedAssets: _oldPictures
       );
+      _pictures = [];
 
-      _person.pictures = [];
-
-      for(Asset pic in _pictures){
+      for(Asset pic in _newPictures){
         PictureModel picture = PictureModel();
 
         ByteData byteData = await pic.getByteData();
         picture.id = pic.identifier;
         picture.uint8 = byteData.buffer.asUint8List();
         picture.asset = pic;
-        _person.pictures.add(picture);
+        _pictures.add(picture);
         _oldPictures.add(pic);
       }
 
@@ -60,7 +68,7 @@ class FindPersonModel with ChangeNotifier{
 
   void removePicture(PictureModel picture) async{
     try{
-      _person.pictures.remove(picture);
+      _pictures.remove(picture);
       _oldPictures.remove(picture.asset);
 
       notifyListeners();

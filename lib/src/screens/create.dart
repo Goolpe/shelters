@@ -5,29 +5,29 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 
-class FindPersonScreen extends StatelessWidget {
+class CreateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FindPersonModel>(
-        builder: (context, state, _) {
-          return _findPersonList(context, state.person);
-        }
+    return Consumer<CreateModel>(
+      builder: (context, CreateModel state, _) {
+        return _createList(context, state);
+      }
     );
   }
 
-  _findPersonList(context, PersonModel person){
+  _createList(context, CreateModel state){
     return ListView(
       shrinkWrap: true,
       children: <Widget>[
         Container(
           height: 150,
           child: ListView.builder(
-            itemCount: person.pictures == null ? 1 : person.pictures.length + 1,
+            itemCount: state.pictures == null ? 1 : state.pictures.length + 1,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, int i){
               
-              return person.pictures != null && i < person.pictures.length 
+              return state.pictures != null && i < state.pictures.length 
               ? Stack(
                 children: <Widget>[
                   Container(
@@ -40,7 +40,7 @@ class FindPersonScreen extends StatelessWidget {
                     margin: EdgeInsets.only(left: 10, right: i == 4 ? 10 : 0, top: 10, bottom: 10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.memory(person.pictures[i].uint8, fit: BoxFit.cover)
+                      child: Image.memory(state.pictures[i].uint8, fit: BoxFit.cover)
                     ),
                   ),
                   Positioned(
@@ -52,7 +52,7 @@ class FindPersonScreen extends StatelessWidget {
                         backgroundColor: Colors.white,
                         child: Icon(MdiIcons.closeCircle, color: Colors.red, size: 30,),
                       ),
-                      onTap: () => Provider.of<FindPersonModel>(context, listen: false).removePicture(person.pictures[i]),
+                      onTap: () => Provider.of<CreateModel>(context, listen: false).removePicture(state.pictures[i]),
                     )
                   )
                 ]
@@ -71,22 +71,22 @@ class FindPersonScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     child: Icon(MdiIcons.imagePlus, color: Colors.blueGrey,),
                   ),
-                  onTap: () => Provider.of<FindPersonModel>(context, listen: false).changePictures(),
+                  onTap: () => Provider.of<CreateModel>(context, listen: false).changePictures(),
                 ),
               );
             },
           )
         ),
         CustomListTile(
-          title: Text('firstName'),
+          title: Text('name'),
           trailing: TextFormField(
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration.collapsed(
               hintText: '',
             ),
-            initialValue: person.firstName,
+            initialValue: state.name,
             onChanged: (String value){
-              Provider.of<FindPersonModel>(context, listen: false).changeFirstName(value);
+              Provider.of<CreateModel>(context, listen: false).changeName(value);
             },
             inputFormatters:[
               LengthLimitingTextInputFormatter(20),
@@ -95,13 +95,28 @@ class FindPersonScreen extends StatelessWidget {
         ),
         Divider(height: 1),
         CustomListTile(
-          title: Text('last name'),
+          title: Text('type'),
           trailing: TextFormField(
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration.collapsed(hintText: ''),
-            initialValue: person.lastName,
+            initialValue: state.type,
             onChanged: (String value){
-              Provider.of<FindPersonModel>(context, listen: false).changeLastName(value);
+              Provider.of<CreateModel>(context, listen: false).changeType(value);
+            },
+            inputFormatters:[
+              LengthLimitingTextInputFormatter(20),
+            ]
+          ),
+        ),
+        Divider(height: 1),
+        CustomListTile(
+          title: Text('breed'),
+          trailing: TextFormField(
+            textCapitalization: TextCapitalization.sentences,
+            decoration: InputDecoration.collapsed(hintText: ''),
+            initialValue: state.breed,
+            onChanged: (String value){
+              Provider.of<CreateModel>(context, listen: false).changeBreed(value);
             },
             inputFormatters:[
               LengthLimitingTextInputFormatter(20),
@@ -112,16 +127,8 @@ class FindPersonScreen extends StatelessWidget {
         CustomListTile(
           title: Text('date of birth'),
           trailing: GestureDetector(
-            child: Text(_convertDate(person.dateOfBirth)),
-            onTap: () => _showDateOfBirth(context, person),
-          )
-        ),
-        Divider(height: 1),
-        CustomListTile(
-          title: Text('date of loss'),
-          trailing: GestureDetector(
-            child: Text(_convertDate(person.dateOfLoss)),
-            onTap: () => _showDateOfLoss(context, person),
+            child: Text(_convertDate(state.dateOfBirth)),
+            onTap: () => _showDateOfBirth(context, state),
           )
         ),
         Divider(height: 1),
@@ -129,29 +136,16 @@ class FindPersonScreen extends StatelessWidget {
     );
   }
   
-  void _showDateOfBirth(BuildContext context, PersonModel person) async{
+  void _showDateOfBirth(BuildContext context, CreateModel state) async{
     final DateTime date = await showDatePicker(
       context: context,
-      initialDate: person.dateOfBirth ?? person.dateOfLoss ?? DateTime.now(),
+      initialDate: state.dateOfBirth  ?? DateTime.now(),
       firstDate: DateTime(1900),
-      lastDate: person.dateOfLoss ?? DateTime.now(),
-    );
-
-    if(date != null && date != person.dateOfBirth){
-      Provider.of<FindPersonModel>(context, listen: false).changeDateOfBirth(date);
-    }
-  }
-
-  void _showDateOfLoss(BuildContext context, PersonModel person) async{
-    final DateTime date = await showDatePicker(
-      context: context,
-      initialDate: person.dateOfLoss ?? DateTime.now(),
-      firstDate: person.dateOfBirth ?? DateTime(1900),
       lastDate: DateTime.now(),
     );
 
-    if(date != null && date != person.dateOfLoss){
-      Provider.of<FindPersonModel>(context, listen: false).changeDateOfLoss(date);
+    if(date != null && date != state.dateOfBirth){
+      Provider.of<CreateModel>(context, listen: false).changeDateOfBirth(date);
     }
   }
 

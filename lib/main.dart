@@ -9,8 +9,7 @@ void main(){
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => NavigationModel()),
-        ChangeNotifierProvider(create: (_) => FindPersonModel()),
-        ChangeNotifierProvider(create: (_) => FindModel()),
+        ChangeNotifierProvider(create: (_) => CreateModel()),
         ChangeNotifierProvider(create: (_) => AnimalPanelModel()),
         ChangeNotifierProvider(create: (_) => AnimalsListModel()),
         ChangeNotifierProvider(create: (_) => SettingsPanelModel()),

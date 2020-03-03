@@ -1,5 +1,3 @@
-export 'find_animal.dart';
-export 'find_person.dart';
-export 'find.dart';
+export 'create.dart';
 export 'home.dart';
 export 'navigation.dart';

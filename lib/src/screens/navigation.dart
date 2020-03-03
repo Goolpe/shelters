@@ -12,7 +12,6 @@ class Navigation extends StatelessWidget{
     return Consumer<NavigationModel>(
       builder: (context, state, _){
         return Scaffold(
-          resizeToAvoidBottomInset: true,
           appBar: AppBar(
             title: Text('shelters', style: TextStyle(color: Colors.blueAccent)),
             centerTitle: true,
@@ -24,10 +23,10 @@ class Navigation extends StatelessWidget{
           ),
           body: [
             HomeScreen(),
-            FindScreen(),
-            FindScreen(),
-            FindScreen(),
-            FindScreen(),
+            CreateScreen(),
+            CreateScreen(),
+            CreateScreen(),
+            CreateScreen(),
           ][state.index],
           bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
