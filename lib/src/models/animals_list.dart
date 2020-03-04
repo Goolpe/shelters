@@ -1,13 +1,29 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:shelters/shelf.dart';
 
 class AnimalsListModel with ChangeNotifier{
-  List<AnimalModel> _animals = [];
 
-  List<AnimalModel> get animals => _animals;
+  DatabaseReference _dbRef;
+  
+  List<dynamic> _data = [];
+  List<dynamic> get data => _data;
 
-  void fetchData() async {
-    _animals = await AnimalModel.fetchAnimalList();
+  void init() async{
+    _dbRef = FirebaseDatabase.instance.reference();
     notifyListeners();
+  }
+
+  void addData(){
+    _dbRef.push().set({
+      'title': 'Mastering EJB',
+      'description': 'Programming Guide for J2EE'
+    });
+  }
+
+  void getData(){
+    _dbRef.once().then((DataSnapshot snapshot) {
+      _data = snapshot.value;
+      notifyListeners();
+    });
   }
 }
