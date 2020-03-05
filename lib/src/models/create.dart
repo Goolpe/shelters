@@ -1,24 +1,36 @@
 import 'dart:typed_data';
-
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:shelters/shelf.dart';
 
 class CreateModel with ChangeNotifier{
+  DatabaseReference _dbRef;
 
   String _name = '';
+  String get name => _name;
+
   String _type = '';
+  String get type => _type;
+
+  String _age = '';
+  String get age => _age;
+
   DateTime _dateOfBirth;
+  DateTime get dateOfBirth => _dateOfBirth;
+
   String _breed;
+  String get breed => _breed;
+
   List<PictureModel> _pictures = [];
+  List<PictureModel> get pictures => _pictures;
+
   List<Asset> _oldPictures = [];
 
-  String get name => _name;
-  String get type => _type;
-  DateTime get dateOfBirth => _dateOfBirth;
-  String get breed => _breed;
-  List<PictureModel> get pictures => _pictures;
+  void init(){
+    _dbRef = FirebaseDatabase.instance.reference();
+  }
 
   void changeName(String name){
     _name = name;
@@ -38,6 +50,21 @@ class CreateModel with ChangeNotifier{
   void changeBreed(String breed){
     _breed = breed;
     notifyListeners();
+  }
+
+  void changeAge(String age){
+    _age = age;
+    notifyListeners();
+  }
+
+  void create(){
+    _dbRef.push().set({
+      'name': _name,
+      'url': "https://cdn2.thecatapi.com/images/6mt.jpg",
+      'type': _type,
+      'breed': _breed,
+      'age': _age
+    });
   }
 
   void changePictures() async{

@@ -9,10 +9,13 @@ class CreateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CreateModel>(
-      builder: (context, CreateModel state, _) {
-        return _createList(context, state);
-      }
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Consumer<CreateModel>(
+        builder: (context, CreateModel state, _) {
+          return _createList(context, state);
+        }
+      )
     );
   }
 
@@ -125,13 +128,43 @@ class CreateScreen extends StatelessWidget {
         ),
         Divider(height: 1),
         CustomListTile(
-          title: Text('date of birth'),
-          trailing: GestureDetector(
-            child: Text(_convertDate(state.dateOfBirth)),
-            onTap: () => _showDateOfBirth(context, state),
-          )
+          title: Text('age'),
+          trailing: TextFormField(
+            textCapitalization: TextCapitalization.sentences,
+            decoration: InputDecoration.collapsed(hintText: ''),
+            initialValue: state.age,
+            onChanged: (String value){
+              Provider.of<CreateModel>(context, listen: false).changeAge(value);
+            },
+            inputFormatters:[
+              LengthLimitingTextInputFormatter(20),
+            ]
+          ),
         ),
+        // CustomListTile(
+        //   title: Text('date of birth'),
+        //   trailing: GestureDetector(
+        //     child: Text(_convertDate(state.dateOfBirth)),
+        //     onTap: () => _showDateOfBirth(context, state),
+        //   )
+        // ),
         Divider(height: 1),
+        Container(
+          margin: EdgeInsets.all(16),
+          height: 50,
+          child: RaisedButton(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            elevation: 0,
+            textColor: Colors.white,
+            color: Color(0xffd63447),
+            child: Text('Create'),
+            onPressed: (){
+              Provider.of<CreateModel>(context, listen: false).create();
+            },
+          )
+        )
       ]
     );
   }

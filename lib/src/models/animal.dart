@@ -1,43 +1,26 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-import 'package:shelters/shelf.dart';
-
 class AnimalModel{
-  final String id;
+  final String name;
   final String url;
+  final String age;
+  final String breed;
+  final String type;
   
   AnimalModel({
-    this.id,
-    this.url
+    this.name,
+    this.url,
+    this.age,
+    this.breed,
+    this.type
   });
 
-  factory AnimalModel.fromJson(Map<String, dynamic> _parsedJson){
+  factory AnimalModel.fromJson(Map<dynamic, dynamic> _parsedJson){
     return AnimalModel(
-      id: _parsedJson['id'],
+      name: _parsedJson['name'],
+      type: _parsedJson['type'],
+      age: _parsedJson['age'],
+      breed: _parsedJson['breed'],
       url: _parsedJson['url']
     );
-  }
-
-  static Future<List<AnimalModel>> fetchAnimalList() async{
-    http.Response result = await http.get('https://api.thecatapi.com/v1/images/search?limit=15&format=json',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': API_KEY
-      }
-    );
-    if(result.statusCode == 200){
-      List<AnimalModel> list = [];
-      List<dynamic> _parsedJson = json.decode(result.body);
-
-      for(int i=0;i<_parsedJson.length;i++){
-        list.add(AnimalModel.fromJson(_parsedJson[i]));
-      }
-
-      return list;
-    } else{
-      throw Exception('Failed to load post');
-    }
   }
 }
 
