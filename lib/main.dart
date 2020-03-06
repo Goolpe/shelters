@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shelters/shelf.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
+  timeago.setLocaleMessages('en', CustomEn());
 
   runApp(
     MultiProvider(

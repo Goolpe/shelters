@@ -12,23 +12,21 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   KeyboardVisibilityNotification kVN = KeyboardVisibilityNotification();
+  int kvId;
   double _size = 300;
 
   @override
   void initState() {
-    kVN.addNewListener(
+    super.initState();
+    kvId = kVN.addNewListener(
       onChange: (bool visible) {
-        setState(() => _size = visible ? 0 : 300);
+        if(mounted){
+          setState(() => _size = visible ? 0 : 300);
+        }
       },
     );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    kVN.dispose();
-    super.dispose();
   }
 
   @override
@@ -141,4 +139,10 @@ class _LoginScreenState extends State<LoginScreen> {
   _login(){
 
   }
+  @override
+  void dispose() {
+    kVN.removeListener(kvId);
+    super.dispose();
+  } 
+
 }

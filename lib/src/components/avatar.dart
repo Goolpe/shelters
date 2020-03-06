@@ -5,12 +5,10 @@ import 'package:shelters/shelf.dart';
 
 class Avatar extends StatelessWidget{
   Avatar({
-    @required this.url,
-    @required this.title
+    @required this.animal
   });
 
-  final String url;
-  final String title;
+  final AnimalModel animal;
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +19,21 @@ class Avatar extends StatelessWidget{
             customBorder: CircleBorder(),
             child: Padding(
             padding: EdgeInsets.all(10),
-            child: url.isEmpty
+            child: animal == null
               ? CircleAvatar(
                 radius: MediaQuery.of(context).size.width/8,
                 backgroundColor: Colors.grey[200],
               )
               : CircleAvatar(
                 radius: MediaQuery.of(context).size.width/8,
-                backgroundImage: CachedNetworkImageProvider(url),
+                backgroundImage: CachedNetworkImageProvider(animal.images[0]),
                 backgroundColor: Colors.grey[200],
               ),
             ),
-            onTap: () => Provider.of<AnimalPanelModel>(context, listen: false).open(url)
+            onTap: () => Provider.of<AnimalPanelModel>(context, listen: false).open(animal)
           ),
         ),
-        Text(title)
+        Text(animal != null ? animal.name : '')
       ]
     );
   }

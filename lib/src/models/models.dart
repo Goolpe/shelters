@@ -1,4 +1,5 @@
 export 'animal_panel.dart';
+export 'animal_type.dart';
 export 'animal.dart';
 export 'animals_list.dart';
 export 'auth.dart';

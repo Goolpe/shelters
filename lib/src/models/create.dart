@@ -11,11 +11,8 @@ class CreateModel with ChangeNotifier{
   String _name = '';
   String get name => _name;
 
-  String _type = '';
-  String get type => _type;
-
-  String _age = '';
-  String get age => _age;
+  AnimalType _type = animalTypes[0];
+  AnimalType get type => _type;
 
   DateTime _dateOfBirth;
   DateTime get dateOfBirth => _dateOfBirth;
@@ -37,7 +34,7 @@ class CreateModel with ChangeNotifier{
     notifyListeners();
   }
 
-  void changeType(String type){
+  void changeType(AnimalType type){
     _type = type;
     notifyListeners();
   }
@@ -52,18 +49,14 @@ class CreateModel with ChangeNotifier{
     notifyListeners();
   }
 
-  void changeAge(String age){
-    _age = age;
-    notifyListeners();
-  }
-
   void create(){
     _dbRef.push().set({
       'name': _name,
-      'url': "https://cdn2.thecatapi.com/images/6mt.jpg",
-      'type': _type,
+      'images': ["https://cdn2.thecatapi.com/images/6mt.jpg", 
+      "https://cdn2.thecatapi.com/images/e0g.jpg"],
+      'type': _type.name,
       'breed': _breed,
-      'age': _age
+      'dateOfBirth': _dateOfBirth.toIso8601String()
     });
   }
 

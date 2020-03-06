@@ -5,6 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class AnimalPanel extends StatelessWidget {
 
@@ -12,22 +13,22 @@ class AnimalPanel extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Consumer<AnimalPanelModel>(
-      builder: (context, state, _){
+      builder: (context, AnimalPanelModel state, _){
         return SlidingUpPanel(
           renderPanelSheet: false,
           maxHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
           minHeight: 0,
           panelBuilder: (ScrollController sc) => 
-            state.url.isEmpty 
+            state.animal == null
             ? SizedBox() 
-            : _animalPage(state.url, sc),
+            : _animalPage(state.animal, sc),
           controller: state.controller,
         );
       }
     );
   }
 
-  Widget _animalPage(String url, ScrollController scrollController){
+  Widget _animalPage(AnimalModel animal, ScrollController scrollController){
     return Card(
       elevation: 20,
       shape: RoundedRectangleBorder(
@@ -42,20 +43,21 @@ class AnimalPanel extends StatelessWidget {
           SizedBox(
             height: 400,
             child: Swiper(
+              key: Key(animal.id),
               containerHeight: 400,
               itemHeight: 400,
               itemBuilder: (BuildContext context,int index){
-                return CachedNetworkImage(imageUrl: url, fit: BoxFit.cover);
+                return CachedNetworkImage(imageUrl: animal.images[index], fit: BoxFit.cover);
               },
-              itemCount: 3,
+              itemCount: animal.images.length,
               pagination: SwiperPagination(),
             ),
           ),
           ListTile(
-            title: Text('Лола, 2'),
-            subtitle: Text('Чеширский кот'),
+            title: Text('${animal.name}, ${timeago.format(DateTime.parse(animal.dateOfBirth))}'),
+            subtitle: Text('${animal.breed}'),
             trailing: Chip(
-              label: Text('кошки', style: TextStyle(color: Colors.white)),
+              label: Text('${animal.type.name}', style: TextStyle(color: Colors.white)),
               backgroundColor: Colors.green
             ),
           ),

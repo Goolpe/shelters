@@ -17,10 +17,11 @@ class AnimalsListModel with ChangeNotifier{
   void getData(){
     _dbRef.once().then((DataSnapshot snapshot) {
       Map<String, dynamic> _dataMap = Map<String, dynamic>.from(snapshot.value);
-      List<dynamic> _dataList = _dataMap.values.toList();
+      List<dynamic> _dataValues = _dataMap.values.toList();
+      List<dynamic> _dataKeys = _dataMap.keys.toList();
 
-      for(int i = 0; i < _dataList.length; i++){
-        _animals.add(AnimalModel.fromJson(_dataList[i]));
+      for(int i = 0; i < _dataValues.length; i++){
+        _animals.add(AnimalModel.fromJson(_dataValues[i], _dataKeys[i]));
       }
     });
   }

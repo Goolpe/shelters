@@ -99,17 +99,30 @@ class CreateScreen extends StatelessWidget {
         Divider(height: 1),
         CustomListTile(
           title: Text('type'),
-          trailing: TextFormField(
-            textCapitalization: TextCapitalization.sentences,
-            decoration: InputDecoration.collapsed(hintText: ''),
-            initialValue: state.type,
-            onChanged: (String value){
-              Provider.of<CreateModel>(context, listen: false).changeType(value);
+          trailing: DropdownButton<AnimalType>(
+            underline: SizedBox(),
+            value: state.type,
+            items: animalTypes.map<DropdownMenuItem<AnimalType>>((AnimalType value) {
+              return DropdownMenuItem<AnimalType>(
+                value: value,
+                child: Text(value.name),
+              );
+            }).toList(),
+            onChanged: (AnimalType val){
+              Provider.of<CreateModel>(context, listen: false).changeType(val);
             },
-            inputFormatters:[
-              LengthLimitingTextInputFormatter(20),
-            ]
           ),
+          // trailing: TextFormField(
+          //   textCapitalization: TextCapitalization.sentences,
+          //   decoration: InputDecoration.collapsed(hintText: ''),
+          //   initialValue: state.type,
+          //   onChanged: (String value){
+          //     Provider.of<CreateModel>(context, listen: false).changeType(value);
+          //   },
+          //   inputFormatters:[
+          //     LengthLimitingTextInputFormatter(20),
+          //   ]
+          // ),
         ),
         Divider(height: 1),
         CustomListTile(
@@ -127,27 +140,27 @@ class CreateScreen extends StatelessWidget {
           ),
         ),
         Divider(height: 1),
-        CustomListTile(
-          title: Text('age'),
-          trailing: TextFormField(
-            textCapitalization: TextCapitalization.sentences,
-            decoration: InputDecoration.collapsed(hintText: ''),
-            initialValue: state.age,
-            onChanged: (String value){
-              Provider.of<CreateModel>(context, listen: false).changeAge(value);
-            },
-            inputFormatters:[
-              LengthLimitingTextInputFormatter(20),
-            ]
-          ),
-        ),
         // CustomListTile(
-        //   title: Text('date of birth'),
-        //   trailing: GestureDetector(
-        //     child: Text(_convertDate(state.dateOfBirth)),
-        //     onTap: () => _showDateOfBirth(context, state),
-        //   )
+        //   title: Text('age'),
+        //   trailing: TextFormField(
+        //     textCapitalization: TextCapitalization.sentences,
+        //     decoration: InputDecoration.collapsed(hintText: ''),
+        //     initialValue: state.age,
+        //     onChanged: (String value){
+        //       Provider.of<CreateModel>(context, listen: false).changeAge(value);
+        //     },
+        //     inputFormatters:[
+        //       LengthLimitingTextInputFormatter(20),
+        //     ]
+        //   ),
         // ),
+        CustomListTile(
+          title: Text('date of birth'),
+          trailing: GestureDetector(
+            child: Text(_convertDate(state.dateOfBirth)),
+            onTap: () => _showDateOfBirth(context, state),
+          )
+        ),
         Divider(height: 1),
         Container(
           margin: EdgeInsets.all(16),

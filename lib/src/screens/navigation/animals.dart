@@ -18,16 +18,14 @@ class AnimalsScreen extends StatelessWidget{
           itemBuilder: (context, index){
             if(state.animals.isNotEmpty){
               return Avatar(
-                url: state.animals[index].url,
-                title: state.animals[index].name,
+                animal: state.animals[index]
               );
             }
             return Shimmer.fromColors(
               baseColor: Colors.grey[200],
               highlightColor: Colors.grey[300],
               child: Avatar(
-                url: '',
-                title: '',
+                animal: null,
               )
             );
           }
