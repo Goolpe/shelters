@@ -83,6 +83,8 @@ class CreateScreen extends StatelessWidget {
         CustomListTile(
           title: Text('name'),
           trailing: TextFormField(
+            onEditingComplete: () => FocusScope.of(context).nextFocus(),
+            textInputAction: TextInputAction.go,
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration.collapsed(
               hintText: '',
@@ -90,6 +92,23 @@ class CreateScreen extends StatelessWidget {
             initialValue: state.name,
             onChanged: (String value){
               Provider.of<CreateModel>(context, listen: false).changeName(value);
+            },
+            inputFormatters:[
+              LengthLimitingTextInputFormatter(20),
+            ]
+          ),
+        ),
+        Divider(height: 1),
+        CustomListTile(
+          title: Text('breed'),
+          trailing: TextFormField(
+            onEditingComplete: () => FocusScope.of(context).nextFocus(),
+            textInputAction: TextInputAction.go,
+            textCapitalization: TextCapitalization.sentences,
+            decoration: InputDecoration.collapsed(hintText: ''),
+            initialValue: state.breed,
+            onChanged: (String value){
+              Provider.of<CreateModel>(context, listen: false).changeBreed(value);
             },
             inputFormatters:[
               LengthLimitingTextInputFormatter(20),
@@ -111,32 +130,6 @@ class CreateScreen extends StatelessWidget {
             onChanged: (AnimalType val){
               Provider.of<CreateModel>(context, listen: false).changeType(val);
             },
-          ),
-          // trailing: TextFormField(
-          //   textCapitalization: TextCapitalization.sentences,
-          //   decoration: InputDecoration.collapsed(hintText: ''),
-          //   initialValue: state.type,
-          //   onChanged: (String value){
-          //     Provider.of<CreateModel>(context, listen: false).changeType(value);
-          //   },
-          //   inputFormatters:[
-          //     LengthLimitingTextInputFormatter(20),
-          //   ]
-          // ),
-        ),
-        Divider(height: 1),
-        CustomListTile(
-          title: Text('breed'),
-          trailing: TextFormField(
-            textCapitalization: TextCapitalization.sentences,
-            decoration: InputDecoration.collapsed(hintText: ''),
-            initialValue: state.breed,
-            onChanged: (String value){
-              Provider.of<CreateModel>(context, listen: false).changeBreed(value);
-            },
-            inputFormatters:[
-              LengthLimitingTextInputFormatter(20),
-            ]
           ),
         ),
         Divider(height: 1),
