@@ -58,7 +58,7 @@ class AnimalPanel extends StatelessWidget {
             subtitle: Text('${animal.breed}'),
             trailing: Chip(
               label: Text('${animal.type.name}', style: TextStyle(color: Colors.white)),
-              backgroundColor: Colors.green
+              backgroundColor: animal.type.color
             ),
           ),
           ListTile(

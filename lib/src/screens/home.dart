@@ -5,7 +5,7 @@ import 'package:shelters/shelf.dart';
 
 class HomeScreen extends StatelessWidget{
 
-  final List<IconData> _icons = [Icons.dashboard, Icons.home, Icons.search, Icons.home, Icons.person];
+  final List<IconData> _icons = [Icons.dashboard, Icons.home, MdiIcons.plus, Icons.home, Icons.person];
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,6 @@ class HomeScreen extends StatelessWidget{
                 appBar: AppBar(
                   title: Text('shelters', style: TextStyle(color: Colors.blueAccent)),
                   centerTitle: true,
-                  backgroundColor: Colors.transparent,
                   elevation: 0,
                   actions: <Widget>[
                     _rightButtons(state.index, context)
@@ -59,16 +58,8 @@ class HomeScreen extends StatelessWidget{
   _rightButtons(int state, BuildContext context){
     if(state==0){
       return IconButton(
-        icon: Icon(MdiIcons.settings, color: Colors.black),
+        icon: Icon(MdiIcons.tune, color: Colors.black),
         onPressed: () => Provider.of<SettingsPanelModel>(context, listen: false).open(),
-      );
-    } else if(state==4){
-      return IconButton(
-        icon: Icon(MdiIcons.exitToApp, color: Colors.black),
-        onPressed: () async{
-          await Provider.of<AuthModel>(context, listen: false).logout();
-          Provider.of<NavigationModel>(context, listen: false)..change(0);
-        }
       );
     }
     return SizedBox();

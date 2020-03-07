@@ -19,8 +19,8 @@ class AnimalsListModel with ChangeNotifier{
 
   void getData(){
     _loading = true;
-    notifyListeners();
     _animals = [];
+    notifyListeners();
 
     _dbRef.once().then((DataSnapshot snapshot) {
       Map<String, dynamic> _dataMap = Map<String, dynamic>.from(snapshot.value);
@@ -31,6 +31,7 @@ class AnimalsListModel with ChangeNotifier{
         _animals.add(AnimalModel.fromJson(_dataValues[i], _dataKeys[i]));
       }
     });
+    
     _loading = false;
     notifyListeners();
   }

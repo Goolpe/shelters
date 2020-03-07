@@ -7,3 +7,4 @@ export 'create.dart';
 export 'navigation.dart';
 export 'picture.dart';
 export 'settings_panel.dart';
+export 'theme.dart';

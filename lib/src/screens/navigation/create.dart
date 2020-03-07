@@ -81,7 +81,7 @@ class CreateScreen extends StatelessWidget {
           )
         ),
         CustomListTile(
-          title: Text('name'),
+          title: 'Name',
           trailing: TextFormField(
             onEditingComplete: () => FocusScope.of(context).nextFocus(),
             textInputAction: TextInputAction.go,
@@ -89,6 +89,7 @@ class CreateScreen extends StatelessWidget {
             decoration: InputDecoration.collapsed(
               hintText: '',
             ),
+            style: Theme.of(context).textTheme.bodyText1,
             initialValue: state.name,
             onChanged: (String value){
               Provider.of<CreateModel>(context, listen: false).changeName(value);
@@ -98,14 +99,14 @@ class CreateScreen extends StatelessWidget {
             ]
           ),
         ),
-        Divider(height: 1),
         CustomListTile(
-          title: Text('breed'),
+          title: 'Breed',
           trailing: TextFormField(
             onEditingComplete: () => FocusScope.of(context).nextFocus(),
             textInputAction: TextInputAction.go,
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration.collapsed(hintText: ''),
+            style: Theme.of(context).textTheme.bodyText1,
             initialValue: state.breed,
             onChanged: (String value){
               Provider.of<CreateModel>(context, listen: false).changeBreed(value);
@@ -115,46 +116,33 @@ class CreateScreen extends StatelessWidget {
             ]
           ),
         ),
-        Divider(height: 1),
         CustomListTile(
-          title: Text('type'),
-          trailing: DropdownButton<AnimalType>(
-            underline: SizedBox(),
-            value: state.type,
-            items: animalTypes.map<DropdownMenuItem<AnimalType>>((AnimalType value) {
-              return DropdownMenuItem<AnimalType>(
-                value: value,
-                child: Text(value.name),
-              );
-            }).toList(),
-            onChanged: (AnimalType val){
-              Provider.of<CreateModel>(context, listen: false).changeType(val);
-            },
-          ),
+          title: 'Type',
+          trailing: ButtonTheme(
+          alignedDropdown: true,
+          child: DropdownButton<AnimalType>(
+              underline: SizedBox(),
+              value: state.type,
+              items: animalTypes.map<DropdownMenuItem<AnimalType>>((AnimalType value) {
+                return DropdownMenuItem<AnimalType>(
+                  value: value,
+                  child: Text(value.name),
+                );
+              }).toList(),
+              onChanged: (AnimalType val){
+                Provider.of<CreateModel>(context, listen: false).changeType(val);
+              },
+            ),
+          )
         ),
-        Divider(height: 1),
-        // CustomListTile(
-        //   title: Text('age'),
-        //   trailing: TextFormField(
-        //     textCapitalization: TextCapitalization.sentences,
-        //     decoration: InputDecoration.collapsed(hintText: ''),
-        //     initialValue: state.age,
-        //     onChanged: (String value){
-        //       Provider.of<CreateModel>(context, listen: false).changeAge(value);
-        //     },
-        //     inputFormatters:[
-        //       LengthLimitingTextInputFormatter(20),
-        //     ]
-        //   ),
-        // ),
         CustomListTile(
-          title: Text('date of birth'),
+          title: 'Date of birth',
           trailing: GestureDetector(
-            child: Text(_convertDate(state.dateOfBirth)),
+            child: Text(_convertDate(state.dateOfBirth),
+              style: Theme.of(context).textTheme.bodyText1),
             onTap: () => _showDateOfBirth(context, state),
           )
         ),
-        Divider(height: 1),
         Container(
           margin: EdgeInsets.all(16),
           height: 50,
