@@ -81,6 +81,7 @@ class CreateScreen extends StatelessWidget {
           )
         ),
         CustomListTile(
+          showDivider: false,
           title: 'Name',
           trailing: TextFormField(
             onEditingComplete: () => FocusScope.of(context).nextFocus(),

@@ -5,7 +5,7 @@ import 'package:shelters/shelf.dart';
 
 class HomeScreen extends StatelessWidget{
 
-  final List<IconData> _icons = [Icons.dashboard, Icons.home, MdiIcons.plus, Icons.home, Icons.person];
+  final List<IconData> _icons = [Icons.dashboard, MdiIcons.map, MdiIcons.plus, MdiIcons.chatOutline, MdiIcons.cogs];
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,9 @@ class HomeScreen extends StatelessWidget{
                 ),
                 body: [
                   AnimalsScreen(),
+                  MapScreen(),
                   CreateScreen(),
-                  CreateScreen(),
-                  CreateScreen(),
+                  DialogsScreen(),
                   ProfileScreen(),
                 ][state.index],
                 bottomNavigationBar: BottomNavigationBar(
@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget{
   _rightButtons(int state, BuildContext context){
     if(state==0){
       return IconButton(
-        icon: Icon(MdiIcons.tune, color: Colors.black),
+        icon: Icon(MdiIcons.tune),
         onPressed: () => Provider.of<SettingsPanelModel>(context, listen: false).open(),
       );
     }

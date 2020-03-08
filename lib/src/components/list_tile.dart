@@ -38,7 +38,7 @@ class CustomListTile extends StatelessWidget{
           child: Material(
             child: InkWell(
               child: Container(
-                color: Theme.of(context).backgroundColor,
+                // color: Theme.of(context).backgroundColor,
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 height: 50,
                 child: Row(
