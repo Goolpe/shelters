@@ -9,7 +9,7 @@ final darkTheme = ThemeData(
   accentIconTheme: IconThemeData(color: Colors.black),
   dividerColor: Colors.black12,
   textTheme: TextTheme(
-    subtitle1: TextStyle(color: Colors.white),
+    subtitle: TextStyle(color: Colors.white),
   ),
   appBarTheme: AppBarTheme(
     iconTheme: IconThemeData(
@@ -28,6 +28,6 @@ final lightTheme = ThemeData(
   accentIconTheme: IconThemeData(color: Colors.white),
   dividerColor: Colors.white54,
   textTheme: TextTheme(
-    bodyText2: TextStyle(color: Colors.grey[700])
+    body2: TextStyle(color: Colors.grey[700])
   )
 );

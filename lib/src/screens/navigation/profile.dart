@@ -33,9 +33,9 @@ class ProfileScreen extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('ACCOUNT', style: Theme.of(context).textTheme.subtitle2),
+                              Text('ACCOUNT', style: Theme.of(context).textTheme.subtitle),
                               SizedBox(height: 10),
-                              Text('Edit and manage your account details', style: Theme.of(context).textTheme.subtitle1),
+                              Text('Edit and manage your account details', style: Theme.of(context).textTheme.subtitle),
                             ]
                           ),
                           Stack(
@@ -79,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
                         textCapitalization: TextCapitalization.sentences,
                         decoration: InputDecoration.collapsed(hintText: ''),
                         initialValue: state.user.displayName,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.body1,
                         onChanged: (String value){
                           Provider.of<AuthModel>(context, listen: false).updateName(value);
                         },
@@ -96,7 +96,7 @@ class ProfileScreen extends StatelessWidget {
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration.collapsed(hintText: ''),
                         initialValue: 'admin@mail.com',
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.body1,
                         onChanged: (String value){
 
                         },
@@ -113,7 +113,7 @@ class ProfileScreen extends StatelessWidget {
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration.collapsed(hintText: ''),
                         initialValue: state.user.phoneNumber,
-                        style: Theme.of(context).textTheme.bodyText1,
+                        style: Theme.of(context).textTheme.body1,
                         onChanged: (String value){
                           
                         },
@@ -137,12 +137,12 @@ class ProfileScreen extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             width: MediaQuery.of(context).size.width,
-                            child: Text('HELP & FEEDBACK', style: Theme.of(context).textTheme.subtitle2),
+                            child: Text('HELP & FEEDBACK', style: Theme.of(context).textTheme.subtitle),
                           ),
                           Container(
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.only(top: 10),
-                            child: Text('We welcome your feedback!', style: Theme.of(context).textTheme.subtitle1),
+                            child: Text('We welcome your feedback!', style: Theme.of(context).textTheme.subtitle),
                           ),
                         ]
                       )
@@ -152,7 +152,7 @@ class ProfileScreen extends StatelessWidget {
                       title: 'Contact Us',
                       trailing: Align(
                         alignment: Alignment.centerRight,
-                        child: Icon(MdiIcons.chevronRight, color: Theme.of(context).textTheme.bodyText1.color),
+                        child: Icon(MdiIcons.chevronRight, color: Theme.of(context).textTheme.body1.color),
                       ),
                       onTap: (){print('lol');},
                     ),

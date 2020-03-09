@@ -26,7 +26,7 @@ class CustomListTile extends StatelessWidget{
           padding: EdgeInsets.only(left: 16),
           child: Divider(
             height: 0, 
-            color: Theme.of(context).textTheme.bodyText2.color
+            color: Theme.of(context).textTheme.body2.color
           ),
         ) : const SizedBox(),
         Theme(
@@ -47,7 +47,7 @@ class CustomListTile extends StatelessWidget{
                     ? Container(
                       alignment: Alignment.centerLeft,
                       width: 35,
-                      child: Icon(icon, color: Theme.of(context).textTheme.bodyText2.color),
+                      child: Icon(icon, color: Theme.of(context).textTheme.body2.color),
                     )
                     : SizedBox(),
                     Expanded(
@@ -57,7 +57,7 @@ class CustomListTile extends StatelessWidget{
                             flex: 1,
                             child: Text(title, style: titleColor != null 
                               ? TextStyle(color: titleColor) 
-                              : Theme.of(context).textTheme.bodyText2),
+                              : Theme.of(context).textTheme.body2),
                           ),
                           Expanded(
                             flex: 2,

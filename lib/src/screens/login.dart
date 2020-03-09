@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:keyboard_visibility/keyboard_visibility.dart';
+import 'package:keyboard_utils/keyboard_aware/keyboard_aware.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 
@@ -12,22 +12,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
-  KeyboardVisibilityNotification kVN = KeyboardVisibilityNotification();
-  int kvId;
-  double _size = 300;
-
-  @override
-  void initState() {
-    super.initState();
-    kvId = kVN.addNewListener(
-      onChange: (bool visible) {
-        if(mounted){
-          setState(() => _size = visible ? 0 : 300);
-        }
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +31,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      AnimatedContainer(
-                        padding: EdgeInsets.only(left: 20),
-                        curve: Curves.easeOutQuart,
-                        width: _size,
-                        height: _size,
-                        duration: Duration(milliseconds: 300),
-                        child: SvgPicture.asset(
-                          'assets/logo.svg',
-                          width: _size,
-                          height: _size,
-                        )
+                      KeyboardAware(
+                        builder: (context, keyboardConfig) {
+                        final double _size = keyboardConfig.isKeyboardOpen ? 0 : 300;
+
+                        return AnimatedContainer(
+                            padding: EdgeInsets.only(left: 20),
+                            curve: Curves.easeOutQuart,
+                            width: _size,
+                            height: _size,
+                            duration: Duration(milliseconds: 100),
+                            child: SvgPicture.asset(
+                              'assets/logo.svg',
+                              width: _size,
+                              height: _size,
+                            )
+                          );
+                        }
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -139,10 +129,5 @@ class _LoginScreenState extends State<LoginScreen> {
   _login(){
 
   }
-  @override
-  void dispose() {
-    kVN.removeListener(kvId);
-    super.dispose();
-  } 
 
 }

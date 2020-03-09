@@ -90,7 +90,7 @@ class CreateScreen extends StatelessWidget {
             decoration: InputDecoration.collapsed(
               hintText: '',
             ),
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.body1,
             initialValue: state.name,
             onChanged: (String value){
               Provider.of<CreateModel>(context, listen: false).changeName(value);
@@ -107,7 +107,7 @@ class CreateScreen extends StatelessWidget {
             textInputAction: TextInputAction.go,
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration.collapsed(hintText: ''),
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.body1,
             initialValue: state.breed,
             onChanged: (String value){
               Provider.of<CreateModel>(context, listen: false).changeBreed(value);
@@ -140,7 +140,7 @@ class CreateScreen extends StatelessWidget {
           title: 'Date of birth',
           trailing: GestureDetector(
             child: Text(_convertDate(state.dateOfBirth),
-              style: Theme.of(context).textTheme.bodyText1),
+              style: Theme.of(context).textTheme.body1),
             onTap: () => _showDateOfBirth(context, state),
           )
         ),
