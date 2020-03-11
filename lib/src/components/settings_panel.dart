@@ -21,11 +21,14 @@ class SettingsPanel extends StatelessWidget {
   }
 
   Widget _settingsPanel(){
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Text('Местоположение')
-        ],
+    return SafeArea(
+      child: Container(
+        margin: EdgeInsets.all(16),
+        child: Column(
+          children: <Widget>[
+            TextField()
+          ],
+        )
       )
     );
   }

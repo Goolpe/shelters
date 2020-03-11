@@ -5,7 +5,7 @@ import 'package:shelters/shelf.dart';
 
 class HomeScreen extends StatelessWidget{
 
-  final List<IconData> _icons = [Icons.dashboard, MdiIcons.map, MdiIcons.plus, MdiIcons.chatOutline, MdiIcons.cogs];
+  final List<IconData> _icons = [MdiIcons.viewDashboard, MdiIcons.plus, MdiIcons.chatOutline, MdiIcons.cogs];
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,6 @@ class HomeScreen extends StatelessWidget{
                 ),
                 body: [
                   AnimalsScreen(),
-                  MapScreen(),
                   CreateScreen(),
                   DialogsScreen(),
                   ProfileScreen(),

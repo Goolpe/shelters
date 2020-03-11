@@ -4,6 +4,12 @@ import 'package:latlong/latlong.dart';
 import 'package:shelters/shelf.dart';
 
 class MapScreen extends StatelessWidget {
+  MapScreen({
+    this.state
+  });
+
+  final AnimalsListModel state;
+  
   @override
   Widget build(BuildContext context) {
     return FlutterMap(

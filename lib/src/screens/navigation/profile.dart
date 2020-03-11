@@ -154,7 +154,7 @@ class ProfileScreen extends StatelessWidget {
                         alignment: Alignment.centerRight,
                         child: Icon(MdiIcons.chevronRight, color: Theme.of(context).textTheme.body1.color),
                       ),
-                      onTap: (){print('lol');},
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Scaffold())),
                     ),
                   ],
                 ),
