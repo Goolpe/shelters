@@ -3,8 +3,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong/latlong.dart';
 import 'package:shelters/shelf.dart';
 
-class MapScreen extends StatelessWidget {
-  MapScreen({
+class AnimalsMapView extends StatelessWidget {
+  AnimalsMapView({
     this.state
   });
 

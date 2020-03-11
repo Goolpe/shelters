@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shelters/shelf.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ListScreen extends StatelessWidget {
-  ListScreen({
+class AnimalsGridView extends StatelessWidget {
+  AnimalsGridView({
     @required this.state
   });
 
@@ -19,14 +19,14 @@ class ListScreen extends StatelessWidget {
       itemCount: state.animals.isNotEmpty ? state.animals.length : 12,
       itemBuilder: (context, index){
         if(state.animals.isNotEmpty){
-          return Avatar(
+          return SheltersAvatar(
             animal: state.animals[index]
           );
         }
         return Shimmer.fromColors(
           baseColor: Colors.grey[200],
           highlightColor: Colors.grey[300],
-          child: Avatar(
+          child: SheltersAvatar(
             animal: null,
           )
         );

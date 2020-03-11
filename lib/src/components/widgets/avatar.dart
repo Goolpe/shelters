@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 
-class Avatar extends StatelessWidget{
-  Avatar({
+class SheltersAvatar extends StatelessWidget{
+  SheltersAvatar({
     @required this.animal
   });
 

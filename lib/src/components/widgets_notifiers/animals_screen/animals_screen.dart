@@ -16,8 +16,8 @@ class AnimalsScreen extends StatelessWidget{
             key: _refreshIndicatorKey,
             onRefresh: () => _refresh(context),
             child: state.list
-            ? ListScreen(state: state)
-            : MapScreen(state: state)
+            ? AnimalsGridView(state: state)
+            : AnimalsMapView(state: state)
           ),
           floatingActionButton: FloatingActionButton(
             child: Icon(state.list ? MdiIcons.mapMarker : MdiIcons.viewDashboard),

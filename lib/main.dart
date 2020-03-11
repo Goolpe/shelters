@@ -6,7 +6,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  timeago.setLocaleMessages('en', CustomEn());
+  timeago.setLocaleMessages('en', SheltersTimeAgo());
   
   SharedPreferences pref = await SharedPreferences.getInstance();
   bool themeMode = pref.getBool('theme') ?? true;

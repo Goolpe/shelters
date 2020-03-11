@@ -71,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                         ]
                       )
                     ),
-                    CustomListTile(
+                    SheltersListTile(
                       title: 'Name',
                       trailing: TextFormField(
                         onEditingComplete: () => FocusScope.of(context).nextFocus(),
@@ -88,7 +88,7 @@ class ProfileScreen extends StatelessWidget {
                         ]
                       ),
                     ),
-                    CustomListTile(
+                    SheltersListTile(
                       title: 'Email',
                       trailing: TextFormField(
                         onEditingComplete: () => FocusScope.of(context).nextFocus(),
@@ -105,7 +105,7 @@ class ProfileScreen extends StatelessWidget {
                         ]
                       ),
                     ),
-                    CustomListTile(
+                    SheltersListTile(
                       title: 'Phone',
                       trailing: TextFormField(
                         onEditingComplete: () => FocusScope.of(context).nextFocus(),
@@ -147,7 +147,7 @@ class ProfileScreen extends StatelessWidget {
                         ]
                       )
                     ),
-                    CustomListTile(
+                    SheltersListTile(
                       icon: MdiIcons.emailOutline,
                       title: 'Contact Us',
                       trailing: Align(
@@ -160,7 +160,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              CustomListTile(
+              SheltersListTile(
                 showDivider: false,
                 icon: MdiIcons.brightness6,
                 title: 'Theme',
@@ -179,7 +179,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              CustomListTile(
+              SheltersListTile(
                 showDivider: false,
                 titleColor: Colors.red,
                 title: 'Log Out',

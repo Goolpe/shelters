@@ -80,7 +80,7 @@ class CreateScreen extends StatelessWidget {
             },
           )
         ),
-        CustomListTile(
+        SheltersListTile(
           showDivider: false,
           title: 'Name',
           trailing: TextFormField(
@@ -100,7 +100,7 @@ class CreateScreen extends StatelessWidget {
             ]
           ),
         ),
-        CustomListTile(
+        SheltersListTile(
           title: 'Breed',
           trailing: TextFormField(
             onEditingComplete: () => FocusScope.of(context).nextFocus(),
@@ -117,7 +117,7 @@ class CreateScreen extends StatelessWidget {
             ]
           ),
         ),
-        CustomListTile(
+        SheltersListTile(
           title: 'Type',
           paddingTrailing: false,
           trailing: ButtonTheme(
@@ -138,7 +138,7 @@ class CreateScreen extends StatelessWidget {
             ),
           )
         ),
-        CustomListTile(
+        SheltersListTile(
           title: 'Date of birth',
           trailing: GestureDetector(
             child:Text(_convertDate(state.dateOfBirth),

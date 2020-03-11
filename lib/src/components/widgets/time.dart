@@ -1,6 +1,6 @@
 import 'package:timeago/timeago.dart' as timeago;
 
-class CustomEn extends timeago.EnMessages {
+class SheltersTimeAgo extends timeago.EnMessages {
   @override
   String suffixAgo() => '';
 }

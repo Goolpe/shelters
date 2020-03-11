@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomListTile extends StatelessWidget{
-  CustomListTile({
+class SheltersListTile extends StatelessWidget{
+  SheltersListTile({
     this.icon,
     this.title = '',
     this.trailing = const SizedBox(),

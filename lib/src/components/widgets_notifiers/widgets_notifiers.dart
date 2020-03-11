@@ -2,6 +2,8 @@ export 'animal_panel/animal_notifier.dart';
 export 'animal_panel/animal_panel.dart';
 export 'animals_screen/animals_notifier.dart';
 export 'animals_screen/animals_screen.dart';
+export 'animals_screen/animals_grid_view.dart';
+export 'animals_screen/animals_map_view.dart';
 export 'auth_screen/auth_notifier.dart';
 export 'auth_screen/login_screen.dart';
 export 'bottom_panel/bottom_notifier.dart';
