@@ -11,15 +11,15 @@ class CreateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Consumer<CreateModel>(
-        builder: (context, CreateModel state, _) {
+      child: Consumer<CreateNotifier>(
+        builder: (context, CreateNotifier state, _) {
           return _createList(context, state);
         }
       )
     );
   }
 
-  _createList(context, CreateModel state){
+  _createList(context, CreateNotifier state){
     return ListView(
       shrinkWrap: true,
       children: <Widget>[
@@ -55,7 +55,7 @@ class CreateScreen extends StatelessWidget {
                         backgroundColor: Colors.white,
                         child: Icon(MdiIcons.closeCircle, color: Colors.red, size: 30,),
                       ),
-                      onTap: () => Provider.of<CreateModel>(context, listen: false).removePicture(state.pictures[i]),
+                      onTap: () => Provider.of<CreateNotifier>(context, listen: false).removePicture(state.pictures[i]),
                     )
                   )
                 ]
@@ -74,7 +74,7 @@ class CreateScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     child: Icon(MdiIcons.imagePlus, color: Colors.blueGrey,),
                   ),
-                  onTap: () => Provider.of<CreateModel>(context, listen: false).changePictures(),
+                  onTap: () => Provider.of<CreateNotifier>(context, listen: false).changePictures(),
                 ),
               );
             },
@@ -93,7 +93,7 @@ class CreateScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.body1,
             initialValue: state.name,
             onChanged: (String value){
-              Provider.of<CreateModel>(context, listen: false).changeName(value);
+              Provider.of<CreateNotifier>(context, listen: false).changeName(value);
             },
             inputFormatters:[
               LengthLimitingTextInputFormatter(20),
@@ -110,7 +110,7 @@ class CreateScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.body1,
             initialValue: state.breed,
             onChanged: (String value){
-              Provider.of<CreateModel>(context, listen: false).changeBreed(value);
+              Provider.of<CreateNotifier>(context, listen: false).changeBreed(value);
             },
             inputFormatters:[
               LengthLimitingTextInputFormatter(20),
@@ -119,11 +119,13 @@ class CreateScreen extends StatelessWidget {
         ),
         CustomListTile(
           title: 'Type',
+          paddingTrailing: false,
           trailing: ButtonTheme(
           alignedDropdown: true,
           child: DropdownButton<AnimalType>(
               underline: SizedBox(),
               value: state.type,
+              isExpanded: true,
               items: animalTypes.map<DropdownMenuItem<AnimalType>>((AnimalType value) {
                 return DropdownMenuItem<AnimalType>(
                   value: value,
@@ -131,7 +133,7 @@ class CreateScreen extends StatelessWidget {
                 );
               }).toList(),
               onChanged: (AnimalType val){
-                Provider.of<CreateModel>(context, listen: false).changeType(val);
+                Provider.of<CreateNotifier>(context, listen: false).changeType(val);
               },
             ),
           )
@@ -139,7 +141,7 @@ class CreateScreen extends StatelessWidget {
         CustomListTile(
           title: 'Date of birth',
           trailing: GestureDetector(
-            child: Text(_convertDate(state.dateOfBirth),
+            child:Text(_convertDate(state.dateOfBirth),
               style: Theme.of(context).textTheme.body1),
             onTap: () => _showDateOfBirth(context, state),
           )
@@ -156,7 +158,7 @@ class CreateScreen extends StatelessWidget {
             color: Color(0xffd63447),
             child: Text('Create'),
             onPressed: (){
-              Provider.of<CreateModel>(context, listen: false).create();
+              Provider.of<CreateNotifier>(context, listen: false).create();
             },
           )
         )
@@ -164,7 +166,7 @@ class CreateScreen extends StatelessWidget {
     );
   }
   
-  void _showDateOfBirth(BuildContext context, CreateModel state) async{
+  void _showDateOfBirth(BuildContext context, CreateNotifier state) async{
     final DateTime date = await showDatePicker(
       context: context,
       initialDate: state.dateOfBirth  ?? DateTime.now(),
@@ -173,7 +175,7 @@ class CreateScreen extends StatelessWidget {
     );
 
     if(date != null && date != state.dateOfBirth){
-      Provider.of<CreateModel>(context, listen: false).changeDateOfBirth(date);
+      Provider.of<CreateNotifier>(context, listen: false).changeDateOfBirth(date);
     }
   }
 

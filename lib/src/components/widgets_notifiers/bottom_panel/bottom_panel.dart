@@ -3,24 +3,23 @@ import 'package:provider/provider.dart';
 import 'package:shelters/shelf.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class SettingsPanel extends StatelessWidget {
+class BottomPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<SettingsPanelModel>  (
+    return Consumer<BottomPanelNotifier>  (
       builder: (context, state, _){
         return SlidingUpPanel(
           backdropEnabled: true,
-          slideDirection: SlideDirection.DOWN,
           maxHeight: 150,
           minHeight: 0,
-          panel: _settingsPanel(),
+          panel: _bottomPanel(),
           controller: state.controller,
         );
       }
     );
   }
 
-  Widget _settingsPanel(){
+  Widget _bottomPanel(){
     return SafeArea(
       child: Container(
         margin: EdgeInsets.all(16),

@@ -14,13 +14,14 @@ void main() async{
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthModel()..init()),
-        ChangeNotifierProvider(create: (_) => NavigationModel()),
-        ChangeNotifierProvider(create: (_) => CreateModel()..init()),
-        ChangeNotifierProvider(create: (_) => AnimalPanelModel()),
-        ChangeNotifierProvider(create: (_) => AnimalsListModel()..init()),
-        ChangeNotifierProvider(create: (_) => SettingsPanelModel()),
-        ChangeNotifierProvider(create: (_) => ThemeModel(themeMode ? lightTheme : darkTheme)),
+        ChangeNotifierProvider(create: (_) => AuthNotifier()..init()),
+        ChangeNotifierProvider(create: (_) => NavigationNotifier()),
+        ChangeNotifierProvider(create: (_) => CreateNotifier()..init()),
+        ChangeNotifierProvider(create: (_) => AnimalPanelNotifier()),
+        ChangeNotifierProvider(create: (_) => AnimalsNotifier()..init()),
+        ChangeNotifierProvider(create: (_) => SettingsPanelNotifier()),
+        ChangeNotifierProvider(create: (_) => BottomPanelNotifier()),
+        ChangeNotifierProvider(create: (_) => ThemeNotifier(themeMode ? lightTheme : darkTheme)),
       ],
       child: App()
     )
@@ -31,12 +32,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _themeModel = Provider.of<ThemeModel>(context);
+    final _themeModel = Provider.of<ThemeNotifier>(context);
     
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _themeModel.themeData,
-      home: Consumer<AuthModel>(
+      home: Consumer<AuthNotifier>(
         builder: (context, state, _){
           if(state.authLoading){
             return Container(color: Colors.white);

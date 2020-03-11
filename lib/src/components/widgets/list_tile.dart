@@ -7,7 +7,8 @@ class CustomListTile extends StatelessWidget{
     this.trailing = const SizedBox(),
     this.onTap,
     this.showDivider = true,
-    this.titleColor
+    this.titleColor,
+    this.paddingTrailing = true
   });
 
   final IconData icon;
@@ -16,6 +17,9 @@ class CustomListTile extends StatelessWidget{
   final Function onTap;
   final bool showDivider;
   final Color titleColor;
+
+  //dropdownButton padding
+  final bool paddingTrailing;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +65,10 @@ class CustomListTile extends StatelessWidget{
                           ),
                           Expanded(
                             flex: 2,
-                            child: trailing,
+                            child:  Padding(
+                              padding: EdgeInsets.only(left: paddingTrailing ? 16 : 0),
+                              child: trailing
+                            )
                           ),
                         ],
                       ),

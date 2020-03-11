@@ -5,12 +5,12 @@ import 'package:shelters/shelf.dart';
 
 class AnimalsScreen extends StatelessWidget{
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
-    new GlobalKey<RefreshIndicatorState>();
+    GlobalKey<RefreshIndicatorState>();
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<AnimalsListModel>(
-      builder: (context, AnimalsListModel state, _){
+    return Consumer<AnimalsNotifier>(
+      builder: (context, AnimalsNotifier state, _){
         return Scaffold(
           body: RefreshIndicator(
             key: _refreshIndicatorKey,
@@ -21,7 +21,7 @@ class AnimalsScreen extends StatelessWidget{
           ),
           floatingActionButton: FloatingActionButton(
             child: Icon(state.list ? MdiIcons.mapMarker : MdiIcons.viewDashboard),
-            onPressed: () => Provider.of<AnimalsListModel>(context, listen: false).changeScreen(),
+            onPressed: () => Provider.of<AnimalsNotifier>(context, listen: false).changeScreen(),
           )
         );
       }
@@ -29,7 +29,7 @@ class AnimalsScreen extends StatelessWidget{
   }
 
   Future<Null> _refresh(context) {
-    Provider.of<AnimalsListModel>(context, listen: false).getData();
+    Provider.of<AnimalsNotifier>(context, listen: false).getData();
     return Future.delayed(Duration(seconds: 1));
   }
 }

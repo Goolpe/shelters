@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:shelters/shelf.dart';
 
-class CreateModel with ChangeNotifier{
+class CreateNotifier with ChangeNotifier{
   DatabaseReference _dbRef;
 
   String _name = '';
@@ -20,8 +20,8 @@ class CreateModel with ChangeNotifier{
   String _breed;
   String get breed => _breed;
 
-  List<PictureModel> _pictures = [];
-  List<PictureModel> get pictures => _pictures;
+  List<PictureEntity> _pictures = [];
+  List<PictureEntity> get pictures => _pictures;
 
   List<Asset> _oldPictures = [];
 
@@ -70,7 +70,7 @@ class CreateModel with ChangeNotifier{
       _pictures = [];
 
       for(Asset pic in _newPictures){
-        PictureModel picture = PictureModel();
+        PictureEntity picture = PictureEntity();
 
         ByteData byteData = await pic.getByteData();
         picture.id = pic.identifier;
@@ -86,7 +86,7 @@ class CreateModel with ChangeNotifier{
     }
   }
 
-  void removePicture(PictureModel picture) async{
+  void removePicture(PictureEntity picture) async{
     try{
       _pictures.remove(picture);
       _oldPictures.remove(picture.asset);

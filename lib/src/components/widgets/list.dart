@@ -7,7 +7,7 @@ class ListScreen extends StatelessWidget {
     @required this.state
   });
 
-  final AnimalsListModel state;
+  final AnimalsNotifier state;
 
   @override
   Widget build(BuildContext context) {

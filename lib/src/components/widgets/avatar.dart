@@ -8,7 +8,7 @@ class Avatar extends StatelessWidget{
     @required this.animal
   });
 
-  final AnimalModel animal;
+  final AnimalEntity animal;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class Avatar extends StatelessWidget{
                 backgroundColor: Colors.grey[200],
               ),
             ),
-            onTap: () => Provider.of<AnimalPanelModel>(context, listen: false).open(animal)
+            onTap: () => Provider.of<AnimalPanelNotifier>(context, listen: false).open(animal)
           ),
         ),
         Text(animal != null ? animal.name : '')

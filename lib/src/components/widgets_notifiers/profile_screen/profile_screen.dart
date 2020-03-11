@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Consumer<AuthModel>(
+      child: Consumer<AuthNotifier>(
         builder: (context, state, _){
           return ListView(
             children: <Widget>[
@@ -81,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
                         initialValue: state.user.displayName,
                         style: Theme.of(context).textTheme.body1,
                         onChanged: (String value){
-                          Provider.of<AuthModel>(context, listen: false).updateName(value);
+                          Provider.of<AuthNotifier>(context, listen: false).updateName(value);
                         },
                         inputFormatters:[
                           LengthLimitingTextInputFormatter(20),
@@ -166,12 +166,12 @@ class ProfileScreen extends StatelessWidget {
                 title: 'Theme',
                 trailing: Align(
                   alignment: Alignment.centerRight,
-                  child: Consumer<ThemeModel>(
+                  child: Consumer<ThemeNotifier>(
                     builder: (context, state, _){
                       return CupertinoSwitch(
                         value: state.themeData == darkTheme,
                         onChanged: (bool value) {
-                          Provider.of<ThemeModel>(context,listen: false).changeData();
+                          Provider.of<ThemeNotifier>(context,listen: false).changeData();
                         },
                       );
                     }
@@ -216,8 +216,8 @@ class ProfileScreen extends StatelessWidget {
             textColor: Colors.red,
             onPressed: () async{
               Navigator.pop(context);
-              await Provider.of<AuthModel>(context, listen: false).logout();
-              Provider.of<NavigationModel>(context, listen: false)..change(0);
+              await Provider.of<AuthNotifier>(context, listen: false).logout();
+              Provider.of<NavigationNotifier>(context, listen: false)..change(0);
             },
           )
         ],

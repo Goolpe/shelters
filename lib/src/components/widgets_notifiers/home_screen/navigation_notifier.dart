@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class NavigationModel with ChangeNotifier{
+class NavigationNotifier with ChangeNotifier{
 
   int _index = 0;
   int get index => _index;

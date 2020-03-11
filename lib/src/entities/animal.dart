@@ -1,6 +1,6 @@
 import 'package:shelters/shelf.dart';
 
-class AnimalModel{
+class AnimalEntity{
   final String id;
   final String name;
   final List<dynamic> images;
@@ -8,7 +8,7 @@ class AnimalModel{
   final String breed;
   final AnimalType type;
   
-  AnimalModel({
+  AnimalEntity({
     this.id,
     this.name,
     this.images,
@@ -17,8 +17,8 @@ class AnimalModel{
     this.type
   });
 
-  factory AnimalModel.fromJson(Map<dynamic, dynamic> _parsedValue, _parsedKey){
-    return AnimalModel(
+  factory AnimalEntity.fromJson(Map<dynamic, dynamic> _parsedValue, _parsedKey){
+    return AnimalEntity(
       id: _parsedKey,
       name: _parsedValue['name'],
       type: animalTypes.firstWhere((element) => element.name == _parsedValue['type']),

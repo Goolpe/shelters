@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelters/shelf.dart';
-class ThemeModel with ChangeNotifier{
-  ThemeModel(this._themeData);
+
+class ThemeNotifier with ChangeNotifier{
+  ThemeNotifier(this._themeData);
 
   ThemeData _themeData;
   ThemeData get themeData => _themeData;

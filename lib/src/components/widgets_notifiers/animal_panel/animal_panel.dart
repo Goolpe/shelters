@@ -12,8 +12,8 @@ class AnimalPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Consumer<AnimalPanelModel>(
-      builder: (context, AnimalPanelModel state, _){
+    return Consumer<AnimalPanelNotifier>(
+      builder: (context, AnimalPanelNotifier state, _){
         return SlidingUpPanel(
           renderPanelSheet: false,
           maxHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
@@ -28,7 +28,7 @@ class AnimalPanel extends StatelessWidget {
     );
   }
 
-  Widget _animalPage(AnimalModel animal, ScrollController scrollController){
+  Widget _animalPage(AnimalEntity animal, ScrollController scrollController){
     return Card(
       elevation: 20,
       shape: RoundedRectangleBorder(

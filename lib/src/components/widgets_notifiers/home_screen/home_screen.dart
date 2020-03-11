@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget{
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Consumer<NavigationModel>(
+          Consumer<NavigationNotifier>(
             builder: (context, state, _){
               return Scaffold(
                 appBar: AppBar(
@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget{
                   type: BottomNavigationBarType.fixed,
                   showUnselectedLabels: false,
                   showSelectedLabels: false,
-                  onTap: (int value) => Provider.of<NavigationModel>(context, listen: false).change(value),
+                  onTap: (int value) => Provider.of<NavigationNotifier>(context, listen: false).change(value),
                   currentIndex: state.index,
                   selectedItemColor: Colors.blue,
                   items: _icons.map((IconData icon) => 
@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget{
     if(state==0){
       return IconButton(
         icon: Icon(MdiIcons.tune),
-        onPressed: () => Provider.of<SettingsPanelModel>(context, listen: false).open(),
+        onPressed: () => Provider.of<SettingsPanelNotifier>(context, listen: false).open(),
       );
     }
     return SizedBox();

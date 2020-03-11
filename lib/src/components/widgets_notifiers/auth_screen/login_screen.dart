@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         SignInButton(
                           Buttons.Google,
                           text: "Continue with Google",
-                          onPressed: () => Provider.of<AuthModel>(context, listen: false).handleSignIn(),
+                          onPressed: () => Provider.of<AuthNotifier>(context, listen: false).handleSignIn(),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),

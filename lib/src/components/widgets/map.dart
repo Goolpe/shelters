@@ -8,8 +8,8 @@ class MapScreen extends StatelessWidget {
     this.state
   });
 
-  final AnimalsListModel state;
-  
+  final AnimalsNotifier state;
+
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
