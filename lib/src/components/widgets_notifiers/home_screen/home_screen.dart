@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget{
                 body: [
                   AnimalsScreen(),
                   CreateScreen(),
-                  DialogsScreen(),
+                  ChatsScreen(),
                   ProfileScreen(),
                 ][state.index],
                 bottomNavigationBar: BottomNavigationBar(
