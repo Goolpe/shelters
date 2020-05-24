@@ -3,10 +3,12 @@ import 'package:shelters/index.dart';
 
 class AnimalScreen extends StatelessWidget {
   AnimalScreen({
-    @required this.id
+    @required this.id,
+    this.scrollController
   });
 
   final int id;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class AnimalScreen extends StatelessWidget {
       ),
       margin: const EdgeInsets.all(16.0),
       child: ListView(
+        controller: scrollController,
         padding: EdgeInsets.zero,
         children: <Widget>[
           Container(
@@ -29,6 +32,30 @@ class AnimalScreen extends StatelessWidget {
           ),
           ListTile(
             title: Text('Pushok', style: TextStyle(fontSize: 24),),
+          ),
+          ListTile(
+            title: Text('Sex', style: TextStyle(fontSize: 24),),
+          ),
+          ListTile(
+            title: Text('Skin color', style: TextStyle(fontSize: 24),),
+          ),
+          ListTile(
+            title: Text('Sex', style: TextStyle(fontSize: 24),),
+          ),
+          ListTile(
+            title: Text('Skin color', style: TextStyle(fontSize: 24),),
+          ),
+          ListTile(
+            title: Text('Skin color', style: TextStyle(fontSize: 24),),
+          ),
+          ListTile(
+            title: Text('Sex', style: TextStyle(fontSize: 24),),
+          ),
+          ListTile(
+            title: Text('Skin color', style: TextStyle(fontSize: 24),),
+          ),
+          ListTile(
+            title: Text('Skin color', style: TextStyle(fontSize: 24),),
           ),
           ListTile(
             title: Text('Sex', style: TextStyle(fontSize: 24),),

@@ -23,11 +23,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_responsive: ^0.0.6
   flutter_swiper: ^1.1.6
   get: ^2.5.9
+  material_design_icons_flutter: ^4.0.5245
   sliding_up_panel: ^1.0.2
   provider: ^4.1.2
-  flutter_responsive: ^0.0.6
 
 dev_dependencies:
   flutter_test:

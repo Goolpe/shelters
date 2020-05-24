@@ -8,7 +8,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>{
 
   @override
   Widget build(BuildContext context) {
@@ -17,32 +17,16 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (context, value, snapshot) {
           return SlidingUpPanel(
             minHeight: 0,
-            maxHeight: MediaQuery.of(context).size.height,
+            maxHeight: MediaQuery.of(context).size.height - 20,
             backdropEnabled: true,
             renderPanelSheet: false,
-            panelBuilder: (ScrollController sc) => AnimalScreen(id: value.id),
+            panelBuilder: (ScrollController sc) => 
+              AnimalScreen(
+              id: value.id, 
+              scrollController: sc
+            ),
             controller: value.panelController,
-            body: ListView(
-              children: [
-                AppBar(
-                  centerTitle: true,
-                  elevation: 0,
-                  title: Text('Shelters', style: TextStyle(color: Colors.black)),
-                  backgroundColor: Colors.transparent,
-                ),
-                GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  crossAxisCount: 3,
-                  children: List.generate(100, (index) {
-                    return Container(
-                      margin: EdgeInsets.all(8),
-                      child: SheltersHomeImage(id: index)
-                    );
-                  }),
-                ),
-              ],
-            )
+            body: NavigationScreen()
           );
         }
       )
