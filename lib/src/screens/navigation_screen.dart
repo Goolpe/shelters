@@ -48,7 +48,7 @@ class _NavigationScreenState extends State<NavigationScreen> with TickerProvider
 _choose(currentIndex){
   switch(currentIndex){
     case 0: return AnimalsScreen();
-    case 1: return AnimalsScreen();
-    case 2: return AnimalsScreen();
+    case 1: return LostScreen();
+    case 2: return ProfileScreen();
   }
 }

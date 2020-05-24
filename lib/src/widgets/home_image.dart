@@ -28,19 +28,19 @@ class SheltersHomeImage extends StatelessWidget {
           Positioned(
             bottom: 0,
             left: 0,
+            top: 0,
             right: 0,
             child: Container(
-              height: 50,
               padding: EdgeInsets.only(bottom: 5, left: 10, right: 10),
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.zero, bottom: Radius.circular(16)),
+                borderRadius: BorderRadius.circular(16),
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    Colors.black87,
+                    Colors.black38,
                   ]
                 )
               ),
@@ -48,7 +48,6 @@ class SheltersHomeImage extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 18, 
                   color: Colors.white
                 ),
               )

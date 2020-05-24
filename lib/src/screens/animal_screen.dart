@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
 
 class AnimalScreen extends StatelessWidget {
@@ -10,6 +13,15 @@ class AnimalScreen extends StatelessWidget {
   final int id;
   final ScrollController scrollController;
 
+  Future<void> share() async {
+    await FlutterShare.share(
+      title: 'Look',
+      text: 'I found a pet, do you like it?',
+      linkUrl: 'https://goolpe.github.io/',
+      chooserTitle: 'Pet'
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,52 +30,79 @@ class AnimalScreen extends StatelessWidget {
         color: Colors.white,
       ),
       margin: const EdgeInsets.all(16.0),
-      child: ListView(
-        controller: scrollController,
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height / 1.5,
-            width: MediaQuery.of(context).size.width,
-            child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(16), bottom: Radius.zero),
-              child: SheltersAnimalImage(id: id)
-            )
-          ),
-          ListTile(
-            title: Text('Pushok', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Sex', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Skin color', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Sex', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Skin color', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Skin color', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Sex', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Skin color', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Skin color', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Sex', style: TextStyle(fontSize: 24),),
-          ),
-          ListTile(
-            title: Text('Skin color', style: TextStyle(fontSize: 24),),
-          )
-        ]
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: ListView(
+          controller: scrollController,
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            SheltersAnimalImage(id: id),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Wrap(
+                      spacing: 8,
+                      children: [
+                          Chip(
+                            avatar: Icon(MdiIcons.paw),
+                            label: Text('Cat')
+                          ),
+                          Chip(
+                            avatar: Icon(MdiIcons.genderMaleFemale),
+                            label: Text('Male')
+                          ),
+                          Chip(
+                            avatar: Icon(MdiIcons.formatColorFill),
+                            label: Text('Orange/Black')
+                          ),
+                          Chip(
+                            avatar: Icon(MdiIcons.eye),
+                            label: Text('Green')
+                          ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Text('Hi, tell me about yourself '*30, style: TextStyle(fontSize: 18),),
+                  ),
+                  Divider(),
+                  ListTile(
+                    contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                    trailing: Icon(MdiIcons.mapSearch),
+                    title: Text('Saint-Petersburg, Nevskiy 467, shelter "Orlenok"', style: TextStyle(fontSize: 18),),
+                    onTap: () => Provider.of<PanelProvider>(context, listen: false).goToMap(),
+                  ),
+                  Container(
+                    height: 50,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)
+                      ),
+                      color: Color(0xff5f27cd),
+                      textColor: Colors.white,
+                      child: Text('Share'),
+                      onPressed: share,
+                    ),
+                  ),
+                  // Container(
+                  //   height: 50,
+                  //   alignment: Alignment.center,
+                  //   child: GestureDetector(
+                  //     child: Text('Complain'),
+                  //     onTap: (){},
+                  //   ),
+                  // )
+                ],
+              ),
+            ),
+          ]
+        )
       )
     );
   }

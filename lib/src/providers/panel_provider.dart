@@ -13,4 +13,9 @@ class PanelProvider extends ChangeNotifier{
     _panelController.open();
     notifyListeners();
   }
+
+  goToMap(){
+    _panelController.close();
+    notifyListeners();
+  }
 }
