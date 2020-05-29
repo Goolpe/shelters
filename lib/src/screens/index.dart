@@ -1,3 +1,4 @@
+export 'animal_screen.dart';
 export 'animals_screen.dart';
 export 'discover_screen.dart';
 export 'home_screen.dart';

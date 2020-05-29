@@ -25,7 +25,7 @@ class MenuScreen extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(right: 16),
                           child: CircleAvatar(
-                            radius:20,
+                            radius: 20,
                             backgroundColor: Colors.black,
                           ),
                         ),
@@ -51,10 +51,6 @@ class MenuScreen extends StatelessWidget {
                             title: 'Adoption',
                           ),
                           MenuItem(
-                            icon: MdiIcons.home,
-                            title: 'Donation',
-                          ),
-                          MenuItem(
                             icon: MdiIcons.plus,
                             title: 'Add pet',
                           ),
@@ -63,8 +59,12 @@ class MenuScreen extends StatelessWidget {
                             title: 'Favorites',
                           ),
                           MenuItem(
-                            icon: MdiIcons.message,
+                            icon: MdiIcons.forum,
                             title: 'Messages',
+                          ),
+                          MenuItem(
+                            icon: MdiIcons.handshake,
+                            title: 'Donation',
                           ),
                         ]
                       ),
@@ -92,14 +92,11 @@ class MenuScreen extends StatelessWidget {
               ),
             ),
             Positioned(
-              right: -MediaQuery.of(context).size.width / 1.8,
+              right: -MediaQuery.of(context).size.width / 1.6,
               child: Stack(
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24)
-                    ),
-                    height: MediaQuery.of(context).size.height / 1.6,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 1.4,
                     width: MediaQuery.of(context).size.width,
                     child: Hero(
                       tag: 'DontationScreen',
@@ -110,22 +107,16 @@ class MenuScreen extends StatelessWidget {
                   ),
                   Positioned.fill(
                     child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        color: Color(0xff416c6d).withOpacity(0.6),
-                      ),
+                      color: Color(0xff416c6d).withOpacity(0.6),
                     ),
                   )
                 ],
               ),
             ),
             Positioned(
-              right: -MediaQuery.of(context).size.width / 1.5,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                height: MediaQuery.of(context).size.height / 1.4,
+              right: -MediaQuery.of(context).size.width / 1.4,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height / 1.2,
                 width: MediaQuery.of(context).size.width,
                 child: Hero(
                   tag: 'HomeScreen',

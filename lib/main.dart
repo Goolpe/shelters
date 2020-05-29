@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Shelters',
         theme: ThemeData(
-          textTheme: GoogleFonts.novaFlatTextTheme(
+          textTheme: GoogleFonts.novaSlimTextTheme(
             Theme.of(context).textTheme
           )
         ),

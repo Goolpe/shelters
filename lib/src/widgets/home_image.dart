@@ -57,9 +57,9 @@ class SheltersHomeImage extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () => _orientationPortrait 
-      ? Provider.of<PanelProvider>(context, listen: false).openPanel(id)
-      : Provider.of<NavigationProvider>(context, listen: false).openAnimalScreen(id),
+      // onTap: () => _orientationPortrait 
+      // ? Provider.of<PanelProvider>(context, listen: false).openPanel(id)
+      // : Provider.of<NavigationProvider>(context, listen: false).openAnimalScreen(id),
     );
   }
 }

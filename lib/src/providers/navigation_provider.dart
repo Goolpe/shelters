@@ -3,28 +3,33 @@ import 'package:get/get.dart';
 import 'package:shelters/index.dart';
 
 class NavigationProvider extends ChangeNotifier{
-  
-  String _title = 'Adoption';
-  String get title => _title;
 
-  Widget _screen = AnimalsScreen();
-  Widget get screen => _screen;
+  bool _isMenu = true;
+  bool get isMenu => _isMenu;
+
+  String _activeTitle = 'Adoption';
+  String get activeTitle => _activeTitle;
 
   openScreen(String newTitle){
-    _title = newTitle;
-    // _screen = _choose();
-    Get.to(_widget());
-    notifyListeners();
-  }
+    if(newTitle == 'Menu'){
+      _isMenu = true;
+      Get.back();
+    } else{
+      _isMenu = false;
+      _activeTitle = newTitle;
+      Get.to(_widget());
+    }
 
-  openAnimalScreen(int id){
-    _screen = LandscapeAnimalScreen(id: id);
     notifyListeners();
   }
 
   _widget(){
-    switch(_title){
+    switch(_activeTitle){
       case 'Adoption': return Hero(
+        tag: 'HomeScreen',
+        child: HomeScreen()
+      );
+      default: return Hero(
         tag: 'HomeScreen',
         child: HomeScreen()
       );
