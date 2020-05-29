@@ -8,7 +8,7 @@ class PanelProvider extends ChangeNotifier{
   int _id = 0;
   int get id => _id;
 
-  open(int newID){
+  openPanel(int newID){
     _id = newID;
     _panelController.open();
     notifyListeners();

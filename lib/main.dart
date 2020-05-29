@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
 import 'src/screens/index.dart';
@@ -12,6 +13,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (context) => NavigationProvider(),
+        ),
+        ChangeNotifierProvider(
           create: (context) => PanelProvider(),
         )
       ],
@@ -19,7 +23,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Shelters',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          textTheme: GoogleFonts.novaFlatTextTheme(
+            Theme.of(context).textTheme
+          )
         ),
         builder: (BuildContext context, Widget child) {
           return ScrollConfiguration(
@@ -27,7 +33,7 @@ class MyApp extends StatelessWidget {
             child: child
           );
         },
-        home: HomeScreen(),
+        home: MenuScreen(),
       ),
     );
   }

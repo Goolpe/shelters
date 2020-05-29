@@ -11,6 +11,8 @@ class SheltersHomeImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool _orientationPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       child: Stack(
@@ -55,7 +57,9 @@ class SheltersHomeImage extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () => Provider.of<PanelProvider>(context, listen: false).open(id),
+      onTap: () => _orientationPortrait 
+      ? Provider.of<PanelProvider>(context, listen: false).openPanel(id)
+      : Provider.of<NavigationProvider>(context, listen: false).openAnimalScreen(id),
     );
   }
 }

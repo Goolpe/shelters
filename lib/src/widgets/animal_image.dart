@@ -11,42 +11,33 @@ class SheltersAnimalImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool _orientationPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
     return Container(
       height: MediaQuery.of(context).size.height / 1.5,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
-          Swiper(
+          _orientationPortrait
+          ? Swiper(
             key: Key('$id'),
             containerHeight: 400,
             itemHeight: 400,
             itemBuilder: (BuildContext context,int index){
-              return Stack(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: Image.network(
-                      'https://images.unsplash.com/photo-1552933529-e359b2477252?ixlib=rb-1.2.1&w=1000&q=80',
-                      fit: BoxFit.cover
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black45,
-                        ]
-                      ),
-                    ),
-                  )
-                ],
-              );
+              return _image(index, context);
             },
             itemCount: 3,
             pagination: SwiperPagination(),
+          )
+          : Container(
+            height: 400,
+            child: ListView.builder(
+              itemCount: 3,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return _image(index, context);
+              },
+            ),
           ),
           Positioned(
             left: 16,
@@ -77,6 +68,32 @@ class SheltersAnimalImage extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Widget _image(int index, BuildContext context){
+    return Stack(
+      children: [
+        SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Image.network(
+            'https://images.unsplash.com/photo-1552933529-e359b2477252?ixlib=rb-1.2.1&w=1000&q=80',
+            fit: BoxFit.cover
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.transparent,
+                Colors.black45,
+              ]
+            ),
+          ),
+        )
+      ],
     );
   }
 }
