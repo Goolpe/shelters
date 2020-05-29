@@ -30,7 +30,7 @@ dependencies:
   flutter_responsive: ^0.0.6
   flutter_share: ^1.0.2+1
   flutter_svg: ^0.17.4
-  # flutter_swiper: ^1.1.6
+  get_version: ^0.2.2
   get: ^2.5.9
   google_fonts: ^1.1.0
   google_sign_in_web: ^0.9.1+1

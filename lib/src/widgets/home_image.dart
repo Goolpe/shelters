@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shelters/index.dart';
 
 class SheltersHomeImage extends StatelessWidget {
   SheltersHomeImage({
@@ -11,16 +9,15 @@ class SheltersHomeImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool _orientationPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     return InkWell(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
       child: Stack(
         alignment: Alignment.center,
         children: [
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
               image: DecorationImage(
                 image: NetworkImage('https://images.unsplash.com/photo-1552933529-e359b2477252?ixlib=rb-1.2.1&w=1000&q=80'),
                 fit: BoxFit.cover
@@ -33,10 +30,10 @@ class SheltersHomeImage extends StatelessWidget {
             top: 0,
             right: 0,
             child: Container(
-              padding: EdgeInsets.only(bottom: 5, left: 10, right: 10),
+              padding: const EdgeInsets.only(bottom: 5, left: 10, right: 10),
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,

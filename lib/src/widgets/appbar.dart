@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
 
-class SheltersHeader extends StatelessWidget {
-  SheltersHeader({
-    // this.isTwoLine = true,
+class SheltersAppBar extends StatelessWidget {
+  SheltersAppBar({
     this.title = '',
-    this.trailing
+    this.trailing,
+    this.leading
   });
 
-  // final bool isTwoLine;
   final String title;
   final Widget trailing;
+  final Widget leading;
 
   @override
   Widget build(BuildContext context) {
+    return leading != null
+    ? _child(context)
+    : WillPopScope(
+      onWillPop: () => Provider.of<NavigationProvider>(context, listen: false).openScreen('Menu'),
+      child: _child(context)
+    );
+  }
+
+  Widget _child(BuildContext context){
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             children: [
-              Padding(
+              leading ?? Padding(
                 padding: const EdgeInsets.all(16),
                 child: GestureDetector(
                   child: SvgPicture.asset(
@@ -40,7 +48,7 @@ class SheltersHeader extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.only(right: 16),
             child: trailing ?? SizedBox()
           ) 
         ],

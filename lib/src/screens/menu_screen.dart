@@ -11,7 +11,7 @@ class MenuScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: Color(0xff416c6d),
+        backgroundColor:  Theme.of(context).primaryColor,
         body: Consumer<NavigationProvider>(
           builder: (context, navState, snapshot) {
             return SafeArea(
@@ -19,7 +19,7 @@ class MenuScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 24),
+                    padding: const EdgeInsets.symmetric(vertical: 24),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -112,7 +112,7 @@ class MenuScreen extends StatelessWidget {
                         ),
                         Positioned.fill(
                           child: Container(
-                            color: Color(0xff416c6d).withOpacity(0.6),
+                            color: Theme.of(context).primaryColor.withOpacity(0.6),
                           ),
                         )
                       ],

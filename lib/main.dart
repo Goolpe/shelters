@@ -17,12 +17,17 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => PanelProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CarouselProvider(),
         )
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Shelters',
         theme: ThemeData(
+          primaryColor: Color(0xff416c6d),
+          accentColor: Color(0xff306060),
           textTheme: GoogleFonts.novaSlimTextTheme(
             Theme.of(context).textTheme
           )

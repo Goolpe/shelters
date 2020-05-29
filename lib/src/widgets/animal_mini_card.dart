@@ -7,24 +7,24 @@ import 'package:shelters/index.dart';
 
 class AnimalMiniCard extends StatelessWidget {
   AnimalMiniCard({
-    this.index
+    @required this.tag
   });
 
-  final int index;
+  final String tag;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 16),
+      margin: const EdgeInsets.symmetric(vertical: 16),
       child: GestureDetector(
         child: Stack(
           children: [
             Container(
               height: 200,
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
@@ -36,7 +36,7 @@ class AnimalMiniCard extends StatelessWidget {
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
                   color: Colors.white,
                 ),
                 child: Row(
@@ -89,10 +89,10 @@ class AnimalMiniCard extends StatelessWidget {
                 height: 200,
                 width: MediaQuery.of(context).size.width / 2 - 20,
                 child: Hero(
-                  tag: 'animal_image_$index',
+                  tag: tag,
                   child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: const BorderRadius.all(Radius.circular(16)),
                       color: Colors.white,
                       boxShadow: [
                         BoxShadow(
@@ -113,7 +113,7 @@ class AnimalMiniCard extends StatelessWidget {
             )
           ],
         ),
-        onTap: () => Get.to(AnimalScreen(index: index)),
+        onTap: () => Get.to(AnimalScreen(tag: tag)),
       ),
     );
   }

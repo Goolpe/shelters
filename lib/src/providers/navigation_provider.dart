@@ -36,8 +36,10 @@ class NavigationProvider extends ChangeNotifier{
   
   Widget screenWidget(String text){
     switch(text){
-      case 'Adoption': return HomeScreen();
+      case 'Adoption': return HomeScreen(title: text);
       case 'Add pet': return AddScreen();
+      case 'Favorites': return HomeScreen(title: text);
+      case 'Settings': return SettingsScreen();
       default: return HomeScreen();
       // case 'Donation': return AnimalsScreen();
       // case 'Donation': return LostScreen();
