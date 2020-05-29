@@ -6,6 +6,11 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shelters/index.dart';
 
 class AnimalMiniCard extends StatelessWidget {
+  AnimalMiniCard({
+    this.index
+  });
+
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +77,7 @@ class AnimalMiniCard extends StatelessWidget {
                             )
                           ],
                         ),
-                      ),
+                      )
                     )
                   ],
                 )
@@ -83,29 +88,32 @@ class AnimalMiniCard extends StatelessWidget {
               child: Container(
                 height: 200,
                 width: MediaQuery.of(context).size.width / 2 - 20,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        spreadRadius: 3,
-                        blurRadius: 12,
-                        offset: Offset(10, 0),
-                      ),
-                    ],
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider('https://d17fnq9dkz9hgj.cloudfront.net/uploads/2012/11/101438745-cat-conjunctivitis-causes.jpg')
-                    )
+                child: Hero(
+                  tag: 'animal_image_$index',
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 3,
+                          blurRadius: 12,
+                          offset: Offset(10, 0),
+                        ),
+                      ],
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: CachedNetworkImageProvider('https://news.cgtn.com/news/77416a4e3145544d326b544d354d444d3355444f31457a6333566d54/img/37d598e5a04344da81c76621ba273915/37d598e5a04344da81c76621ba273915.jpg')
+                      )
+                    ),
                   ),
-                ),
+                )
               ),
             )
           ],
         ),
-        onTap: () => Get.to(AnimalScreen()),
+        onTap: () => Get.to(AnimalScreen(index: index)),
       ),
     );
   }

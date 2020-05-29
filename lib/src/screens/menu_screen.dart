@@ -101,7 +101,7 @@ class MenuScreen extends StatelessWidget {
                     child: Hero(
                       tag: 'DontationScreen',
                       child: IgnorePointer(
-                        child: HomeScreen()
+                        child: AnimalScreen(index: -1)
                       )
                     )
                   ),

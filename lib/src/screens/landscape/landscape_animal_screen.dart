@@ -30,10 +30,10 @@ class LandscapeAnimalScreen extends StatelessWidget {
       color: Colors.white,
       child: ListView(
         children: [
-          Container(
-            height: 200,
-            child: SheltersAnimalImage(id: id)
-          ),
+          // Container(
+          //   height: 200,
+          //   child: SheltersAnimalImage(id: id)
+          // ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
             child: Column(
@@ -101,7 +101,7 @@ class LandscapeAnimalScreen extends StatelessWidget {
 
   List<Widget> _child(BuildContext context){
     return [
-      SheltersAnimalImage(id: id),
+      // SheltersAnimalImage(id: id),
       Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: Column(

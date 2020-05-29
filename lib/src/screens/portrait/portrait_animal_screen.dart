@@ -47,7 +47,7 @@ class PortraitAnimalScreen extends StatelessWidget {
 
   List<Widget> _child(BuildContext context){
     return [
-      SheltersAnimalImage(id: id),
+      // SheltersAnimalImage(id: id),
       Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
         child: Column(

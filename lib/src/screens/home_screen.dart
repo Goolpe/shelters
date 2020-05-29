@@ -4,7 +4,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,53 +15,34 @@ class _HomeScreenState extends State<HomeScreen>{
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<NavigationProvider>(
-      builder: (context, navState, snapshot) {
-        return Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: navState.isMenu 
-              ? BorderRadius.circular(24) 
-              : BorderRadius.zero,
-            ),
-            padding: const EdgeInsets.only(top: 15),
-            child: Column(
-              children: [
-                _header(),
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(  
-                      color: Color(0xfff6f6f6),
-                      borderRadius: navState.isMenu 
-                      ? BorderRadius.circular(24) 
-                      : BorderRadius.zero,
-                    ),
-                    child: ClipRRect(
-                      borderRadius: navState.isMenu 
-                      ? BorderRadius.circular(24) 
-                      : BorderRadius.zero,
-                      child: ListView(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        shrinkWrap: true,
-                        children: [
-                          _shortPets(),
-                          Column(
-                            children: List.generate(3, (index){
-                              return AnimalMiniCard();
-                            })
-                          )
-                        ],
-                      ),
-                    ),
-                  )
-                )
-              ],
-            ),
-          ),
-        );
-      }
+    return SheltersScaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Column(
+          children: [
+            _header(),
+            Expanded(
+              child: Container(
+                color: Color(0xfff6f6f6),
+                child: ListView(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  shrinkWrap: true,
+                  children: [
+                    _shortPets(),
+                    Column(
+                      children: List.generate(3, (index){
+                        return AnimalMiniCard(
+                          index: index
+                        );
+                      })
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      )
     );    
   }
 
