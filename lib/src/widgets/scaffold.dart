@@ -13,22 +13,25 @@ class SheltersScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<NavigationProvider>(
       builder: (context, navState, snapshot) {
-        return Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: navState.isMenu 
-              ? BorderRadius.circular(24) 
-              : BorderRadius.zero,
-            ),
-            child: ClipRRect(
-              borderRadius: navState.isMenu 
-              ? BorderRadius.circular(24) 
-              : BorderRadius.zero,
-              child: body
+        return WillPopScope(
+          onWillPop: () => Provider.of<NavigationProvider>(context, listen: false).openScreen('Menu'),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: navState.isMenu 
+                ? BorderRadius.circular(24) 
+                : BorderRadius.zero,
+              ),
+              child: ClipRRect(
+                borderRadius: navState.isMenu 
+                ? BorderRadius.circular(24) 
+                : BorderRadius.zero,
+                child: body
+              )
             )
-          )
+          ),
         );
       }
     );

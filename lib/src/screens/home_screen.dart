@@ -20,7 +20,13 @@ class _HomeScreenState extends State<HomeScreen>{
         padding: const EdgeInsets.only(top: 20),
         child: Column(
           children: [
-            _header(),
+            SheltersHeader(
+              title: 'Adoption',
+              trailing: GestureDetector(
+                child: Icon(MdiIcons.tune, color: Colors.grey[600],),
+                onTap: (){},
+              ),
+            ),
             Expanded(
               child: Container(
                 color: Color(0xfff6f6f6),
@@ -44,54 +50,6 @@ class _HomeScreenState extends State<HomeScreen>{
         ),
       )
     );    
-  }
-
-  Widget _header(){
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: GestureDetector(
-              child: SvgPicture.asset(
-                'assets/menu.svg',
-                color: Colors.grey[600],
-                height: 25,
-              ),
-              onTap: () => Provider.of<NavigationProvider>(context, listen: false).openScreen('Menu'),
-            ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Text('Location', style: TextStyle(color: Colors.grey,),),
-                ),
-                Row(
-                  children: [
-                    Icon(MdiIcons.mapMarker, size: 18),
-                    SizedBox(width: 5),
-                    AutoSizeText('Saint-Petersburg, Russia', style: TextStyle(fontSize: 18),),
-                  ],
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: GestureDetector(
-              child: Icon(MdiIcons.tune, color: Colors.grey[600],),
-              onTap: (){},
-            ),
-          )
-        ],
-      ),
-    );
   }
 
   Widget _shortPets(){

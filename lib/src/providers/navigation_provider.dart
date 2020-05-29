@@ -10,29 +10,35 @@ class NavigationProvider extends ChangeNotifier{
   String _activeTitle = 'Adoption';
   String get activeTitle => _activeTitle;
 
+  String _prevTitle = 'Add pet';
+  String get prevTitle => _prevTitle;
+
   openScreen(String newTitle){
     if(newTitle == 'Menu'){
       _isMenu = true;
       Get.back();
     } else{
       _isMenu = false;
-      _activeTitle = newTitle;
-      Get.to(_widget());
+      
+      if(newTitle != _activeTitle){
+        _prevTitle = _activeTitle;
+        _activeTitle = newTitle;
+      }
+
+      Get.to(Hero(
+        tag: _activeTitle,
+        child: screenWidget(_activeTitle)
+      ));
     }
 
     notifyListeners();
   }
-
-  _widget(){
-    switch(_activeTitle){
-      case 'Adoption': return Hero(
-        tag: 'HomeScreen',
-        child: HomeScreen()
-      );
-      default: return Hero(
-        tag: 'HomeScreen',
-        child: HomeScreen()
-      );
+  
+  Widget screenWidget(String text){
+    switch(text){
+      case 'Adoption': return HomeScreen();
+      case 'Add pet': return AddScreen();
+      default: return HomeScreen();
       // case 'Donation': return AnimalsScreen();
       // case 'Donation': return LostScreen();
       // case 'Donation': return ProfileScreen();
