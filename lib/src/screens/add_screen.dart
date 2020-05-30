@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:shelters/index.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class AddScreen extends StatefulWidget {
 
@@ -9,228 +12,193 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
+
+  TextEditingController _ageController = TextEditingController();
+
   bool _gender = false;
-  String _currentSelectedPet = 'Cat';
-  String _currentSelectedDateType = 'Months';
+  String _currentSelectedPet = 'Cats';
+
+  int _currentAge;
+  String _currentSelectedDateType; 
+
+  @override
+  void initState() {
+    _currentAge = int.parse(_ageController.text.isEmpty ? '0' : _ageController.text);
+    _currentSelectedDateType = timeago.RuMessages().days(_currentAge).split(' ')[1];
+    super.initState();
+  }
 
   var _pets = [
-    "Cat",
-    "Dog",
-    "Bird",
+    "Cats",
+    "Dogs",
+    "Birds",
     "Other",
-  ];
-
-  var _dateTypes = [
-    "Days",
-    "Months",
-    "Years",
   ];
 
   @override
   Widget build(BuildContext context) {    
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: SheltersScaffold(
-        appBar: SheltersAppBar(
-          title: 'Add pet',
-          trailing: ButtonTheme(
-            height: 40,
-            child: FlatButton(
-              color: Theme.of(context).primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(16)
+
+    List<String> _dateTypes = [
+      timeago.RuMessages().days(_currentAge).split(' ')[1],
+      timeago.RuMessages().months(_currentAge).split(' ')[1],
+      timeago.RuMessages().years(_currentAge).split(' ')[1],
+    ];
+
+    return SheltersScaffold(
+      appBar: SheltersAppBar(
+        title: 'Add pet',
+        trailing: SheltersButton(
+          title: 'Done',
+        )
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      bodyList: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            children: [
+              Expanded(
+                child: SheltersTextfield(
+                  label: 'Name',
                 )
               ),
-              child: Text('Create', style: TextStyle(color: Colors.white),),
-              onPressed: (){},
-            ),
-          ),
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        bodyList: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(16),
-                        ),
-                      ),
-                      labelText: 'Name',
-                      labelStyle: TextStyle(fontSize: 18),
-                      fillColor: Colors.white,
-                      filled: true,
-                    ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16)
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: SheltersSwitchListTile(
-                      title: _gender ? 'Male' : 'Female',
+                  margin: EdgeInsets.only(left: 16),
+                  child: ListTile(
+                    title: Text(FlutterI18n.translate(context, _gender ? 'Male' : 'Female'), style: TextStyle(fontSize: 18)),
+                    trailing: CupertinoSwitch(
+                      trackColor: Theme.of(context).primaryColor,
+                      activeColor: Theme.of(context).primaryColor,
                       value: _gender,
                       onChanged: (bool value) {
                         setState(() => _gender = value);
                       },
                     ),
-                  )
-                )
-              ],
-            )
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: FormField<String>(
-                    builder: (FormFieldState<String> state) {
-                      return InputDecorator(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(16),
-                            ),
-                          ),
-                          labelText: 'Type',
-                          labelStyle: TextStyle(fontSize: 18),
-                          fillColor: Colors.white,
-                          filled: true,
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: _currentSelectedPet,
-                            isDense: true,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                _currentSelectedPet = newValue;
-                                state.didChange(newValue);
-                              });
-                            },
-                            items: _pets.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      );
-                    },
                   ),
+                )
+              )
+            ],
+          )
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            children: [
+              Expanded(
+                child: FormField<String>(
+                  builder: (FormFieldState<String> state) {
+                    return InputDecorator(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(16),
+                          ),
+                        ),
+                        labelText: FlutterI18n.translate(context, 'Genus'),
+                        labelStyle: TextStyle(fontSize: 18),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: _currentSelectedPet,
+                          isDense: true,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _currentSelectedPet = newValue;
+                              state.didChange(newValue);
+                            });
+                          },
+                          items: _pets.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(FlutterI18n.translate(context, value)),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    );
+                  },
                 ),
-                SizedBox(width: 10),
-                Expanded(
-                  flex: 1,
-                  child: TextField(
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: SheltersTextfield(
                     maxLength: 2,
-                    maxLines: 1,
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
-                        WhitelistingTextInputFormatter.digitsOnly
+                        WhitelistingTextInputFormatter(RegExp("^[1-9][0-9]*\$")),
                     ],
-                    buildCounter: (BuildContext context, { int currentLength, int maxLength, bool isFocused }) => null,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(16)
-                        )
-                      ),
-                      labelText: 'Age',
-                      labelStyle: TextStyle(fontSize: 18),
-                      fillColor: Colors.white,
-                      filled: true,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  flex: 2,
-                  child: FormField<String>(
-                    builder: (FormFieldState<String> state) {
-                      return InputDecorator(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(16)
-                            )
-                          ),
-                          fillColor: Colors.white,
-                          filled: true,
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: _currentSelectedDateType,
-                            isDense: true,
-                            onChanged: (String newValue) {
-                              setState(() {
-                                _currentSelectedDateType = newValue;
-                                state.didChange(newValue);
-                              });
-                            },
-                            items: _dateTypes.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      );
+                    label: 'Age',
+                    controller: _ageController,
+                    onChanged: (value){
+                      setState(() {
+                        _currentSelectedDateType = timeago.RuMessages().days(int.parse(value)).split(' ')[1];
+                      });
                     },
-                  )
-                ),
-              ],
-            )
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(16),
                   ),
-                ),
-                labelText: 'Breed',
-                labelStyle: TextStyle(fontSize: 18),
-                fillColor: Colors.white,
-                filled: true,
+                )
               ),
-            )
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
-            child: TextField(
-              maxLines: 10,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(16),
-                  ),
-                ),
-                alignLabelWithHint: true,
-                labelText: 'Comment',
-                labelStyle: TextStyle(fontSize: 18),
-                fillColor: Colors.white,
-                filled: true,
+              Expanded(
+                child: FormField<String>(
+                  builder: (FormFieldState<String> state) {
+                    return InputDecorator(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(16)
+                          )
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: _currentSelectedDateType,
+                          isDense: true,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              _currentSelectedDateType = newValue;
+                              state.didChange(newValue);
+                            });
+                          },
+                          items: _dateTypes.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    );
+                  },
+                )
               ),
-            )
-          ),
-        ],
-      )
+            ],
+          )
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: SheltersTextfield(
+            label: 'Breed',
+          )
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: SheltersTextfield(
+            maxLines: 10,
+            label: 'Comment',
+          )
+        ),
+      ],
     );
   }
 }

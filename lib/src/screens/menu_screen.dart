@@ -5,9 +5,8 @@ import 'package:shelters/index.dart';
 
 class MenuScreen extends StatelessWidget {
 
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -53,7 +52,7 @@ class MenuScreen extends StatelessWidget {
                               children: [
                                 MenuItem(
                                   icon: MdiIcons.paw,
-                                  title: 'Adoption',
+                                  title: 'Pets',
                                 ),
                                 MenuItem(
                                   icon: MdiIcons.plus,
@@ -126,9 +125,10 @@ class MenuScreen extends StatelessWidget {
                       child: Hero(
                         tag: navState.activeTitle,
                         child: IgnorePointer(
+                          ignoring: true,
                           child: navState.screenWidget(navState.activeTitle)
-                        )
-                      )
+                        ),
+                      ),
                     ),
                   )
                 ],

@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
 
 class SheltersAppBar extends StatelessWidget {
   SheltersAppBar({
-    this.title = '',
+    this.title,
     this.trailing,
-    this.leading
+    this.leadingIcon
   });
 
   final String title;
   final Widget trailing;
-  final Widget leading;
+  final IconData leadingIcon;
 
   @override
   Widget build(BuildContext context) {
-    return leading != null
+    return leadingIcon != null
     ? _child(context)
     : WillPopScope(
       onWillPop: () => Provider.of<NavigationProvider>(context, listen: false).openScreen('Menu'),
@@ -33,18 +34,21 @@ class SheltersAppBar extends StatelessWidget {
         children: [
           Row(
             children: [
-              leading ?? Padding(
-                padding: const EdgeInsets.all(16),
-                child: GestureDetector(
-                  child: SvgPicture.asset(
-                    'assets/menu.svg',
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: IconButton(
+                  icon: Icon(
+                    leadingIcon ?? SheltersIcon.menu,
+                    size: 24,
                     color: Colors.grey[600],
-                    height: 25,
                   ),
-                  onTap: () => Provider.of<NavigationProvider>(context, listen: false).openScreen('Menu'),
+                  onPressed: () => 
+                    leadingIcon != null
+                    ? Get.back()
+                    : Provider.of<NavigationProvider>(context, listen: false).openScreen('Menu'),
                 ),
               ),
-              Text(title, style: TextStyle(fontSize: 18),),
+              Text(FlutterI18n.translate(context, title ?? ''), style: TextStyle(fontSize: 18),),
             ],
           ),
           Padding(

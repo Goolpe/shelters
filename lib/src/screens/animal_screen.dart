@@ -166,35 +166,15 @@ class AnimalScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        child: ButtonTheme(
+                        child: SheltersButton(
                           height: 50,
-                          child: FlatButton(
-                            color: Theme.of(context).accentColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(16)
-                              )
-                            ),
-                            child: Text('Adoption', style: TextStyle(color: Colors.white),),
-                            onPressed: (){},
-                          ),
+                          title: 'Pets',
                         ),
                       ),
                       SizedBox(width: 24),
-                      ButtonTheme(
+                      SheltersOutlineButton(
                         height: 50,
-                        minWidth: 50,
-                        child: OutlineButton(
-                          borderSide: BorderSide(color: Theme.of(context).accentColor),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(16)
-                            )
-                          ),
-                          color: Theme.of(context).accentColor,
-                          child: Icon(MdiIcons.heartOutline),
-                          onPressed: (){},
-                        ),
+                        icon: MdiIcons.heartOutline,
                       ),
                     ],
                   )

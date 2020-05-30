@@ -10,7 +10,7 @@ class SheltersAnimalImage extends StatelessWidget {
   SheltersAnimalImage({
     @required this.tag,
     this.isBig = false
-  });
+  }) : assert(isBig != null && tag != null);
 
   final String tag;
   final bool isBig;

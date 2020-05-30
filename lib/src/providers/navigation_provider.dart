@@ -7,7 +7,7 @@ class NavigationProvider extends ChangeNotifier{
   bool _isMenu = true;
   bool get isMenu => _isMenu;
 
-  String _activeTitle = 'Adoption';
+  String _activeTitle = 'Pets';
   String get activeTitle => _activeTitle;
 
   String _prevTitle = 'Add pet';
@@ -36,7 +36,7 @@ class NavigationProvider extends ChangeNotifier{
   
   Widget screenWidget(String text){
     switch(text){
-      case 'Adoption': return HomeScreen(title: text);
+      case 'Pets': return HomeScreen(title: text);
       case 'Add pet': return AddScreen();
       case 'Favorites': return HomeScreen(title: text);
       case 'Settings': return SettingsScreen();

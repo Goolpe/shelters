@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shelters/index.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({
-    this.title = ''
+    this.title
   });
 
   final String title;
@@ -15,13 +15,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>{
-  final List<String> _animals = ['all','cats','dogs','birds'];
+  final List<String> _animals = ['All','Cats','Dogs','Birds'];
 
   @override
   Widget build(BuildContext context) {
     return SheltersScaffold(
       appBar: SheltersAppBar(
-        title: widget.title,
+        title: widget.title ?? '',
         trailing: GestureDetector(
           child: Icon(MdiIcons.tune, color: Colors.grey[600],),
           onTap: (){},
@@ -46,32 +46,25 @@ class _HomeScreenState extends State<HomeScreen>{
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _animals.length,
+        padding: EdgeInsets.symmetric(horizontal: 4),
         itemBuilder: (context, index) {
           return Column(
             children: [
-              Container(
-                height: 70,
-                width: 70,
-                decoration: BoxDecoration(
-                  color: index == 0 ? Theme.of(context).accentColor : Colors.white,
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.4),
-                      spreadRadius: 1,
-                      blurRadius: 15,
-                      offset: Offset(0, 10), // changes position of shadow
-                    ),
-                  ]
-                ),
-                margin: const EdgeInsets.all(12),
-                padding: const EdgeInsets.all(16),
-                child: SvgPicture.asset(
-                  'assets/${_animals[index]}.svg',
-                  color: index == 0 ? Colors.white : Colors.black,
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: SheltersButton(
+                  height: 70,
+                  color: index != 0 ? Colors.white : null,
+                  elevation: index == 0 ? 0 : 10,
+                  child: Icon(SheltersIcon.fromString(_animals[index] ?? ''), 
+                    size: 40,
+                    color: index == 0 
+                    ? Colors.white 
+                    : Colors.black
+                  )
                 ),
               ),
-              Text(_animals[index])
+              Text(FlutterI18n.translate(context, _animals[index]))
             ],
           );
         },
