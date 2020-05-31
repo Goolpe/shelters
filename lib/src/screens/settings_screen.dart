@@ -23,14 +23,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<SettingsProvider>(
-      builder: (context, settingsState, snapshot) {
+      builder: (BuildContext context, SettingsProvider settingsState, Widget snapshot) {
         return SheltersScaffold(
           appBar: SheltersAppBar(
+            leading: IconButton(
+              icon: const Icon(SheltersIcon.menu),
+              onPressed: () => Get.back(),
+            ),
             title: 'Settings'
           ),
-          bodyList: [
+          bodyList: <Widget>[
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'Dark Theme'), style: TextStyle(fontSize: 18)),
+              title: Text(FlutterI18n.translate(context, 'Dark Theme'), 
+                style: const TextStyle(fontSize: 18)
+              ),
               trailing: CupertinoSwitch(
                 trackColor: Theme.of(context).primaryColor,
                 activeColor: Theme.of(context).primaryColor,
@@ -39,7 +45,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'Notifications'), style: TextStyle(fontSize: 18)),
+              title: Text(FlutterI18n.translate(context, 'Notifications'), 
+                style: const TextStyle(fontSize: 18)
+              ),
               trailing: CupertinoSwitch(
                 trackColor: Theme.of(context).primaryColor,
                 activeColor: Theme.of(context).primaryColor,
@@ -48,10 +56,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'Language'), style: TextStyle(fontSize: 18)),
+              title: Text(FlutterI18n.translate(context, 'Language'), 
+                style: const TextStyle(fontSize: 18)
+              ),
               trailing: Container(
-                width: 120,
-                padding: EdgeInsets.all(16),
+                width: 90,
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<SheltersLocale>(
                     value: settingsState.currentLang,
@@ -70,12 +79,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'About App'), style: TextStyle(fontSize: 18)),
-              onTap: () => Get.to(AboutAppScreen(), transition: Transition.cupertino),
+              title: Text(FlutterI18n.translate(context, 'About App'), style: const TextStyle(fontSize: 18)),
+              onTap: () => Get.to<Widget>(AboutAppScreen(), transition: Transition.cupertino),
             ),
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'Comments & Suggestions'), style: TextStyle(fontSize: 18)),
-              onTap: () => Get.to(ReviewScreen(), transition: Transition.cupertino),
+              title: Text(FlutterI18n.translate(context, 'Comments & Suggestions'), style: const TextStyle(fontSize: 18)),
+              onTap: () => Get.to<Widget>(ReviewScreen(), transition: Transition.cupertino),
             ),
           ],
         );

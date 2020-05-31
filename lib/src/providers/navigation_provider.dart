@@ -4,36 +4,27 @@ import 'package:shelters/index.dart';
 
 class NavigationProvider extends ChangeNotifier{
 
-  bool _isMenu = true;
-  bool get isMenu => _isMenu;
-
   String _activeTitle = 'Pets';
   String get activeTitle => _activeTitle;
 
   String _prevTitle = 'Add pet';
   String get prevTitle => _prevTitle;
 
-  openScreen(String newTitle){
-    if(newTitle == 'Menu'){
-      _isMenu = true;
-      Get.back();
-    } else{
-      _isMenu = false;
+  void openScreen(String newTitle){
       
-      if(newTitle != _activeTitle){
-        _prevTitle = _activeTitle;
-        _activeTitle = newTitle;
-      }
-
-      Get.to(Hero(
-        tag: _activeTitle,
-        child: screenWidget(_activeTitle)
-      ));
+    if(newTitle != _activeTitle){
+      _prevTitle = _activeTitle;
+      _activeTitle = newTitle;
     }
+
+    Get.to<Widget>(Hero(
+      tag: _activeTitle,
+      child: screenWidget(_activeTitle)
+    ));
 
     notifyListeners();
   }
-  
+
   Widget screenWidget(String text){
     switch(text){
       case 'Pets': return HomeScreen(title: text);
@@ -41,9 +32,6 @@ class NavigationProvider extends ChangeNotifier{
       case 'Favorites': return HomeScreen(title: text);
       case 'Settings': return SettingsScreen();
       default: return HomeScreen();
-      // case 'Donation': return AnimalsScreen();
-      // case 'Donation': return LostScreen();
-      // case 'Donation': return ProfileScreen();
     }
   }
 }

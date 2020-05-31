@@ -13,8 +13,8 @@ Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
   //set app localization
-  SharedPreferences _shPreferences = await SharedPreferences.getInstance();
-  String _locale = _shPreferences.getString('locale') ?? 'en';
+  final SharedPreferences _shPreferences = await SharedPreferences.getInstance();
+  final String _locale = _shPreferences.getString('locale') ?? 'en';
   
   final FlutterI18nDelegate flutterI18nDelegate = FlutterI18nDelegate(
     translationLoader: FileTranslationLoader(
@@ -27,39 +27,49 @@ Future<void> main() async{
   //set time localization
   timeago.setLocaleMessages('ru', SheltersTime());
 
+  await flutterI18nDelegate.load(null);
+  
   runApp(MyApp(flutterI18nDelegate));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp(this.flutterI18nDelegate);
+  const MyApp(this.flutterI18nDelegate);
 
   final FlutterI18nDelegate flutterI18nDelegate;
 
   @override
   Widget build(BuildContext context) {
+    TextTheme _textTheme = GoogleFonts.playTextTheme(
+      Theme.of(context).textTheme
+    );
+
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => NavigationProvider(),
+      providers: <ChangeNotifierProvider<dynamic>>[
+        ChangeNotifierProvider<NavigationProvider>(
+          create: (BuildContext context) => NavigationProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => SettingsProvider(),
+        ChangeNotifierProvider<SettingsProvider>(
+          create: (BuildContext context) => SettingsProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => PanelProvider(),
+        ChangeNotifierProvider<PanelProvider>(
+          create: (BuildContext context) => PanelProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => CarouselProvider(),
+        ChangeNotifierProvider<CarouselProvider>(
+          create: (BuildContext context) => CarouselProvider(),
         ),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Shelters',
         theme: ThemeData(
-          primaryColor: Color(0xff416c6d),
-          accentColor: Color(0xff306060),
-          textTheme: GoogleFonts.novaFlatTextTheme(
-            Theme.of(context).textTheme
+          primaryColor: const Color(0xff416c6d),
+          accentColor: const Color(0xff306060),
+          textTheme: _textTheme,
+          appBarTheme: AppBarTheme(
+            color: Colors.white,
+            textTheme: _textTheme,
+            iconTheme: const IconThemeData(color: Colors.black),
+            elevation: 0
           )
         ),
         builder: (BuildContext context, Widget child) {

@@ -4,7 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelters/index.dart';
 
 class SettingsProvider with ChangeNotifier{
-  final List<SheltersLocale> languages = [
+
+  final List<SheltersLocale> languages = <SheltersLocale>[
     SheltersLocale(
       language: 'English',
       locale: 'en',
@@ -25,10 +26,10 @@ class SettingsProvider with ChangeNotifier{
     );
   }
 
-  void changeLanguage(SheltersLocale value, BuildContext context) async {
+  Future<void> changeLanguage(SheltersLocale value, BuildContext context) async {
     _currentLang = value;
 
-    SharedPreferences _shPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences _shPreferences = await SharedPreferences.getInstance();
     _shPreferences.setString('locale', value.locale);
 
     await FlutterI18n.refresh(context, Locale(value.locale));

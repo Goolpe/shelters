@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:get/get.dart';
 import 'package:shelters/index.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -13,95 +14,85 @@ class AddScreen extends StatefulWidget {
 
 class _AddScreenState extends State<AddScreen> {
 
-  TextEditingController _ageController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
 
   bool _gender = false;
   String _currentSelectedPet = 'Cats';
 
-  int _currentAge;
-  String _currentSelectedDateType; 
-
-  @override
-  void initState() {
-    _currentAge = int.parse(_ageController.text.isEmpty ? '0' : _ageController.text);
-    _currentSelectedDateType = timeago.RuMessages().days(_currentAge).split(' ')[1];
-    super.initState();
-  }
-
-  var _pets = [
-    "Cats",
-    "Dogs",
-    "Birds",
-    "Other",
+  final List<String> _pets = <String>[
+    'Cats',
+    'Dogs',
+    'Birds',
+    'Other',
   ];
 
   @override
   Widget build(BuildContext context) {    
+    final int _currentAge = int.parse(_ageController.text.isEmpty ? '0' : _ageController.text);
+    String _currentSelectedDateType = timeago.RuMessages().days(_currentAge).split(' ')[1];
 
-    List<String> _dateTypes = [
+    final List<String> _dateTypes = <String>[
       timeago.RuMessages().days(_currentAge).split(' ')[1],
       timeago.RuMessages().months(_currentAge).split(' ')[1],
       timeago.RuMessages().years(_currentAge).split(' ')[1],
     ];
-
+    
     return SheltersScaffold(
       appBar: SheltersAppBar(
-        title: 'Add pet',
-        trailing: SheltersButton(
-          title: 'Done',
-        )
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      bodyList: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Row(
-            children: [
-              Expanded(
-                child: SheltersTextfield(
-                  label: 'Name',
-                )
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16)
-                  ),
-                  margin: EdgeInsets.only(left: 16),
-                  child: ListTile(
-                    title: Text(FlutterI18n.translate(context, _gender ? 'Male' : 'Female'), style: TextStyle(fontSize: 18)),
-                    trailing: CupertinoSwitch(
-                      trackColor: Theme.of(context).primaryColor,
-                      activeColor: Theme.of(context).primaryColor,
-                      value: _gender,
-                      onChanged: (bool value) {
-                        setState(() => _gender = value);
-                      },
-                    ),
-                  ),
-                )
-              )
-            ],
-          )
+        leading: IconButton(
+          icon: const Icon(SheltersIcon.menu),
+          onPressed: () => Get.back(),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Row(
-            children: [
-              Expanded(
+        title: 'Add pet',
+      ),
+      bodyList: [
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: SheltersTextfield(
+                label: 'Name',
+              )
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16)
+                ),
+                margin: const EdgeInsets.all(8),
+                child: ListTile(
+                  title: Text(FlutterI18n.translate(context, _gender ? 'Male' : 'Female'), 
+                    style: const TextStyle(fontSize: 18)),
+                  trailing: CupertinoSwitch(
+                    trackColor: Theme.of(context).primaryColor,
+                    activeColor: Theme.of(context).primaryColor,
+                    value: _gender,
+                    onChanged: (bool value) {
+                      setState(() => _gender = value);
+                    },
+                  ),
+                ),
+              )
+            )
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
                 child: FormField<String>(
                   builder: (FormFieldState<String> state) {
                     return InputDecorator(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(
+                        border: const OutlineInputBorder(
                           borderSide: BorderSide.none,
-                          borderRadius: const BorderRadius.all(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(16),
                           ),
                         ),
                         labelText: FlutterI18n.translate(context, 'Genus'),
-                        labelStyle: TextStyle(fontSize: 18),
+                        labelStyle: const TextStyle(fontSize: 18),
                         fillColor: Colors.white,
                         filled: true,
                       ),
@@ -125,35 +116,35 @@ class _AddScreenState extends State<AddScreen> {
                       ),
                     );
                   },
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: SheltersTextfield(
-                    maxLength: 2,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                        WhitelistingTextInputFormatter(RegExp("^[1-9][0-9]*\$")),
-                    ],
-                    label: 'Age',
-                    controller: _ageController,
-                    onChanged: (value){
-                      setState(() {
-                        _currentSelectedDateType = timeago.RuMessages().days(int.parse(value)).split(' ')[1];
-                      });
-                    },
-                  ),
                 )
               ),
-              Expanded(
+            ),
+            Expanded(
+              child: SheltersTextfield(
+                maxLength: 2,
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                    WhitelistingTextInputFormatter(RegExp("^[1-9][0-9]*\$")),
+                ],
+                label: 'Age',
+                controller: _ageController,
+                onChanged: (String value){
+                  setState(() {
+                    _currentSelectedDateType = timeago.RuMessages().days(int.parse(value)).split(' ')[1];
+                  });
+                },
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
                 child: FormField<String>(
                   builder: (FormFieldState<String> state) {
                     return InputDecorator(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(
                           borderSide: BorderSide.none,
-                          borderRadius: const BorderRadius.all(
+                          borderRadius: BorderRadius.all(
                             Radius.circular(16)
                           )
                         ),
@@ -180,24 +171,21 @@ class _AddScreenState extends State<AddScreen> {
                       ),
                     );
                   },
-                )
-              ),
-            ],
-          )
+                ),
+              )
+            ),
+          ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: SheltersTextfield(
-            label: 'Breed',
-          )
+        SheltersTextfield(
+          label: 'Breed',
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: SheltersTextfield(
-            maxLines: 10,
-            label: 'Comment',
-          )
+        SheltersTextfield(
+          maxLines: 10,
+          label: 'Comment',
         ),
+        SheltersButton(
+          title: 'Done'
+        )
       ],
     );
   }

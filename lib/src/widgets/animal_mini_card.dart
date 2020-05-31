@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,7 +5,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:shelters/index.dart';
 
 class AnimalMiniCard extends StatelessWidget {
-  AnimalMiniCard({
+  const AnimalMiniCard({
     @required this.tag
   });
 
@@ -15,14 +14,13 @@ class AnimalMiniCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16),
+      margin: const EdgeInsets.all(8),
       child: GestureDetector(
         child: Stack(
           children: [
             Container(
               height: 200,
               width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
                 boxShadow: [
@@ -30,18 +28,18 @@ class AnimalMiniCard extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.2),
                     spreadRadius: 1,
                     blurRadius: 30,
-                    offset: Offset(0, 25),
+                    offset: const Offset(0, 25),
                   ),
                 ]
               ),
               child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
                   color: Colors.white,
                 ),
                 child: Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       flex: 1,
                       child: SizedBox()
                     ),
@@ -57,11 +55,11 @@ class AnimalMiniCard extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text('Petrushka', style: Theme.of(context).textTheme.headline5,),
-                                Icon(MdiIcons.genderMale, color: Color(0xffb0b0b0)),
+                                const Icon(MdiIcons.genderMale, color: Color(0xffb0b0b0)),
                               ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8),
                               child: Text('Abyssinian cat'),
                             ),
                             Text('2 years old', style: TextStyle(color: Colors.grey[500]),),
@@ -69,9 +67,9 @@ class AnimalMiniCard extends StatelessWidget {
                               padding: const EdgeInsets.only(top: 8),
                               child: Row(
                                 children: [
-                                  Icon(MdiIcons.mapMarker, size: 18),
-                                  SizedBox(width: 5),
-                                  AutoSizeText('Distance: 3.6 km', style: TextStyle(fontSize: 16, color: Colors.grey[700]),),
+                                  const Icon(MdiIcons.mapMarker, size: 18),
+                                  const SizedBox(width: 5),
+                                  Text('Distance: 3.6 km', style: TextStyle(fontSize: 16, color: Colors.grey[700]),),
                                 ],
                               )
                             )
@@ -84,7 +82,6 @@ class AnimalMiniCard extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: 16,
               child: Container(
                 height: 200,
                 width: MediaQuery.of(context).size.width / 2 - 20,
@@ -99,10 +96,10 @@ class AnimalMiniCard extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.2),
                           spreadRadius: 3,
                           blurRadius: 12,
-                          offset: Offset(10, 0),
+                          offset: const Offset(10, 0),
                         ),
                       ],
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         fit: BoxFit.cover,
                         image: CachedNetworkImageProvider('https://news.cgtn.com/news/77416a4e3145544d326b544d354d444d3355444f31457a6333566d54/img/37d598e5a04344da81c76621ba273915/37d598e5a04344da81c76621ba273915.jpg')
                       )
@@ -113,7 +110,7 @@ class AnimalMiniCard extends StatelessWidget {
             )
           ],
         ),
-        onTap: () => Get.to(AnimalScreen(tag: tag)),
+        onTap: () => Get.to<Widget>(AnimalScreen(tag: tag)),
       ),
     );
   }

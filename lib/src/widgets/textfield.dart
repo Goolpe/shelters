@@ -23,27 +23,30 @@ class SheltersTextfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      onChanged: onChanged,
-      maxLength: maxLength ?? TextField.noMaxLength,
-      maxLines: maxLines ?? 1,
-      buildCounter: (BuildContext context, { int currentLength, int maxLength, bool isFocused }) => null,
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.all(
-            Radius.circular(16),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextField(
+        controller: controller,
+        onChanged: onChanged,
+        maxLength: maxLength ?? TextField.noMaxLength,
+        maxLines: maxLines ?? 1,
+        buildCounter: (BuildContext context, { int currentLength, int maxLength, bool isFocused }) => null,
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            ),
           ),
+          alignLabelWithHint: maxLines == null ? false : maxLines > 1,
+          labelText: FlutterI18n.translate(context, label ?? ''),
+          labelStyle: TextStyle(fontSize: 18),
+          fillColor: Colors.white,
+          filled: true,
         ),
-        alignLabelWithHint: maxLines == null ? false : maxLines > 1,
-        labelText: FlutterI18n.translate(context, label ?? ''),
-        labelStyle: TextStyle(fontSize: 18),
-        fillColor: Colors.white,
-        filled: true,
+        keyboardType: keyboardType ?? TextInputType.text,
+        inputFormatters: inputFormatters
       ),
-      keyboardType: keyboardType ?? TextInputType.text,
-      inputFormatters: inputFormatters
     );
   }
 }

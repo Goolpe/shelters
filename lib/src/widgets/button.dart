@@ -8,6 +8,7 @@ class SheltersButton extends StatelessWidget {
     this.child,
     this.color,
     this.elevation,
+    this.margin,
   });
 
   final String title;
@@ -15,23 +16,29 @@ class SheltersButton extends StatelessWidget {
   final Widget child;
   final Color color;
   final double elevation;
+  final double margin;
 
   @override
   Widget build(BuildContext context) {
-    return ButtonTheme(
-      height: height ?? 40,
-      minWidth: 70,
-      child: RaisedButton(
-        highlightElevation: 0,
-        elevation: elevation ?? 0,
-        color: color ?? Theme.of(context).primaryColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(16)
-          )
+    return Container(
+      margin: EdgeInsets.all(8),
+      child: ButtonTheme(
+        height: height ?? 56,
+        minWidth: 70,
+        child: RaisedButton(
+          highlightElevation: 0,
+          elevation: elevation ?? 0,
+          color: color ?? Theme.of(context).primaryColor,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(16)
+            )
+          ),
+          child: child ?? Text(FlutterI18n.translate(context, title ?? ''), 
+            style: TextStyle(color: Colors.white)
+          ),
+          onPressed: (){},
         ),
-        child: child ?? Text(FlutterI18n.translate(context, title ?? ''), style: TextStyle(color: Colors.white),),
-        onPressed: (){},
       ),
     );
   }
@@ -48,21 +55,24 @@ class SheltersOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ButtonTheme(
-      height: height ?? 40,
-      minWidth: 50,
-      child: OutlineButton(
-        highlightedBorderColor: Theme.of(context).accentColor,
-        borderSide: BorderSide(color: Theme.of(context).accentColor),
-        shape: RoundedRectangleBorder(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(16)
-          )
+    return Container(
+      margin: EdgeInsets.all(8),
+      child: ButtonTheme(
+        height: height ?? 56,
+        minWidth: 50,
+        child: OutlineButton(
+          highlightedBorderColor: Theme.of(context).accentColor,
+          borderSide: BorderSide(color: Theme.of(context).accentColor),
+          shape: RoundedRectangleBorder(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(16)
+            )
+          ),
+          color: Theme.of(context).accentColor,
+          child: icon != null ? Icon(icon) : SizedBox(),
+          onPressed: (){},
         ),
-        color: Theme.of(context).accentColor,
-        child: icon != null ? Icon(icon) : SizedBox(),
-        onPressed: (){},
-      ),
+      )
     );
   }
 }

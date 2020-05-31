@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shelters/index.dart';
 
 class AboutAppScreen extends StatelessWidget {
@@ -9,10 +8,7 @@ class AboutAppScreen extends StatelessWidget {
     return SheltersScaffold(
       appBar: SheltersAppBar(
         title: 'About App',
-        leadingIcon: MdiIcons.chevronLeft,
-        trailing: Text('v: 1.0'),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       body: Container(
         alignment: Alignment.center,
       ),

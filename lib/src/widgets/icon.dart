@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 class SheltersIcon {
   SheltersIcon._();
 
-  static const _kFontFam = 'SheltersIcon';
-  static const _kFontPkg = null;
+  static const String _kFontFam = 'SheltersIcon';
+  static const String _kFontPkg = null;
 
   static const IconData birds = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData cats = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
