@@ -7,6 +7,7 @@ class SheltersScaffold extends StatelessWidget {
     this.appBar,
     this.backgroundColor,
     this.panel,
+    this.padding
   }) : assert(bodyList == null || body == null);
 
   final List<Widget> bodyList;
@@ -14,6 +15,7 @@ class SheltersScaffold extends StatelessWidget {
   final Widget appBar;
   final Color backgroundColor;
   final Widget panel;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +46,8 @@ class SheltersScaffold extends StatelessWidget {
             color: backgroundColor ?? const Color(0xfff6f6f6),
             child: body
             ?? ListView(
-              padding: const EdgeInsets.all(8),
-              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              padding: padding ?? const EdgeInsets.all(8),
               children: bodyList
             )
           )

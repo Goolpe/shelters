@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +106,7 @@ class _AnimalScreenState extends State<AnimalScreen> {
                                   children: [
                                     Icon(MdiIcons.mapMarker, size: 18),
                                     SizedBox(width: 5),
-                                    AutoSizeText('Distance: 3.6 km', style: TextStyle(fontSize: 16, color: Colors.grey[700]),),
+                                    Text('Distance: 3.6 km', style: TextStyle(fontSize: 16, color: Colors.grey[700]),),
                                   ],
                                 )
                               )

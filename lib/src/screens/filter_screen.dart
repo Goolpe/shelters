@@ -8,21 +8,21 @@ class FilterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PanelProvider>(
+    return Consumer<FilterProvider>(
       builder: (context, panelState, snapshot) {
         return SlidingUpPanel(
-          controller: panelState.panelController,
+          controller: panelState.filterController,
           maxHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
           minHeight: 0,
           panel: Column(
             children: [
               SheltersAppBar(
-                title: 'Filter',
+                title: 'Filters',
                 automaticallyImplyLeading: false,
                 actions: [
                   IconButton(
                     icon: Icon(MdiIcons.close),
-                    onPressed: () => Provider.of<PanelProvider>(context, listen: false).openPanel(),
+                    onPressed: () => Provider.of<FilterProvider>(context, listen: false).openFilter(),
                   )
                 ]
               ),

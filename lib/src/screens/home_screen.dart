@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: Icon(MdiIcons.tune),
             onPressed: () => 
-            Provider.of<PanelProvider>(context, listen: false).openPanel(),
+            Provider.of<FilterProvider>(context, listen: false).openFilter(),
           ),
         ]
       ),

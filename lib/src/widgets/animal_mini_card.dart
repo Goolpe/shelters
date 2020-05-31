@@ -17,9 +17,10 @@ class AnimalMiniCard extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       child: GestureDetector(
         child: Stack(
+          alignment: Alignment.centerLeft,
           children: [
             Container(
-              height: 200,
+              height: 170,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),

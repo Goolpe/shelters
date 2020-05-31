@@ -31,6 +31,9 @@ class NavigationProvider extends ChangeNotifier{
       case 'Add pet': return AddScreen();
       case 'Favorites': return HomeScreen(title: text);
       case 'Settings': return SettingsScreen();
+      case 'Profile': return ProfileScreen();
+      case 'Donation': return DonationScreen();
+      case 'Messages': return MessagesScreen();
       default: return HomeScreen();
     }
   }

@@ -34,9 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           bodyList: <Widget>[
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'Dark Theme'), 
-                style: const TextStyle(fontSize: 18)
-              ),
+              title: Text(FlutterI18n.translate(context, 'Dark Theme')),
               trailing: CupertinoSwitch(
                 trackColor: Theme.of(context).primaryColor,
                 activeColor: Theme.of(context).primaryColor,
@@ -45,9 +43,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'Notifications'), 
-                style: const TextStyle(fontSize: 18)
-              ),
+              title: Text(FlutterI18n.translate(context, 'Notifications')),
               trailing: CupertinoSwitch(
                 trackColor: Theme.of(context).primaryColor,
                 activeColor: Theme.of(context).primaryColor,
@@ -56,9 +52,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'Language'), 
-                style: const TextStyle(fontSize: 18)
-              ),
+              title: Text(FlutterI18n.translate(context, 'Language')),
               trailing: Container(
                 width: 90,
                 child: DropdownButtonHideUnderline(
@@ -79,11 +73,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ),
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'About App'), style: const TextStyle(fontSize: 18)),
+              title: Text(FlutterI18n.translate(context, 'About App')),
               onTap: () => Get.to<Widget>(AboutAppScreen(), transition: Transition.cupertino),
             ),
             ListTile(
-              title: Text(FlutterI18n.translate(context, 'Comments & Suggestions'), style: const TextStyle(fontSize: 18)),
+              title: Text(FlutterI18n.translate(context, 'Comments & Suggestions')),
               onTap: () => Get.to<Widget>(ReviewScreen(), transition: Transition.cupertino),
             ),
           ],
