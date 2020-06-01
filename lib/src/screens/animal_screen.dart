@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
@@ -124,45 +125,26 @@ class _AnimalScreenState extends State<AnimalScreen> {
                   children: [
                     ShowUp(
                       delay: 500,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(right: 16),
-                                      child: CircleAvatar(
-                                        radius: 20,
-                                        backgroundColor: Colors.black,
-                                      ),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text('Kira Kolodinova', style: Theme.of(context).textTheme.headline6,),
-                                        SizedBox(height: 5),
-                                        Text('Owner', style: TextStyle(color: Colors.grey[700]),)
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 6),
-                                  child: Text('May 22, 2020', style: TextStyle(color: Colors.grey[800])),
-                                )
-                              ],
+                      child: Column(
+                        children: [
+                          SheltersMenuItem(
+                            id: 0,
+                            leading: CircleAvatar(
+                              radius: 18,
+                              backgroundColor: Theme.of(context).accentColor,
+                              child: Icon(MdiIcons.camera, size: 18, color: Colors.white)
                             ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              child: Text('Hello my name is Kira, London is the Capital of Great Britain'),
-                            ),
-                          ],
-                        ),
+                            textColor: Colors.black,
+                            icon: MdiIcons.faceProfile,
+                            title: 'Arthur Khabirov',
+                            subtitle: 'active status',
+                            onTap: () => Get.to(ProfileScreen())
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+                            child: Text('Hello my name is Kira, London is the Capital of Great Britain'),
+                          ),
+                        ],
                       )
                     ),
                     ShowUp(

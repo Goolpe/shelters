@@ -29,13 +29,14 @@ dependencies:
     sdk: flutter
   flutter_i18n: ^0.15.0
   flutter_responsive: ^0.0.6
-  flutter_share: ^1.0.2+1
+  flutter_secure_storage: ^3.3.3
   get_version: ^0.2.2
   get: ^2.5.9
   google_fonts: ^1.1.0
   google_sign_in_web: ^0.9.1+1
   material_design_icons_flutter: ^4.0.5245
   multi_image_picker: ^4.6.7
+  share: ^0.6.4+3
   shared_preferences: ^0.5.7+3
   sliding_up_panel: ^1.0.2
   timeago: ^2.0.26

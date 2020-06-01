@@ -4,37 +4,35 @@ import 'package:shelters/index.dart';
 
 class NavigationProvider extends ChangeNotifier{
 
-  String _activeTitle = 'Pets';
-  String get activeTitle => _activeTitle;
+  //pets screen id 1
+  int _activeId = 1;
+  int get activeId => _activeId;
 
-  String _prevTitle = 'Add pet';
-  String get prevTitle => _prevTitle;
+  //settings screen id 6
+  int _prevId = 6;
+  int get prevId => _prevId;
 
-  void openScreen(String newTitle){
-      
-    if(newTitle != _activeTitle){
-      _prevTitle = _activeTitle;
-      _activeTitle = newTitle;
-    }
+  Widget _activeWidget = PetsScreen(title: 'Pets');
+  Widget get activeWidget => _activeWidget;
+
+  Widget _prevWidget = SettingsScreen();
+  Widget get prevWidget => _prevWidget;
+
+  void openScreen(int id, Widget widget){
 
     Get.to<Widget>(Hero(
-      tag: _activeTitle,
-      child: screenWidget(_activeTitle)
+      tag: 'nav_$id',
+      child: widget
     ));
+      
+    if(id != _activeId){
+      _prevId = _activeId;
+      _prevWidget = _activeWidget;
+
+      _activeId = id;
+      _activeWidget = widget;
+    }
 
     notifyListeners();
-  }
-
-  Widget screenWidget(String text){
-    switch(text){
-      case 'Pets': return HomeScreen(title: text);
-      case 'Add pet': return AddScreen();
-      case 'Favorites': return HomeScreen(title: text);
-      case 'Settings': return SettingsScreen();
-      case 'Profile': return ProfileScreen();
-      case 'Donation': return DonationScreen();
-      case 'Messages': return MessagesScreen();
-      default: return HomeScreen();
-    }
   }
 }

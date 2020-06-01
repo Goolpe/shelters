@@ -10,7 +10,7 @@ class SheltersTextfield extends StatelessWidget {
     this.keyboardType,
     this.inputFormatters,
     this.controller,
-    this.onChanged
+    this.onChanged,
   });
 
   final String label;
@@ -28,7 +28,7 @@ class SheltersTextfield extends StatelessWidget {
       child: TextField(
         controller: controller,
         onChanged: onChanged,
-        maxLength: maxLength ?? TextField.noMaxLength,
+        maxLength: maxLength ?? 30,
         maxLines: maxLines ?? 1,
         buildCounter: (BuildContext context, { int currentLength, int maxLength, bool isFocused }) => null,
         decoration: InputDecoration(
@@ -44,6 +44,8 @@ class SheltersTextfield extends StatelessWidget {
           fillColor: Colors.white,
           filled: true,
         ),
+        style: TextStyle(fontSize: 18),
+        textCapitalization: TextCapitalization.sentences,
         keyboardType: keyboardType ?? TextInputType.text,
         inputFormatters: inputFormatters
       ),

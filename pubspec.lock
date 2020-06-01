@@ -130,13 +130,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.6"
-  flutter_share:
+  flutter_secure_storage:
     dependency: "direct main"
     description:
-      name: flutter_share
+      name: flutter_secure_storage
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2+1"
+    version: "3.3.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -357,6 +357,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.24.1"
+  share:
+    dependency: "direct main"
+    description:
+      name: share
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.4+3"
   shared_preferences:
     dependency: "direct main"
     description:

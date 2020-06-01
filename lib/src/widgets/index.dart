@@ -1,6 +1,7 @@
 export 'animal_image.dart';
 export 'animal_mini_card.dart';
 export 'appbar.dart';
+export 'bottom_sheet.dart';
 export 'button.dart';
 export 'icon.dart';
 export 'menu_item.dart';

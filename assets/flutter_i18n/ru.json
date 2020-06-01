@@ -5,6 +5,7 @@
     "All": "Все",
     "Birds": "Птицы",
     "Breed": "Порода",
+    "Cancel": "Отмена",
     "Cats": "Кошки",
     "Comments & Suggestions": "Отзывы & предложения",
     "Comment": "Комментарий",
@@ -16,6 +17,7 @@
     "Favorites": "Избранные",
     "Female": "Самка",
     "Filters": "Фильтры",
+    "Gender": "Пол",
     "Genus": "Род",
     "Language": "Язык",
     "Log out": "Выйти",
@@ -28,5 +30,6 @@
     "Profile": "Профиль",
     "Review": "Отзыв",
     "Send": "Отправить",
-    "Settings": "Настройки"
+    "Settings": "Настройки",
+    "Your pets": "Ваши питомцы"
 }

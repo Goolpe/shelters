@@ -3,45 +3,74 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
 
-class MenuItem extends StatelessWidget {
-  MenuItem({
+class SheltersMenuItem extends StatelessWidget {
+  SheltersMenuItem({
+    @required this.id,
+    this.widget,
     this.icon,
     this.title,
-  });
+    this.subtitle,
+    this.leading,
+    this.authorized = true,
+    this.textColor,
+    this.onTap
+  }) : assert(
+    id != null && authorized != null,
+    widget != null || onTap != null
+  );
 
+  final int id;
   final IconData icon;
   final String title;
+  final String subtitle;
+  final Widget leading;
+  final Widget widget;
+  final bool authorized;
+  final Color textColor;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<NavigationProvider>(
       builder: (context, navState, snapshot) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          child: GestureDetector(
-            child: Row(
-              children: [
-                if(icon != null)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: Icon(icon, 
-                      color: navState.activeTitle == title 
-                      ? Colors.white 
-                      : Color(0xff83b1af)
-                    ),
-                  ),
-                Text(FlutterI18n.translate(context, title ?? ''), 
-                  style: TextStyle(
-                    fontSize: 18, 
-                    color: navState.activeTitle == title 
+        return InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          child: ListTile(
+            title: Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: leading ?? Icon(icon, 
+                    color: navState.activeId == id
                     ? Colors.white 
                     : Color(0xff83b1af)
-                  )
-                )
-              ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(FlutterI18n.translate(context, title ?? ''), 
+                      style: TextStyle(
+                        fontSize: 18, 
+                        color: textColor != null 
+                        ? textColor  
+                        : leading != null || navState.activeId == id
+                          ? Colors.white 
+                          : Color(0xff83b1af)
+                      )
+                    ),
+                    if(subtitle != null)
+                      Text(subtitle, style: TextStyle(color: Color(0xff83b1af)))
+                  ],
+                ),
+              ]
             ),
-            onTap: () => Provider.of<NavigationProvider>(context, listen: false).openScreen(title),
           ),
+          onTap: onTap ?? () =>
+            !authorized 
+            ? Provider.of<LoginProvider>(context, listen: false).openLogin()
+            : Provider.of<NavigationProvider>(context, listen: false).openScreen(id, widget)
         );
       }
     );

@@ -5,6 +5,7 @@
     "All": "All",
     "Birds": "Birds",
     "Breed": "Breed",
+    "Cancel": "Cancel",
     "Cats": "Cats",
     "Comments & Suggestions": "Comments & Suggestions",
     "Comment": "Comment",
@@ -16,6 +17,7 @@
     "Favorites": "Favorites",
     "Female": "Female",
     "Filters": "Filters",
+    "Gender": "Gender",
     "Genus": "Genus",
     "Language": "Language",
     "Log out": "Log out",
@@ -28,5 +30,6 @@
     "Profile": "Profile",
     "Review": "Review",
     "Send": "Send",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "Your pets": "Your pets"
 }

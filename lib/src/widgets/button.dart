@@ -9,6 +9,7 @@ class SheltersButton extends StatelessWidget {
     this.color,
     this.elevation,
     this.margin,
+    this.onPressed
   });
 
   final String title;
@@ -17,6 +18,7 @@ class SheltersButton extends StatelessWidget {
   final Color color;
   final double elevation;
   final double margin;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class SheltersButton extends StatelessWidget {
           child: child ?? Text(FlutterI18n.translate(context, title ?? ''), 
             style: TextStyle(color: Colors.white)
           ),
-          onPressed: (){},
+          onPressed: onPressed ?? (){},
         ),
       ),
     );

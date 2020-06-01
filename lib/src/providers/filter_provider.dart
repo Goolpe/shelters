@@ -13,7 +13,7 @@ class FilterProvider extends ChangeNotifier{
   }
 
   void goToMap(){
-    _filterController.close();
+    _filterController?.close();
     notifyListeners();
   }
 }

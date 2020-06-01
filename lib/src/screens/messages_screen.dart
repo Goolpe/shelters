@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:shelters/index.dart';
 
 class MessagesScreen extends StatelessWidget {
@@ -8,10 +7,7 @@ class MessagesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SheltersScaffold(
       appBar: SheltersAppBar(
-        leading: IconButton(
-          icon: const Icon(SheltersIcon.menu),
-          onPressed: () => Get.back(),
-        ),
+        leadingIcon: SheltersIcon.menu,
         title: 'Messages'
       ),
       bodyList: <Widget>[

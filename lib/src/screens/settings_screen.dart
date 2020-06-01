@@ -26,10 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       builder: (BuildContext context, SettingsProvider settingsState, Widget snapshot) {
         return SheltersScaffold(
           appBar: SheltersAppBar(
-            leading: IconButton(
-              icon: const Icon(SheltersIcon.menu),
-              onPressed: () => Get.back(),
-            ),
+            leadingIcon: SheltersIcon.menu,
             title: 'Settings'
           ),
           bodyList: <Widget>[
@@ -53,24 +50,47 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             ListTile(
               title: Text(FlutterI18n.translate(context, 'Language')),
-              trailing: Container(
-                width: 90,
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<SheltersLocale>(
-                    value: settingsState.currentLang,
-                    isDense: true,
-                    onChanged: (SheltersLocale newValue) {
-                      Provider.of<SettingsProvider>(context, listen: false).changeLanguage(newValue, context);
-                    },
-                    items: settingsState.languages.map((SheltersLocale value) {
-                      return DropdownMenuItem<SheltersLocale>(
-                        value: value,
-                        child: Text(value.language),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
+              trailing: Text(settingsState.currentLang.language ?? '', style: TextStyle(fontSize: 16)),
+              onTap: (){
+                showCupertinoModalPopup(
+                  context: context,
+                  builder: (BuildContext context){
+                    return CupertinoActionSheet(
+                      actions: settingsState.languages.map((SheltersLocale value){
+                        return CupertinoActionSheetAction(
+                          child: Text(FlutterI18n.translate(context, value.language)),
+                          onPressed: () =>
+                            Provider.of<SettingsProvider>(context, listen: false).changeLanguage(value, context)
+                        );
+                      }).toList(),
+                      cancelButton: CupertinoActionSheetAction(
+                        child: Text(FlutterI18n.translate(context, 'Cancel')),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      )
+                    );
+                  }
+                );
+              },
+              // trailing: Container(
+              //   width: 90,
+              //   child: DropdownButtonHideUnderline(
+              //     child: DropdownButton<SheltersLocale>(
+              //       value: settingsState.currentLang,
+              //       isDense: true,
+              //       onChanged: (SheltersLocale newValue) {
+              //         Provider.of<SettingsProvider>(context, listen: false).changeLanguage(newValue, context);
+              //       },
+              //       items: settingsState.languages.map((SheltersLocale value) {
+              //         return DropdownMenuItem<SheltersLocale>(
+              //           value: value,
+              //           child: Text(value.language),
+              //         );
+              //       }).toList(),
+              //     ),
+              //   ),
+              // ),
             ),
             ListTile(
               title: Text(FlutterI18n.translate(context, 'About App')),

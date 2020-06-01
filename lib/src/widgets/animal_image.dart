@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
+import 'package:share/share.dart';
 
 class SheltersAnimalImage extends StatelessWidget {
   SheltersAnimalImage({
@@ -15,17 +16,16 @@ class SheltersAnimalImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
       margin: EdgeInsets.only(bottom: 70),
       child: Consumer<CarouselProvider>(
         builder: (context, carouselState, snapshot) {
           return Stack(
-            alignment: Alignment.topCenter,
             children: [
               Hero(
                 tag: tag,
                 child: Container(
                   height: 400,
+                  width: MediaQuery.of(context).size.width,
                   child: ExtendedImageGesturePageView.builder(
                     itemBuilder: (BuildContext context, int index) {
                       return ExtendedImage.network(
@@ -46,21 +46,22 @@ class SheltersAnimalImage extends StatelessWidget {
                   ),
                 )
               ),
-              Positioned.fill(
+              Positioned(
                 top: 40,
+                left: 0,
+                right: 0,
                 child: ShowUp(
                   delay: 100,
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: Icon(MdiIcons.chevronLeft, size: 30, color: Colors.white,),
+                        icon: Icon(MdiIcons.chevronLeft, size: 40, color: Colors.white,),
                         onPressed: () => Get.back(),
                       ),
                       IconButton(
-                        icon: Icon(MdiIcons.share, size: 30, color: Colors.white),
-                        onPressed: () => Get.back(),
+                        icon: Icon(MdiIcons.shareVariant, size: 30, color: Colors.white),
+                        onPressed: () => Share.share('check my github https://github.com/Goolpe'),
                       )
                     ],
                   )

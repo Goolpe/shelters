@@ -15,6 +15,7 @@ Future<void> main() async{
   //set app localization
   final SharedPreferences _shPreferences = await SharedPreferences.getInstance();
   final String _locale = _shPreferences.getString('locale') ?? 'en';
+
   
   final FlutterI18nDelegate flutterI18nDelegate = FlutterI18nDelegate(
     translationLoader: FileTranslationLoader(
@@ -23,19 +24,26 @@ Future<void> main() async{
       forcedLocale: Locale(_locale),
     )
   );
-
-  //set time localization
-  timeago.setLocaleMessages('ru', SheltersTime());
+  
+  // //set time localization
+  timeago.setLocaleMessages(_locale, selectLocale(_locale));
 
   await flutterI18nDelegate.load(null);
   
-  runApp(MyApp(flutterI18nDelegate));
+  runApp(MyApp(
+    flutterI18nDelegate: flutterI18nDelegate,
+    locale: _locale
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp(this.flutterI18nDelegate);
+  const MyApp({
+    this.flutterI18nDelegate,
+    this.locale
+  });
 
   final FlutterI18nDelegate flutterI18nDelegate;
+  final String locale;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +53,18 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: <ChangeNotifierProvider<dynamic>>[
+        ChangeNotifierProvider<AuthorizationProvider>(
+          lazy: false,
+          create: (BuildContext context) => AuthorizationProvider()..init(),
+        ),
+        ChangeNotifierProvider<LoginProvider>(
+          create: (BuildContext context) => LoginProvider(),
+        ),
         ChangeNotifierProvider<NavigationProvider>(
           create: (BuildContext context) => NavigationProvider(),
+        ),
+        ChangeNotifierProvider<AddPetProvider>(
+          create: (BuildContext context) => AddPetProvider()..init(),
         ),
         ChangeNotifierProvider<SettingsProvider>(
           create: (BuildContext context) => SettingsProvider(),
@@ -78,12 +96,18 @@ class MyApp extends StatelessWidget {
             child: child
           );
         },
+        locale: Locale(locale),
         localizationsDelegates: [
           flutterI18nDelegate,
           GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
         ],
-        home: MenuScreen(),
+        supportedLocales: [
+          const Locale('en'),
+          const Locale('ru'),
+        ],
+        home: HomeScreen(),
       ),
     );
   }
