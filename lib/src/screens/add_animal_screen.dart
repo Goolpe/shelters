@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
 
 
-class AddPetScreen extends StatelessWidget {
+class AddAnimalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {  
@@ -37,7 +37,7 @@ class AddPetScreen extends StatelessWidget {
   //   });
   // }
     
-    return Consumer<AddPetProvider>(
+    return Consumer<AddAnimalProvider>(
       builder: (context, addPetState, snapshot) {
         return SheltersScaffold(
           appBar: SheltersAppBar(
@@ -85,7 +85,7 @@ class AddPetScreen extends StatelessWidget {
                           label: 'Name',
                           controller: addPetState.nameController,
                           onChanged: (String value){
-                            Provider.of<AddPetProvider>(context, listen: false).changeName(value);
+                            Provider.of<AddAnimalProvider>(context, listen: false).changeName(value);
                           },
                         )
                       ),
@@ -98,7 +98,7 @@ class AddPetScreen extends StatelessWidget {
                             return CupertinoActionSheetAction(
                               child: Text(FlutterI18n.translate(context, value)),
                               onPressed: () =>
-                                Provider.of<AddPetProvider>(context, listen: false).changeGender(value),
+                                Provider.of<AddAnimalProvider>(context, listen: false).changeGender(value),
                             );
                           }).toList()
                         )
@@ -116,11 +116,24 @@ class AddPetScreen extends StatelessWidget {
                             return CupertinoActionSheetAction(
                               child: Text(FlutterI18n.translate(context, value)),
                               onPressed: () =>
-                                Provider.of<AddPetProvider>(context, listen: false).changeGenus(value),
+                                Provider.of<AddAnimalProvider>(context, listen: false).changeGenus(value),
                             );
                           }).toList()
                         )
                       ),
+                      Expanded(
+                        child: SheltersTextfield(
+                          label: 'Color',
+                          controller: addPetState.colorController,
+                          onChanged: (String value){
+                            Provider.of<AddAnimalProvider>(context, listen: false).changeColor(value);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
                       Expanded(
                         child: SheltersBottomSheet(
                           active: addPetState.birthday != null,
@@ -129,11 +142,38 @@ class AddPetScreen extends StatelessWidget {
                           datePicker: SheltersDatePicker(
                             initialDateTime: addPetState.birthday ?? DateTime.now(),
                             onDone: () => 
-                              Provider.of<AddPetProvider>(context, listen: false).changeDate(),
+                              Provider.of<AddAnimalProvider>(context, listen: false).changeDate(),
                             onDateTimeChanged: (DateTime value) =>
-                              Provider.of<AddPetProvider>(context, listen: false).changeTempDate(value),
+                              Provider.of<AddAnimalProvider>(context, listen: false).changeTempDate(value),
                           ),
                         )
+                      ),
+                      Expanded(
+                        child: SheltersTextfield(
+                          maxLength: 3,
+                          label: 'Height, cm',
+                          keyboardType: TextInputType.number,
+                          controller: addPetState.heightController,
+                          inputFormatters: [
+                            WhitelistingTextInputFormatter(RegExp('^[1-9][0-9]*\$'))
+                          ],
+                          onChanged: (String value){
+                            Provider.of<AddAnimalProvider>(context, listen: false).changeHeight(value);
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: SheltersTextfield(
+                          label: 'Weight, kg',
+                          keyboardType: TextInputType.number,
+                          controller: addPetState.weightController,
+                          inputFormatters: [
+                            WhitelistingTextInputFormatter(RegExp('^[1-9][0-9]*\$'))
+                          ],
+                          onChanged: (String value){
+                            Provider.of<AddAnimalProvider>(context, listen: false).changeWeight(value);
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -142,7 +182,7 @@ class AddPetScreen extends StatelessWidget {
                     controller: addPetState.breedController,
                     maxLength: 50,
                     onChanged: (String value){
-                      Provider.of<AddPetProvider>(context, listen: false).changeBreed(value);
+                      Provider.of<AddAnimalProvider>(context, listen: false).changeBreed(value);
                     },
                   ),
                   SheltersTextfield(
@@ -152,13 +192,13 @@ class AddPetScreen extends StatelessWidget {
                     maxLines: 5,
                     maxLength: 500,
                     onChanged: (String value){
-                      Provider.of<AddPetProvider>(context, listen: false).changeComment(value);
+                      Provider.of<AddAnimalProvider>(context, listen: false).changeComment(value);
                     },
                   ),
                   SheltersButton(
                     title: 'Done',
                     onPressed: (){
-                      Provider.of<AddPetProvider>(context, listen: false).createPet();
+                      Provider.of<AddAnimalProvider>(context, listen: false).createPet();
                     }
                   )
                 ],

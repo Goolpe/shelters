@@ -4,8 +4,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
 
-class PetsScreen extends StatelessWidget {
-  PetsScreen({
+class AnimalsScreen extends StatelessWidget {
+  AnimalsScreen({
     @required this.title
   }) : assert(title != null);
 
@@ -15,29 +15,38 @@ class PetsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SheltersScaffold(
-      appBar: SheltersAppBar(
-        leadingIcon: SheltersIcon.menu,
-        title: title ?? '',
-        actions: [
-          IconButton(
-            icon: Icon(MdiIcons.tune),
-            onPressed: () => 
-            Provider.of<FilterProvider>(context, listen: false).openFilter(),
+    return Consumer<AnimalsProvider>(
+      builder: (context, animalsState, snapshot) {
+        return SheltersScaffold(
+          appBar: SheltersAppBar(
+            leadingIcon: SheltersIcon.menu,
+            title: title ?? '',
+            actions: [
+              IconButton(
+                icon: Icon(MdiIcons.tune),
+                onPressed: () => 
+                Provider.of<FilterProvider>(context, listen: false).openFilter(),
+              ),
+            ]
           ),
-        ]
-      ),
-      bodyList: [
-        _shortPets(),
-        Column(
-          children: List.generate(3, (index){
-            return AnimalMiniCard(
-              tag: 'tag_${title}_$index'
-            );
-          })
-        )
-      ],
-      panel: FilterScreen()
+          bodyList: [
+            _shortPets(),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+              itemCount: animalsState.dataList.length,
+              itemBuilder: (context, index) {
+                return AnimalMiniCard(
+                  tag: 'tag_${title}_$index',
+                  data: animalsState.dataList[index]
+                );
+              },
+            )
+          ],
+          panel: FilterScreen()
+        );
+      }
     );
   }
 

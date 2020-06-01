@@ -1,0 +1,71 @@
+[
+    {
+      "id": 1,
+      "userID": 0,
+      "name": "Пушок",
+      "gender": "Male",
+      "genus": "Cats",
+      "age": "2019-06-01T10:30:26.808838",
+      "breed": "Сфинкс",
+      "color": "Белый",
+      "height": 90,
+      "weight": 4,
+      "comment": "",
+      "images": [
+        "https://petsi.net/images/catbreed/donskoy-sfinks.jpg",
+        "https://opt-1031816.ssl.1c-bitrix-cdn.ru/upload/resize_cache/iblock/bd5/750_400_1/donskoy_sfinks.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "userID": 0,
+      "name": "Клеопатра",
+      "gender": "Female",
+      "genus": "Cats",
+      "age": "2011-02-01T10:30:26.808838",
+      "breed": "Мейн-кун",
+      "color": "Разноцветный",
+      "height": 100,
+      "weight": 4,
+      "comment": "",
+      "images": [
+        "https://lapkins.ru/upload/iblock/dd6/dd6243954bee36fe1667bb49b3f6848f.jpg",
+        "https://www.cats-british.ru/files/1_0.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "userID": 0,
+      "name": "Соля",
+      "gender": "Female",
+      "genus": "Dogs",
+      "age": "2015-06-01T10:30:26.808838",
+      "breed": "Немецкая овчарка",
+      "color": "Черно-рыжая",
+      "height": 63,
+      "weight": 27,
+      "comment": "",
+      "images": [
+        "https://petsi.net/images/dogbreed/10.jpg",
+        "https://img.aboutanimal.ru/images/2017/12/10/nemeckaya-ovcharka-1512903158.jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "userID": 0,
+      "name": "Кейт",
+      "gender": "Female",
+      "genus": "Dogs",
+      "age": "2014-06-01T10:30:26.808838",
+      "breed": "Сиба-ину",
+      "color": "Рыжая",
+      "height": 37,
+      "weight": 7,
+      "comment": "",
+      "images": [
+        "https://lapkins.ru/upload/iblock/11e/11ea73b02406f137742271272c2812e5.jpg",
+        "https://bigpicture.ru/wp-content/uploads/2013/06/siba-inu-1024x724-1.jpg",
+        "https://i.pinimg.com/originals/80/c0/36/80c03690f37bbd515361a2bf7f42525e.jpg"
+      ]
+    }
+  ]

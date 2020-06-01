@@ -9,9 +9,11 @@ import 'package:share/share.dart';
 class SheltersAnimalImage extends StatelessWidget {
   SheltersAnimalImage({
     @required this.tag,
+    @required this.images
   }) : assert(tag != null);
 
   final String tag;
+  final List<dynamic> images;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +31,13 @@ class SheltersAnimalImage extends StatelessWidget {
                   child: ExtendedImageGesturePageView.builder(
                     itemBuilder: (BuildContext context, int index) {
                       return ExtendedImage.network(
-                        carouselState.images[index],
+                        images[index],
                         fit: BoxFit.cover,
                         enableSlideOutPage: true,
                         mode: ExtendedImageMode.gesture,
                       );
                     },
-                    itemCount: carouselState.images.length,
+                    itemCount: images.length,
                     onPageChanged: (int index) {
                       Provider.of<CarouselProvider>(context, listen: false).changeIndex(index);
                     },

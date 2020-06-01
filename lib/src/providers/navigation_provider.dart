@@ -12,7 +12,7 @@ class NavigationProvider extends ChangeNotifier{
   int _prevId = 6;
   int get prevId => _prevId;
 
-  Widget _activeWidget = PetsScreen(title: 'Pets');
+  Widget _activeWidget = AnimalsScreen(title: 'Pets');
   Widget get activeWidget => _activeWidget;
 
   Widget _prevWidget = SettingsScreen();

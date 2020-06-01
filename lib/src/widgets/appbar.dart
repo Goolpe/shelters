@@ -25,7 +25,7 @@ class SheltersAppBar extends StatelessWidget {
       leading: automaticallyImplyLeading
       ? IconButton(
         icon: Icon(leadingIcon ?? MdiIcons.chevronLeft),
-        onPressed: () => Get.back(closeOverlays: true),
+        onPressed: () => Get.back(),
       ) : SizedBox(),
       actions: actions,
     );

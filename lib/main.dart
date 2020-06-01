@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,6 @@ Future<void> main() async{
   final SharedPreferences _shPreferences = await SharedPreferences.getInstance();
   final String _locale = _shPreferences.getString('locale') ?? 'en';
 
-  
   final FlutterI18nDelegate flutterI18nDelegate = FlutterI18nDelegate(
     translationLoader: FileTranslationLoader(
       useCountryCode: false,
@@ -25,11 +25,9 @@ Future<void> main() async{
     )
   );
   
-  // //set time localization
+  // // //set time localization
   timeago.setLocaleMessages(_locale, selectLocale(_locale));
 
-  await flutterI18nDelegate.load(null);
-  
   runApp(MyApp(
     flutterI18nDelegate: flutterI18nDelegate,
     locale: _locale
@@ -47,6 +45,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final botToastBuilder = BotToastInit();
+
     TextTheme _textTheme = GoogleFonts.playTextTheme(
       Theme.of(context).textTheme
     );
@@ -63,8 +64,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<NavigationProvider>(
           create: (BuildContext context) => NavigationProvider(),
         ),
-        ChangeNotifierProvider<AddPetProvider>(
-          create: (BuildContext context) => AddPetProvider()..init(),
+        ChangeNotifierProvider<AnimalsProvider>(
+          create: (BuildContext context) => AnimalsProvider()..init(),
+        ),
+        ChangeNotifierProvider<AddAnimalProvider>(
+          create: (BuildContext context) => AddAnimalProvider()..init(),
         ),
         ChangeNotifierProvider<SettingsProvider>(
           create: (BuildContext context) => SettingsProvider(),
@@ -79,6 +83,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Shelters',
+        navigatorObservers: [BotToastNavigatorObserver()],
         theme: ThemeData(
           primaryColor: const Color(0xff416c6d),
           accentColor: const Color(0xff306060),
@@ -91,10 +96,12 @@ class MyApp extends StatelessWidget {
           )
         ),
         builder: (BuildContext context, Widget child) {
-          return ScrollConfiguration(
+          child = ScrollConfiguration(
             behavior: PortfolioOverScrollBehavior(),
-            child: child
+            child: child,
           );
+          child = botToastBuilder(context,child);
+          return child;
         },
         locale: Locale(locale),
         localizationsDelegates: [
@@ -104,8 +111,8 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: [
-          const Locale('en'),
-          const Locale('ru'),
+          const Locale('en', 'US'),
+          const Locale('ru', 'RU'),
         ],
         home: HomeScreen(),
       ),

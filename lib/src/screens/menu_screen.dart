@@ -41,20 +41,20 @@ class MenuScreen extends StatelessWidget {
                                 children: [
                                   SheltersMenuItem(
                                     id: 1,
-                                    widget: PetsScreen(title: 'Pets'),
+                                    widget: AnimalsScreen(title: 'Pets'),
                                     icon: MdiIcons.paw,
                                     title: 'Pets',
                                   ),
                                   SheltersMenuItem(
                                     id: 2,
-                                    widget: AddPetScreen(),
+                                    widget: AddAnimalScreen(),
                                     icon: MdiIcons.plus,
                                     title: 'Your pets',
                                     authorized: authState.isAuthorized
                                   ),
                                   SheltersMenuItem(
                                     id: 3,
-                                    widget: PetsScreen(title: 'Favorites'),
+                                    widget: AnimalsScreen(title: 'Favorites'),
                                     icon: MdiIcons.heart,
                                     title: 'Favorites',
                                     authorized: authState.isAuthorized

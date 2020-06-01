@@ -8,6 +8,7 @@ class HomeScreen extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Theme.of(context).primaryColor,
         body: Stack(
           children: <Widget>[

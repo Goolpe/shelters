@@ -1,15 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:shelters/index.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class AnimalMiniCard extends StatelessWidget {
   const AnimalMiniCard({
-    @required this.tag
-  });
+    this.tag,
+    @required this.data,
+    this.showImage = true,
+    this.imageIndex
+  }) : assert(showImage != null && !showImage || tag != null);
 
   final String tag;
+  final Animal data;
+  final bool showImage;
+  final int imageIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +28,6 @@ class AnimalMiniCard extends StatelessWidget {
           alignment: Alignment.centerLeft,
           children: [
             Container(
-              height: 170,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
@@ -34,85 +41,121 @@ class AnimalMiniCard extends StatelessWidget {
                 ]
               ),
               child: Container(
+                padding: EdgeInsets.all(16),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(16)),
                   color: Colors.white,
                 ),
-                child: Row(
+                child: Column(
                   children: [
-                    const Expanded(
-                      flex: 1,
-                      child: SizedBox()
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Petrushka', style: Theme.of(context).textTheme.headline5,),
-                                const Icon(MdiIcons.genderMale, color: Color(0xffb0b0b0)),
-                              ],
+                    if(!showImage)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(data.images.length, (index){
+                          return Padding(
+                            padding: const EdgeInsets.all(2),
+                            child: CircleAvatar(
+                              radius: 4,
+                              backgroundColor: index == imageIndex 
+                              ? Colors.blue : Colors.grey[300],
                             ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 8),
-                              child: Text('Abyssinian cat'),
-                            ),
-                            Text('2 years old', style: TextStyle(color: Colors.grey[500]),),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: Row(
+                          );
+                        }),
+                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if(showImage)
+                          const Expanded(
+                            flex: 1,
+                            child: SizedBox()
+                          ),
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
                                 children: [
-                                  const Icon(MdiIcons.mapMarker, size: 18),
-                                  const SizedBox(width: 5),
-                                  Text('Distance: 3.6 km', style: TextStyle(fontSize: 16, color: Colors.grey[700]),),
-                                ],
-                              )
-                            )
-                          ],
+                                  Icon(data.gender == 'Male' 
+                                    ? MdiIcons.genderMale 
+                                    : MdiIcons.genderFemale, 
+                                    color: Color(0xffb0b0b0)
+                                  ),
+                                  _cardItem(data.name ?? '', style: TextStyle(fontSize: 24)),
+                                  ],
+                              ),
+                              _cardItem(timeago.format(data.age)),
+                              _cardItem(data.breed ?? ''),
+                            ],
+                          )
                         ),
-                      )
-                    )
+                        if(!showImage)
+                          Expanded(
+                            flex: 1,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if(data.height != null)
+                                  _cardItem(FlutterI18n.translate(context, 'Height, cm') + ': ${data.height}'),
+                                if(data.weight != null)
+                                  _cardItem(FlutterI18n.translate(context, 'Weight, kg') + ': ${data.weight}'),
+                              ],
+                            )
+                          ),
+                      ],
+                    ),
                   ],
                 )
               ),
             ),
-            Positioned(
-              child: Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width / 2 - 20,
-                child: Hero(
-                  tag: tag,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(16)),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 3,
-                          blurRadius: 12,
-                          offset: const Offset(10, 0),
-                        ),
-                      ],
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: CachedNetworkImageProvider('https://news.cgtn.com/news/77416a4e3145544d326b544d354d444d3355444f31457a6333566d54/img/37d598e5a04344da81c76621ba273915/37d598e5a04344da81c76621ba273915.jpg')
-                      )
+            if(showImage)
+              Positioned(
+                child: Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width / 2 - 20,
+                  child: Hero(
+                    tag: tag,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(Radius.circular(16)),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.2),
+                            spreadRadius: 3,
+                            blurRadius: 12,
+                            offset: const Offset(10, 0),
+                          ),
+                        ],
+                        image: data.images != null && data.images.isNotEmpty
+                        ? DecorationImage(
+                          fit: BoxFit.cover,
+                          image: CachedNetworkImageProvider(data.images[0])
+                        )
+                        : SizedBox()
+                      ),
                     ),
-                  ),
-                )
-              ),
-            )
+                  )
+                ),
+              )
           ],
         ),
-        onTap: () => Get.to<Widget>(AnimalScreen(tag: tag)),
+        onTap: showImage ? () => Get.to<Widget>(
+          AnimalScreen(
+            tag: tag,
+            data: data,
+          )
+        ) : null,
       ),
+    );
+  }
+
+  Widget _cardItem(String label, {TextStyle style}){
+    return Padding(
+      padding: EdgeInsets.all(8),
+      child: Text(label, style: style),
     );
   }
 }

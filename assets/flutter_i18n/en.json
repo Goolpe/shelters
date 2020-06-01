@@ -7,6 +7,7 @@
     "Breed": "Breed",
     "Cancel": "Cancel",
     "Cats": "Cats",
+    "Color": "Color",
     "Comments & Suggestions": "Comments & Suggestions",
     "Comment": "Comment",
     "Create": "Create",
@@ -19,6 +20,7 @@
     "Filters": "Filters",
     "Gender": "Gender",
     "Genus": "Genus",
+    "Height, cm": "Height, cm",
     "Language": "Language",
     "Log out": "Log out",
     "Male": "Male",
@@ -27,9 +29,11 @@
     "Notifications": "Notifications",
     "Other": "Other",
     "Pets": "Pets",
+    "Please, fill in the fields": "Please, fill in the fields",
     "Profile": "Profile",
     "Review": "Review",
     "Send": "Send",
     "Settings": "Settings",
+    "Weight, kg": "Weight, kg",
     "Your pets": "Your pets"
 }

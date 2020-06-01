@@ -6,10 +6,12 @@ import 'package:shelters/index.dart';
 
 class AnimalScreen extends StatefulWidget {
   AnimalScreen({
-    @required this.tag
-  });
+    @required this.tag,
+    @required this.data
+  }) : assert(data != null);
 
   final String tag;
+  final Animal data;
 
   @override
   _AnimalScreenState createState() => _AnimalScreenState();
@@ -38,6 +40,7 @@ class _AnimalScreenState extends State<AnimalScreen> {
                 children: [
                   SheltersAnimalImage(
                     tag: widget.tag,
+                    images: widget.data.images
                   ),
                   Positioned(
                     bottom: 0,
@@ -45,76 +48,81 @@ class _AnimalScreenState extends State<AnimalScreen> {
                     right: 16,
                     child: ShowUp(
                       delay: 400,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(32)
-                          ),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.2),
-                              spreadRadius: 1,
-                              blurRadius: 30,
-                              offset: Offset(0, 25),
-                            ),
-                          ]
-                        ),
-                        height: 140,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 8,
-                                margin: EdgeInsets.only(bottom: 6),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: List.generate(carouselState.images.length, (index){
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 2),
-                                      child: CircleAvatar(
-                                        radius: 4,
-                                        backgroundColor: index == carouselState.index 
-                                        ? Colors.blue : Colors.grey[300],
-                                      ),
-                                    );
-                                  }),
-                                )
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Petrushka', style: Theme.of(context).textTheme.headline5,),
-                                  Icon(MdiIcons.genderMale, color: Color(0xffb0b0b0)),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 8),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Abyssinian cat'),
-                                    Text('2 years old', style: TextStyle(color: Colors.grey[500]),),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Row(
-                                  children: [
-                                    Icon(MdiIcons.mapMarker, size: 18),
-                                    SizedBox(width: 5),
-                                    Text('Distance: 3.6 km', style: TextStyle(fontSize: 16, color: Colors.grey[700]),),
-                                  ],
-                                )
-                              )
-                            ],
-                          ),
-                        ),
+                      child: AnimalMiniCard(
+                        data: widget.data,
+                        showImage: false,
+                        imageIndex: carouselState.index,
                       ),
+                      // Container(
+                      //   decoration: BoxDecoration(
+                      //     borderRadius: const BorderRadius.all(
+                      //       Radius.circular(32)
+                      //     ),
+                      //     color: Colors.white,
+                      //     boxShadow: [
+                      //       BoxShadow(
+                      //         color: Colors.grey.withOpacity(0.2),
+                      //         spreadRadius: 1,
+                      //         blurRadius: 30,
+                      //         offset: Offset(0, 25),
+                      //       ),
+                      //     ]
+                      //   ),
+                      //   height: 140,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.symmetric(horizontal: 24),
+                      //     child: Column(
+                      //       mainAxisAlignment: MainAxisAlignment.center,
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         Container(
+                      //           height: 8,
+                      //           margin: EdgeInsets.only(bottom: 6),
+                      //           child: Row(
+                      //             mainAxisAlignment: MainAxisAlignment.center,
+                      //             children: List.generate(carouselState.images.length, (index){
+                      //               return Padding(
+                      //                 padding: const EdgeInsets.symmetric(horizontal: 2),
+                      //                 child: CircleAvatar(
+                      //                   radius: 4,
+                      //                   backgroundColor: index == carouselState.index 
+                      //                   ? Colors.blue : Colors.grey[300],
+                      //                 ),
+                      //               );
+                      //             }),
+                      //           )
+                      //         ),
+                      //         Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text('Petrushka', style: Theme.of(context).textTheme.headline5,),
+                      //             Icon(MdiIcons.genderMale, color: Color(0xffb0b0b0)),
+                      //           ],
+                      //         ),
+                      //         Padding(
+                      //           padding: const EdgeInsets.symmetric(vertical: 8),
+                      //           child: Row(
+                      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //             children: [
+                      //               Text('Abyssinian cat'),
+                      //               Text('2 years old', style: TextStyle(color: Colors.grey[500]),),
+                      //             ],
+                      //           ),
+                      //         ),
+                      //         Padding(
+                      //           padding: const EdgeInsets.only(top: 8),
+                      //           child: Row(
+                      //             children: [
+                      //               Icon(MdiIcons.mapMarker, size: 18),
+                      //               SizedBox(width: 5),
+                      //               Text('Distance: 3.6 km', style: TextStyle(fontSize: 16, color: Colors.grey[700]),),
+                      //             ],
+                      //           )
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                     )
                   )
                 ],
