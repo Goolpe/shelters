@@ -41,7 +41,7 @@ class MenuScreen extends StatelessWidget {
                                 children: [
                                   SheltersMenuItem(
                                     id: 1,
-                                    widget: AnimalsScreen(title: 'Pets'),
+                                    widget: PetsScreen(),
                                     icon: MdiIcons.paw,
                                     title: 'Pets',
                                   ),
@@ -49,14 +49,14 @@ class MenuScreen extends StatelessWidget {
                                     id: 2,
                                     widget: AddAnimalScreen(),
                                     icon: MdiIcons.plus,
-                                    title: 'Your pets',
+                                    title: 'Add pet',
                                     authorized: authState.isAuthorized
                                   ),
                                   SheltersMenuItem(
                                     id: 3,
-                                    widget: AnimalsScreen(title: 'Favorites'),
-                                    icon: MdiIcons.heart,
-                                    title: 'Favorites',
+                                    widget: ArticlesScreen(),
+                                    icon: MdiIcons.textBoxMultipleOutline,
+                                    title: 'Articles',
                                     authorized: authState.isAuthorized
                                   ),
                                   SheltersMenuItem(

@@ -37,7 +37,7 @@ class SheltersButton extends StatelessWidget {
             )
           ),
           child: child ?? Text(FlutterI18n.translate(context, title ?? ''), 
-            style: TextStyle(color: Colors.white)
+            style: TextStyle(color: Colors.white, fontSize: 18)
           ),
           onPressed: onPressed ?? (){},
         ),
@@ -49,11 +49,13 @@ class SheltersButton extends StatelessWidget {
 class SheltersOutlineButton extends StatelessWidget {
   SheltersOutlineButton({
     this.height,
-    this.icon
+    this.icon,
+    this.title
   });
 
   final double height;
   final IconData icon;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,8 @@ class SheltersOutlineButton extends StatelessWidget {
             )
           ),
           color: Theme.of(context).accentColor,
-          child: icon != null ? Icon(icon) : SizedBox(),
+          textColor: Theme.of(context).accentColor,
+          child: icon != null ? Icon(icon) : Text(title, style: TextStyle(fontSize: 24)),
           onPressed: (){},
         ),
       )

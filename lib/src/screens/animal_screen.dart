@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class AnimalScreen extends StatefulWidget {
+class AnimalScreen extends StatelessWidget {
   AnimalScreen({
     @required this.tag,
     @required this.data
@@ -15,21 +15,10 @@ class AnimalScreen extends StatefulWidget {
   final Animal data;
 
   @override
-  _AnimalScreenState createState() => _AnimalScreenState();
-}
-
-class _AnimalScreenState extends State<AnimalScreen> {
-
-  @override
-  void initState() {
+  Widget build(BuildContext context) {
     Future.microtask((){
       Provider.of<CarouselProvider>(context, listen: false).changeIndex(0);
     });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
 
     return Scaffold(
       body: Consumer<CarouselProvider>(
@@ -41,8 +30,8 @@ class _AnimalScreenState extends State<AnimalScreen> {
               Stack(
                 children: [
                   SheltersAnimalImage(
-                    tag: widget.tag,
-                    images: widget.data.images
+                    tag: tag,
+                    images: data.images
                   ),
                   Positioned(
                     bottom: 24,
@@ -50,7 +39,7 @@ class _AnimalScreenState extends State<AnimalScreen> {
                     right: 16,
                     child: ShowUp(
                       delay: 300,
-                      child: Text(widget.data.name, 
+                      child: Text(data.name, 
                         style: TextStyle(
                           color: Colors.white, 
                           fontSize: 32
@@ -74,28 +63,28 @@ class _AnimalScreenState extends State<AnimalScreen> {
                           children: [
                             _sheltersChip(
                               avatar: MdiIcons.paw,
-                              label: widget.data.genus
+                              label: data.genus
                             ),
                             _sheltersChip(
-                              avatar: widget.data.gender == 'Female' 
+                              avatar: data.gender == 'Female' 
                               ? MdiIcons.genderFemale : MdiIcons.genderMale,
-                              label: widget.data.gender
+                              label: data.gender
                             ),
                             _sheltersChip(
                               avatar: MdiIcons.cakeVariant,
-                              label: timeago.format(widget.data.age)
+                              label: timeago.format(data.age)
                             ),
                             _sheltersChip(
                               avatar: MdiIcons.ruler,
-                              label: '${widget.data.height} cm'
+                              label: '${data.height} cm'
                             ),
                             _sheltersChip(
                               avatar: MdiIcons.weight,
-                              label: '${widget.data.weight} kg'
+                              label: '${data.weight} kg'
                             ),
                             _sheltersChip(
                               avatar: MdiIcons.tagHeart,
-                              label: widget.data.breed
+                              label: data.breed
                             ),
                           ],
                         )
@@ -118,12 +107,12 @@ class _AnimalScreenState extends State<AnimalScreen> {
                         onTap: () => Get.to(ProfileScreen())
                       ),
                     ),
-                    // if(widget.data.comment != null && widget.data.comment.isNotEmpty)
+                    if(data.comment != null && data.comment.isNotEmpty)
                       ShowUp(
                       delay: 600,
                       child: Padding(
                           padding: const EdgeInsets.all(8),
-                          child: Text('lol '*10),
+                          child: Text(data.comment),
                         ),
                       ),
                     ShowUp(
