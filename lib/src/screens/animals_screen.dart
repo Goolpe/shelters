@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
@@ -11,8 +10,6 @@ class AnimalsScreen extends StatelessWidget {
 
   final String title;
 
-  final List<String> _animals = ['All','Cats','Dogs','Birds'];
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AnimalsProvider>(
@@ -23,14 +20,18 @@ class AnimalsScreen extends StatelessWidget {
             title: title ?? '',
             actions: [
               IconButton(
+                icon: Icon(MdiIcons.map),
+                onPressed: () => 
+                Provider.of<AnimalsProvider>(context, listen: false).openPanel(),
+              ),
+              IconButton(
                 icon: Icon(MdiIcons.tune),
                 onPressed: () => 
-                Provider.of<FilterProvider>(context, listen: false).openFilter(),
+                Provider.of<AnimalsProvider>(context, listen: false).openPanel(),
               ),
             ]
           ),
           bodyList: [
-            _shortPets(),
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
@@ -47,34 +48,6 @@ class AnimalsScreen extends StatelessWidget {
           panel: FilterScreen()
         );
       }
-    );
-  }
-
-  Widget _shortPets(){
-    return Container(
-      height: 110,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: _animals.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              SheltersButton(
-                height: 70,
-                color: index != 0 ? Colors.white : null,
-                elevation: index == 0 ? 0 : 10,
-                child: Icon(SheltersIcon.fromString(_animals[index] ?? ''), 
-                  size: 40,
-                  color: index == 0 
-                  ? Colors.white 
-                  : Colors.black
-                )
-              ),
-              Text(FlutterI18n.translate(context, _animals[index]))
-            ],
-          );
-        },
-      ),
     );
   }
 }

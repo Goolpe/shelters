@@ -164,6 +164,7 @@ class AddAnimalScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: SheltersTextfield(
+                          maxLength: 2,
                           label: 'Weight, kg',
                           keyboardType: TextInputType.number,
                           controller: addPetState.weightController,

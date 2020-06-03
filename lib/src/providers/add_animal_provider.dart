@@ -132,6 +132,7 @@ class AddAnimalProvider with ChangeNotifier{
   void createPet(){
     if(
       _gender != 'Gender' &&
+      _color != null && 
       _color.trim().isNotEmpty && 
       _genus != 'Genus'
     ){

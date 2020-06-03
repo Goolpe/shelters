@@ -13,7 +13,8 @@ class SheltersMenuItem extends StatelessWidget {
     this.leading,
     this.authorized = true,
     this.textColor,
-    this.onTap
+    this.onTap,
+    this.contentPadding
   }) : assert(
     id != null && authorized != null,
     widget != null || onTap != null
@@ -28,6 +29,7 @@ class SheltersMenuItem extends StatelessWidget {
   final bool authorized;
   final Color textColor;
   final Function() onTap;
+  final EdgeInsets contentPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class SheltersMenuItem extends StatelessWidget {
           highlightColor: Colors.transparent,
           splashColor: Colors.transparent,
           child: ListTile(
+            contentPadding: contentPadding,
             title: Row(
               children: <Widget>[
                 Padding(
@@ -69,7 +72,7 @@ class SheltersMenuItem extends StatelessWidget {
           ),
           onTap: onTap ?? () =>
             !authorized 
-            ? Provider.of<LoginProvider>(context, listen: false).openLogin()
+            ? Provider.of<LoginProvider>(context, listen: false).open()
             : Provider.of<NavigationProvider>(context, listen: false).openScreen(id, widget)
         );
       }

@@ -1,0 +1,18 @@
+[
+    {
+      "id": 0,
+      "name": "Admin",
+      "login": "Admin",
+      "password": "12345",
+      "favorites": [0,1],
+      "images": null
+    },
+    {
+      "id": 1,
+      "name": "Nastya",
+      "login": "Nastya",
+      "password": "12345",
+      "favorites": null,
+      "images": null
+    }
+  ]

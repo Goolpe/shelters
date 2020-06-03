@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
                 actions: [
                   IconButton(
                     icon: Icon(MdiIcons.close),
-                    onPressed: () => Provider.of<LoginProvider>(context, listen: false).openLogin(),
+                    onPressed: () => Provider.of<LoginProvider>(context, listen: false).close(),
                   )
                 ]
               ),

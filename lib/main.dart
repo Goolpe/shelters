@@ -73,9 +73,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<SettingsProvider>(
           create: (BuildContext context) => SettingsProvider(),
         ),
-        ChangeNotifierProvider<FilterProvider>(
-          create: (BuildContext context) => FilterProvider(),
-        ),
         ChangeNotifierProvider<CarouselProvider>(
           create: (BuildContext context) => CarouselProvider(),
         ),

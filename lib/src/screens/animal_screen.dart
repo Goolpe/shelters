@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class AnimalScreen extends StatefulWidget {
   AnimalScreen({
@@ -34,6 +35,7 @@ class _AnimalScreenState extends State<AnimalScreen> {
       body: Consumer<CarouselProvider>(
         builder: (context, carouselState, snapshot) {
           return ListView(
+            physics: BouncingScrollPhysics(),
             padding: EdgeInsets.zero,
             children: [
               Stack(
@@ -43,120 +45,89 @@ class _AnimalScreenState extends State<AnimalScreen> {
                     images: widget.data.images
                   ),
                   Positioned(
-                    bottom: 0,
+                    bottom: 24,
                     left: 16,
                     right: 16,
                     child: ShowUp(
-                      delay: 400,
-                      child: AnimalMiniCard(
-                        data: widget.data,
-                        showImage: false,
-                        imageIndex: carouselState.index,
-                      ),
-                      // Container(
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: const BorderRadius.all(
-                      //       Radius.circular(32)
-                      //     ),
-                      //     color: Colors.white,
-                      //     boxShadow: [
-                      //       BoxShadow(
-                      //         color: Colors.grey.withOpacity(0.2),
-                      //         spreadRadius: 1,
-                      //         blurRadius: 30,
-                      //         offset: Offset(0, 25),
-                      //       ),
-                      //     ]
-                      //   ),
-                      //   height: 140,
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 24),
-                      //     child: Column(
-                      //       mainAxisAlignment: MainAxisAlignment.center,
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         Container(
-                      //           height: 8,
-                      //           margin: EdgeInsets.only(bottom: 6),
-                      //           child: Row(
-                      //             mainAxisAlignment: MainAxisAlignment.center,
-                      //             children: List.generate(carouselState.images.length, (index){
-                      //               return Padding(
-                      //                 padding: const EdgeInsets.symmetric(horizontal: 2),
-                      //                 child: CircleAvatar(
-                      //                   radius: 4,
-                      //                   backgroundColor: index == carouselState.index 
-                      //                   ? Colors.blue : Colors.grey[300],
-                      //                 ),
-                      //               );
-                      //             }),
-                      //           )
-                      //         ),
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //           children: [
-                      //             Text('Petrushka', style: Theme.of(context).textTheme.headline5,),
-                      //             Icon(MdiIcons.genderMale, color: Color(0xffb0b0b0)),
-                      //           ],
-                      //         ),
-                      //         Padding(
-                      //           padding: const EdgeInsets.symmetric(vertical: 8),
-                      //           child: Row(
-                      //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //             children: [
-                      //               Text('Abyssinian cat'),
-                      //               Text('2 years old', style: TextStyle(color: Colors.grey[500]),),
-                      //             ],
-                      //           ),
-                      //         ),
-                      //         Padding(
-                      //           padding: const EdgeInsets.only(top: 8),
-                      //           child: Row(
-                      //             children: [
-                      //               Icon(MdiIcons.mapMarker, size: 18),
-                      //               SizedBox(width: 5),
-                      //               Text('Distance: 3.6 km', style: TextStyle(fontSize: 16, color: Colors.grey[700]),),
-                      //             ],
-                      //           )
-                      //         )
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                    )
-                  )
+                      delay: 300,
+                      child: Text(widget.data.name, 
+                        style: TextStyle(
+                          color: Colors.white, 
+                          fontSize: 32
+                        )
+                      )
+                    ),
+                  ),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    ShowUp(
-                      delay: 500,
-                      child: Column(
-                        children: [
-                          SheltersMenuItem(
-                            id: 0,
-                            leading: CircleAvatar(
-                              radius: 18,
-                              backgroundColor: Theme.of(context).accentColor,
-                              child: Icon(MdiIcons.camera, size: 18, color: Colors.white)
+                     ShowUp(
+                      delay: 400,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Wrap(
+                          spacing: 10.0,
+                          children: [
+                            _sheltersChip(
+                              avatar: MdiIcons.paw,
+                              label: widget.data.genus
                             ),
-                            textColor: Colors.black,
-                            icon: MdiIcons.faceProfile,
-                            title: 'Arthur Khabirov',
-                            subtitle: 'active status',
-                            onTap: () => Get.to(ProfileScreen())
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-                            child: Text('Hello my name is Kira, London is the Capital of Great Britain'),
-                          ),
-                        ],
+                            _sheltersChip(
+                              avatar: widget.data.gender == 'Female' 
+                              ? MdiIcons.genderFemale : MdiIcons.genderMale,
+                              label: widget.data.gender
+                            ),
+                            _sheltersChip(
+                              avatar: MdiIcons.cakeVariant,
+                              label: timeago.format(widget.data.age)
+                            ),
+                            _sheltersChip(
+                              avatar: MdiIcons.ruler,
+                              label: '${widget.data.height} cm'
+                            ),
+                            _sheltersChip(
+                              avatar: MdiIcons.weight,
+                              label: '${widget.data.weight} kg'
+                            ),
+                            _sheltersChip(
+                              avatar: MdiIcons.tagHeart,
+                              label: widget.data.breed
+                            ),
+                          ],
+                        )
                       )
                     ),
                     ShowUp(
-                      delay: 700,
+                      delay: 500,
+                      child: SheltersMenuItem(
+                        id: 0,
+                        contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                        leading: CircleAvatar(
+                          radius: 18,
+                          backgroundColor: Theme.of(context).accentColor,
+                          child: Icon(MdiIcons.camera, size: 18, color: Colors.white)
+                        ),
+                        textColor: Colors.black,
+                        icon: MdiIcons.faceProfile,
+                        title: 'Arthur Khabirov',
+                        subtitle: 'owner',
+                        onTap: () => Get.to(ProfileScreen())
+                      ),
+                    ),
+                    // if(widget.data.comment != null && widget.data.comment.isNotEmpty)
+                      ShowUp(
+                      delay: 600,
+                      child: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text('lol '*10),
+                        ),
+                      ),
+                    ShowUp(
+                      delay: 600,
                       child: Container(
                         decoration: BoxDecoration(
                           color: Color(0xfff6f6f6),
@@ -186,5 +157,18 @@ class _AnimalScreenState extends State<AnimalScreen> {
         }
       )
     );
+  }
+
+  Widget _sheltersChip({
+    IconData avatar,
+    String label
+  }){
+      return label == null || label.isEmpty
+      ? SizedBox()
+      : Chip(
+        labelPadding: EdgeInsets.all(2),
+        avatar: Icon(avatar, color: Colors.grey[800],),
+        label: Text(label)
+      );
   }
 }
