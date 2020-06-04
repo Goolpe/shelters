@@ -63,7 +63,7 @@ class AnimalScreen extends StatelessWidget {
                           children: [
                             _sheltersChip(
                               avatar: MdiIcons.paw,
-                              label: data.genus
+                              label: data.genus,
                             ),
                             _sheltersChip(
                               avatar: data.gender == 'Female' 
@@ -100,7 +100,7 @@ class AnimalScreen extends StatelessWidget {
                           backgroundColor: Theme.of(context).accentColor,
                           child: Icon(MdiIcons.camera, size: 18, color: Colors.white)
                         ),
-                        textColor: Colors.black,
+                        textColor: Theme.of(context).textTheme.button.color,
                         icon: MdiIcons.faceProfile,
                         title: 'Arthur Khabirov',
                         subtitle: 'owner',
@@ -117,25 +117,17 @@ class AnimalScreen extends StatelessWidget {
                       ),
                     ShowUp(
                       delay: 600,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xfff6f6f6),
-                          borderRadius: BorderRadius.vertical(
-                            top: Radius.circular(32)
-                          )
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: SheltersButton(
-                                title: 'Pets',
-                              ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SheltersButton(
+                              title: 'Pets',
                             ),
-                            SheltersOutlineButton(
-                              icon: MdiIcons.heartOutline,
-                            ),
-                          ],
-                        )
+                          ),
+                          SheltersOutlineButton(
+                            icon: MdiIcons.heartOutline,
+                          ),
+                        ],
                       )
                     )
                   ],
@@ -149,15 +141,21 @@ class AnimalScreen extends StatelessWidget {
   }
 
   Widget _sheltersChip({
-    IconData avatar,
-    String label
-  }){
+    @required IconData avatar,
+    @required String label
+  })
+  {
       return label == null || label.isEmpty
       ? SizedBox()
-      : Chip(
-        labelPadding: EdgeInsets.all(2),
-        avatar: Icon(avatar, color: Colors.grey[800],),
-        label: Text(label)
+      : Builder(
+        builder: (context) {
+          return Chip(
+            backgroundColor: Theme.of(context).backgroundColor,
+            labelPadding: EdgeInsets.all(2),
+            avatar: Icon(avatar),
+            label: Text(label ?? '')
+          );
+        }
       );
   }
 }

@@ -30,7 +30,10 @@ class SheltersTextfield extends StatelessWidget {
         onChanged: onChanged,
         maxLength: maxLength ?? 30,
         maxLines: maxLines ?? 1,
-        buildCounter: (BuildContext context, { int currentLength, int maxLength, bool isFocused }) => null,
+        buildCounter: (
+          BuildContext context, 
+          { int currentLength, int maxLength, bool isFocused }
+        ) => null,
         decoration: InputDecoration(
           border: const OutlineInputBorder(
             borderSide: BorderSide.none,
@@ -40,8 +43,8 @@ class SheltersTextfield extends StatelessWidget {
           ),
           alignLabelWithHint: maxLines == null ? false : maxLines > 1,
           labelText: FlutterI18n.translate(context, label ?? ''),
-          labelStyle: TextStyle(fontSize: 18),
-          fillColor: Colors.white,
+          labelStyle: TextStyle(fontSize: 18, color: Theme.of(context).textTheme.caption.color),
+          fillColor: Theme.of(context).cardColor,
           filled: true,
         ),
         style: TextStyle(fontSize: 18),

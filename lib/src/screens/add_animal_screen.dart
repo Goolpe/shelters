@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shelters/index.dart';
 
@@ -11,31 +12,6 @@ class AddAnimalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {  
-  //   Future<void> loadAssets() async {
-  //   setState(() {
-  //     images = List<Asset>();
-  //   });
-
-  //   List<Asset> resultList;
-
-  //   try {
-  //     resultList = await MultiImagePicker.pickImages(
-  //       maxImages: 5,
-  //     );
-  //   } on Exception catch (e) {
-  //     print(e);
-  //   }
-
-  //   // If the widget was removed from the tree while the asynchronous platform
-  //   // message was in flight, we want to discard the reply rather than calling
-  //   // setState to update our non-existent appearance.
-  //   if (!mounted) return;
-
-  //   setState(() {
-  //     images = resultList;
-  //     // if (error == null) _error = 'No Error Dectected';
-  //   });
-  // }
     
     return Consumer<AddAnimalProvider>(
       builder: (context, addPetState, snapshot) {
@@ -47,27 +23,57 @@ class AddAnimalScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 8),
           bodyList: [
             Container(
-              height: 100,
+              height: 120,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 4,
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    child: Container(
-                      margin: EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(8)
-                      ),
-                      width: 92,
-                      child: Icon(
-                        MdiIcons.plus,
-                        color: Colors.grey,
-                        size: 30,
-                      ),
+                    child: Stack(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.all(8),
+                          child: Container(
+                            height: 120,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: BorderRadius.circular(8)
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: addPetState.images.length > index 
+                              ? AssetThumb(
+                                asset: addPetState.images[index],
+                                width: 100,
+                                height: 90,
+                              )
+                              : Icon(
+                                MdiIcons.plus,
+                                color: Colors.grey,
+                                size: 30,
+                              )
+                            ),
+                          ),
+                        ),
+                        if(addPetState.images.length > index)
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            child: CircleAvatar(
+                              radius: 16,
+                              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                              child: Icon(MdiIcons.close, color: Colors.red),
+                            ),
+                            onTap: () =>
+                              Provider.of<AddAnimalProvider>(context, listen: false).removeImage(addPetState.images[index]),
+                          ),
+                        )
+                      ]
                     ),
-                    // onTap: loadAssets,
+                    onTap: () => Provider.of<AddAnimalProvider>(context, listen: false).chooseImage(context),
                   );
                 },
               ),

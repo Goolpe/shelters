@@ -47,13 +47,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final botToastBuilder = BotToastInit();
-
     TextTheme _textTheme = GoogleFonts.playTextTheme(
       Theme.of(context).textTheme
     );
-
+    
     return MultiProvider(
       providers: <ChangeNotifierProvider<dynamic>>[
+        ChangeNotifierProvider<ThemeProvider>(
+          create: (BuildContext context) => ThemeProvider()..init(context),
+        ),
         ChangeNotifierProvider<AuthorizationProvider>(
           lazy: false,
           create: (BuildContext context) => AuthorizationProvider()..init(),
@@ -77,41 +79,55 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => CarouselProvider(),
         ),
       ],
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Shelters',
-        navigatorObservers: [BotToastNavigatorObserver()],
-        theme: ThemeData(
-          primaryColor: const Color(0xff416c6d),
-          accentColor: const Color(0xff306060),
-          textTheme: _textTheme,
-          appBarTheme: AppBarTheme(
-            color: Colors.white,
-            textTheme: _textTheme,
-            iconTheme: const IconThemeData(color: Colors.black),
-            elevation: 0
-          )
-        ),
-        builder: (BuildContext context, Widget child) {
-          child = ScrollConfiguration(
-            behavior: PortfolioOverScrollBehavior(),
-            child: child,
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeState, snapshot) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Shelters',
+            navigatorObservers: [BotToastNavigatorObserver()],
+            theme: themeState.darkTheme
+            ? ThemeData.dark().copyWith(
+              accentColor: const Color(0xff306060),
+              splashColor: Theme.of(context).splashColor,
+              appBarTheme: AppBarTheme(
+                elevation: 0
+              )
+            )
+            : ThemeData(
+              primaryColor: const Color(0xff416c6d),
+              accentColor: const Color(0xff306060),
+              splashColor: const Color(0xff83b1af),
+              scaffoldBackgroundColor: const Color(0xfff6f6f6),
+              backgroundColor: const Color(0xffdfe4ea),
+              appBarTheme: AppBarTheme(
+                color: Colors.white,
+                textTheme: _textTheme,
+                iconTheme: const IconThemeData(color: Colors.black),
+                elevation: 0
+              )
+            ),
+            builder: (BuildContext context, Widget child) {
+              child = ScrollConfiguration(
+                behavior: PortfolioOverScrollBehavior(),
+                child: child,
+              );
+              child = botToastBuilder(context,child);
+              return child;
+            },
+            locale: Locale(locale),
+            localizationsDelegates: [
+              flutterI18nDelegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              const Locale('en', 'US'),
+              const Locale('ru', 'RU'),
+            ],
+            home: HomeScreen()
           );
-          child = botToastBuilder(context,child);
-          return child;
-        },
-        locale: Locale(locale),
-        localizationsDelegates: [
-          flutterI18nDelegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: [
-          const Locale('en', 'US'),
-          const Locale('ru', 'RU'),
-        ],
-        home: HomeScreen(),
+        }
       ),
     );
   }

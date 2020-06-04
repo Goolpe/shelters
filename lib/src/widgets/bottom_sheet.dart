@@ -40,7 +40,7 @@ class SheltersBottomSheet extends StatelessWidget {
             Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 borderRadius: BorderRadius.circular(16)
               ),
               margin: const EdgeInsets.all(4),
@@ -48,15 +48,15 @@ class SheltersBottomSheet extends StatelessWidget {
               child: Text(FlutterI18n.translate(context, value ?? ''), 
                 style: TextStyle(fontSize: 18, 
                   color: active 
-                  ? Colors.black
-                  : Colors.grey[600])
+                  ? Theme.of(context).textTheme.button.color
+                  : Theme.of(context).textTheme.caption.color)
               )
             ),
             if(active)
               Positioned(
                 left: 16,
                 child: Text(FlutterI18n.translate(context, title ?? ''),
-                  style: TextStyle(color: Colors.grey[600])),
+                  style: TextStyle(color: Theme.of(context).textTheme.caption.color)),
               )
           ],
         ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelters/index.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -11,13 +12,15 @@ class AnimalsProvider with ChangeNotifier{
   List<Animal> _dataList = [];
   List<Animal> get dataList => _dataList;
 
-  List<Animal> _allData = [];
+  List<Animal> _allPets = [];
+
+  List<int> _favoritePets = [];
 
   final List<String> genus = ['All','Cats','Dogs','Birds'];
 
   final List<String> gender = ['All','Male','Female'];
 
-  final List<String> title = ['All','Favorites','Yours'];
+  final List<String> title = ['All','Favorites','Your'];
 
   final List<int> _conditions = [0,0,0];
   List<int> get conditions => _conditions;
@@ -25,15 +28,21 @@ class AnimalsProvider with ChangeNotifier{
   List<int> _tempConditions = [0,0,0];
   List<int> get tempConditions => _tempConditions;
 
+  SharedPreferences _shPreferences;
+  int _userID;
+
   Future<void> init() async{
+    _shPreferences = await SharedPreferences.getInstance();
+    _userID = _shPreferences.getInt('userID') ?? 0;
+
     String _dataJson = await fetchJson('animals');
     List<dynamic> _newDataList = json.decode(_dataJson) as List<dynamic>;
 
-    _newDataList.forEach((dynamic _allDataMap){
-      _allData.add(Animal.fromJson(_allDataMap));
+    _newDataList.forEach((dynamic _allPetsMap){
+      _allPets.add(Animal.fromJson(_allPetsMap));
     });
-    
-    _dataList = List.from(_allData);
+
+    _dataList = List.from(_allPets);
 
     notifyListeners();
   }
@@ -54,19 +63,37 @@ class AnimalsProvider with ChangeNotifier{
     }
 
     _dataList.clear();
-    for(int i = 0; i < _allData.length; i++){
+    _getFavorites();
+
+    for(int i = 0; i < _allPets.length; i++){
       if(_conditions[0] != 0){
-        if(_allData[i].genus != genus[_conditions[0]]){
-          continue;
-        };
+        if(_allPets[i].genus != genus[_conditions[0]]) continue;
       }
       if(_conditions[1] != 0){
-        if(_allData[i].gender != gender[_conditions[1]]){
-          continue;
-        };
+        if(_allPets[i].gender != gender[_conditions[1]]) continue;
       }
-      _dataList.add(_allData[i]);
+      if(_conditions[2] != 0){
+        if(_conditions[2] == 1){
+          if(!_favoritePets.contains(_allPets[i].id)) continue;
+        } else{
+          if(_allPets[i].userID != _userID) continue;
+        }
+      }
+      _dataList.add(_allPets[i]);
     }
     notifyListeners();
+  }
+
+  void _getFavorites() async{
+    String _dataJson = await fetchJson('users');
+    List<dynamic> _newDataList = json.decode(_dataJson) as List<dynamic>;
+
+    for(int i = 0; i < _newDataList.length; i++){
+      User _user = User.fromJson(_newDataList[i]);
+      if(_user.id == _userID){
+        _favoritePets = List.from(_user.favorites);
+        break;
+      }
+    }
   }
 }

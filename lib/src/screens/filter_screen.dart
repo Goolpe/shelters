@@ -22,6 +22,7 @@ class _FilterScreenState extends State<FilterScreen> {
           controller: animalsState.filterController,
           maxHeight: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
           minHeight: 0,
+          color: Theme.of(context).scaffoldBackgroundColor,
           onPanelClosed: (){
             Provider.of<AnimalsProvider>(context, listen: false).cancelData();
           },
@@ -31,6 +32,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 children: [
                   SheltersAppBar(
                     title: 'Filters',
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                     automaticallyImplyLeading: false,
                     actions: [
                       IconButton(
@@ -90,7 +92,7 @@ class _FilterScreenState extends State<FilterScreen> {
                       borderRadius: BorderRadius.circular(8)
                     ),
                     color: Theme.of(context).accentColor,
-                    child: Text('Done', style: TextStyle(fontSize: 18, color: Colors.white)),
+                    child: Text(FlutterI18n.translate(context, 'Done'), style: TextStyle(fontSize: 18, color: Colors.white)),
                     onPressed: (){ 
                       Provider.of<AnimalsProvider>(context, listen: false).update();
                       Provider.of<AnimalsProvider>(context, listen: false).filterController.close();
@@ -116,13 +118,13 @@ class _FilterScreenState extends State<FilterScreen> {
             children: [
               SheltersButton(
                 height: 70,
-                color: index != animalsState.tempConditions[0] ? Colors.white : null,
-                elevation: index == animalsState.tempConditions[0] ? 0 : 10,
+                color: index != animalsState.tempConditions[0] ? Theme.of(context).cardColor : Theme.of(context).accentColor,
+                elevation: index == animalsState.tempConditions[0] ? 0 : 4,
                 child: Icon(SheltersIcon.fromString(animalsState.genus[index] ?? ''), 
                   size: 40,
                   color: index == animalsState.tempConditions[0] 
-                  ? Colors.white 
-                  : Colors.black
+                  ? Colors.white
+                  : Theme.of(context).textTheme.button.color
                 ),
                 onPressed: () => 
                   Provider.of<AnimalsProvider>(context, listen: false).updateData(0, index),
@@ -149,7 +151,7 @@ class _FilterScreenState extends State<FilterScreen> {
     return Container(
       height: 50,
       alignment: Alignment.center,
-      child: Text(title, style: TextStyle(fontSize: 18))
+      child: Text(FlutterI18n.translate(context, title ?? ''), style: TextStyle(fontSize: 18))
     );
   }
 }

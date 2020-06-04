@@ -4,7 +4,7 @@
       "name": "Admin",
       "login": "Admin",
       "password": "12345",
-      "favorites": [0,1],
+      "favorites": [2,3],
       "images": null
     },
     {

@@ -13,13 +13,12 @@ class MenuScreen extends StatelessWidget {
           builder: (context, settingsState, snapshot) {
             return Consumer<NavigationProvider>(
               builder: (context, navState, snapshot) {
-                return SafeArea(
+                return Padding(
+                  padding: const EdgeInsets.only(top: 40, bottom: 16),
                   child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: Column(
+                      alignment: Alignment.center,
+                      children: [
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SheltersMenuItem(
@@ -83,29 +82,28 @@ class MenuScreen extends StatelessWidget {
                             ),
                           ]
                         ),
-                      ),
-                      if(navState.prevId != null)
-                        Positioned(
-                          right: -(MediaQuery.of(context).size.width / 1.6),
-                          child: _miniScreen(
-                            tag: 'nav_${navState.prevId}',
-                            widget: navState.prevWidget,
-                            context: context,
-                            height: 1.4,
-                            overlay: true
-                          )
-                        ),
-                      if(navState.activeId != null)
-                        Positioned(
-                          right: -(MediaQuery.of(context).size.width / 1.4),
-                          child: _miniScreen(
-                            tag: 'nav_${navState.activeId}',
-                            widget: navState.activeWidget,
-                            context: context,
-                            height: 1.2,
-                          )
-                        ),
-                    ],
+                        if(navState.prevId != null)
+                          Positioned(
+                            right: -(MediaQuery.of(context).size.width / 1.6),
+                            child: _miniScreen(
+                              tag: 'nav_${navState.prevId}',
+                              widget: navState.prevWidget,
+                              context: context,
+                              height: 1.4,
+                              overlay: true
+                            )
+                          ),
+                        if(navState.activeId != null)
+                          Positioned(
+                            right: -(MediaQuery.of(context).size.width / 1.4),
+                            child: _miniScreen(
+                              tag: 'nav_${navState.activeId}',
+                              widget: navState.activeWidget,
+                              context: context,
+                              height: 1.2,
+                            )
+                          ),
+                      ],
                   ),
                 );
               }

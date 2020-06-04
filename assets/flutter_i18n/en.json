@@ -3,6 +3,7 @@
     "Add pet": "Add pet",
     "Age": "Age",
     "All": "All",
+    "Articles": "Articles",
     "Birds": "Birds",
     "Breed": "Breed",
     "Cancel": "Cancel",
@@ -35,5 +36,5 @@
     "Send": "Send",
     "Settings": "Settings",
     "Weight, kg": "Weight, kg",
-    "Your pets": "Your pets"
+    "Your": "Your"
 }

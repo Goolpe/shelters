@@ -62,7 +62,7 @@ class SheltersOutlineButton extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(8),
       child: ButtonTheme(
-        height: height ?? 56,
+        height: height ?? 54,
         minWidth: 50,
         child: OutlineButton(
           highlightedBorderColor: Theme.of(context).accentColor,

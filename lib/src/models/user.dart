@@ -8,6 +8,12 @@ class User{
 
   int id;
   String name;
-  List<String> images;
-  List<int> favorites;
+  List<dynamic> images;
+  List<dynamic> favorites;
+
+  User.fromJson(dynamic json)
+    : id = json['id'] as int,
+    name = json['name'] as String,
+    images = json['images'] as List<dynamic>,
+    favorites = json['favorites'] as List<dynamic>;
 }

@@ -5,7 +5,6 @@ class SheltersScaffold extends StatelessWidget {
     this.bodyList,
     this.body,
     this.appBar,
-    this.backgroundColor,
     this.panel,
     this.padding
   }) : assert(bodyList == null || body == null);
@@ -13,7 +12,6 @@ class SheltersScaffold extends StatelessWidget {
   final List<Widget> bodyList;
   final Widget body;
   final Widget appBar;
-  final Color backgroundColor;
   final Widget panel;
   final EdgeInsets padding;
 
@@ -36,14 +34,13 @@ class SheltersScaffold extends StatelessWidget {
     return Column(
       children: [
         if(appBar != null)
-          Padding(
+          Container(
             padding: EdgeInsets.only(top: 24),
             child: appBar,
           ),
         Expanded(
           child: Container(
             width: MediaQuery.of(context).size.width,
-            color: backgroundColor ?? const Color(0xfff6f6f6),
             child: body
             ?? ListView(
               physics: BouncingScrollPhysics(),

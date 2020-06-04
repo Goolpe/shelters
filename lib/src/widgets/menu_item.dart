@@ -47,7 +47,7 @@ class SheltersMenuItem extends StatelessWidget {
                   child: leading ?? Icon(icon, 
                     color: navState.activeId == id
                     ? Colors.white 
-                    : Color(0xff83b1af)
+                    : Theme.of(context).splashColor
                   ),
                 ),
                 Column(
@@ -55,16 +55,16 @@ class SheltersMenuItem extends StatelessWidget {
                   children: [
                     Text(FlutterI18n.translate(context, title ?? ''), 
                       style: TextStyle(
-                        fontSize: 18, 
+                        fontSize: 18,
                         color: textColor != null 
                         ? textColor  
                         : leading != null || navState.activeId == id
                           ? Colors.white 
-                          : Color(0xff83b1af)
+                          : Theme.of(context).splashColor
                       )
                     ),
                     if(subtitle != null)
-                      Text(subtitle, style: TextStyle(color: Color(0xff83b1af)))
+                      Text(subtitle, style: TextStyle(color: Theme.of(context).splashColor))
                   ],
                 ),
               ]

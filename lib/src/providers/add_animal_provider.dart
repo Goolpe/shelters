@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:shelters/index.dart';
 
@@ -54,6 +56,9 @@ class AddAnimalProvider with ChangeNotifier{
 
   DateTime _tempDate;
 
+  List<Asset> _images = [];
+  List<Asset> get images => _images;
+
   final List<String> pets = <String>[
     'Cats',
     'Dogs',
@@ -104,6 +109,29 @@ class AddAnimalProvider with ChangeNotifier{
 
   void changeTempDate(DateTime newDate){
     _tempDate = newDate;
+  }
+
+  Future<void> chooseImage(BuildContext context) async {
+    List<Asset> _result = [];
+    bool canceled = false;
+    try {
+      _result = await MultiImagePicker.pickImages(
+        maxImages: 4,
+        enableCamera: true,
+        selectedAssets: _images,
+      );
+    } on Exception catch (_) {
+      canceled = true;
+    }
+    if(_result != null && !canceled){
+      _images = _result;
+      notifyListeners();
+    }
+  }
+
+  removeImage(Asset data){
+    _images.remove(data);
+    notifyListeners();
   }
 
   Future<void> changeDate() async{
