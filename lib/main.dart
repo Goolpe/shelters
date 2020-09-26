@@ -1,14 +1,14 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:get/get.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelters/index.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'src/screens/index.dart';
+
+import 'package:shelters/index.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ Future<void> main() async{
     )
   );
   
-  // // //set time localization
+  //set time localization
   timeago.setLocaleMessages(_locale, selectLocale(_locale));
 
   runApp(MyApp(
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final botToastBuilder = BotToastInit();
-    TextTheme _textTheme = GoogleFonts.playTextTheme(
+    final _textTheme = GoogleFonts.playTextTheme(
       Theme.of(context).textTheme
     );
     
@@ -81,7 +81,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeState, snapshot) {
-          return GetMaterialApp(
+          return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Shelters',
             navigatorObservers: [BotToastNavigatorObserver()],
@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
             ? ThemeData.dark().copyWith(
               accentColor: const Color(0xff306060),
               splashColor: Theme.of(context).splashColor,
-              appBarTheme: AppBarTheme(
+              appBarTheme: const AppBarTheme(
                 elevation: 0
               )
             )
@@ -121,9 +121,9 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: [
-              const Locale('en', 'US'),
-              const Locale('ru', 'RU'),
+            supportedLocales: const [
+              Locale('en', 'US'),
+              Locale('ru', 'RU'),
             ],
             home: HomeScreen()
           );

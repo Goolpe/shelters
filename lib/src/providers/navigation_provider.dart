@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+
 import 'package:shelters/index.dart';
 
 class NavigationProvider extends ChangeNotifier{
@@ -12,19 +13,13 @@ class NavigationProvider extends ChangeNotifier{
   int _prevId = 6;
   int get prevId => _prevId;
 
-  Widget _activeWidget = PetsScreen();
+  Widget _activeWidget = AnimalsScreen();
   Widget get activeWidget => _activeWidget;
 
   Widget _prevWidget = SettingsScreen();
   Widget get prevWidget => _prevWidget;
 
   void openScreen(int id, Widget widget){
-
-    Get.to<Widget>(Hero(
-      tag: 'nav_$id',
-      child: widget
-    ));
-      
     if(id != _activeId){
       _prevId = _activeId;
       _prevWidget = _activeWidget;
@@ -32,7 +27,6 @@ class NavigationProvider extends ChangeNotifier{
       _activeId = id;
       _activeWidget = widget;
     }
-
     notifyListeners();
   }
 }

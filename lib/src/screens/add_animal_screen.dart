@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:shelters/index.dart';
 
+import 'package:shelters/index.dart';
 
 class AddAnimalScreen extends StatelessWidget {
 
@@ -16,24 +17,24 @@ class AddAnimalScreen extends StatelessWidget {
     return Consumer<AddAnimalProvider>(
       builder: (context, addPetState, snapshot) {
         return SheltersScaffold(
-          appBar: SheltersAppBar(
+          appBar: const SheltersAppBar(
             leadingIcon: SheltersIcon.menu,
             title: 'Add pet',
           ),
-          padding: EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           bodyList: [
             Container(
               height: 120,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 4,
-                padding: EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     child: Stack(
                       children: [
                         Container(
-                          margin: EdgeInsets.all(8),
+                          margin: const EdgeInsets.all(8),
                           child: Container(
                             height: 120,
                             width: 100,
@@ -49,7 +50,7 @@ class AddAnimalScreen extends StatelessWidget {
                                 width: 100,
                                 height: 90,
                               )
-                              : Icon(
+                              : const Icon(
                                 MdiIcons.plus,
                                 color: Colors.grey,
                                 size: 30,
@@ -65,7 +66,7 @@ class AddAnimalScreen extends StatelessWidget {
                             child: CircleAvatar(
                               radius: 16,
                               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                              child: Icon(MdiIcons.close, color: Colors.red),
+                              child: const Icon(MdiIcons.close, color: Colors.red),
                             ),
                             onTap: () =>
                               Provider.of<AddAnimalProvider>(context, listen: false).removeImage(addPetState.images[index]),
@@ -104,7 +105,7 @@ class AddAnimalScreen extends StatelessWidget {
                             return CupertinoActionSheetAction(
                               child: Text(FlutterI18n.translate(context, value)),
                               onPressed: () =>
-                                Provider.of<AddAnimalProvider>(context, listen: false).changeGender(value),
+                                Provider.of<AddAnimalProvider>(context, listen: false).changeGender(value, context),
                             );
                           }).toList()
                         )
@@ -122,7 +123,7 @@ class AddAnimalScreen extends StatelessWidget {
                             return CupertinoActionSheetAction(
                               child: Text(FlutterI18n.translate(context, value)),
                               onPressed: () =>
-                                Provider.of<AddAnimalProvider>(context, listen: false).changeGenus(value),
+                                Provider.of<AddAnimalProvider>(context, listen: false).changeGenus(value, context),
                             );
                           }).toList()
                         )
@@ -148,7 +149,7 @@ class AddAnimalScreen extends StatelessWidget {
                           datePicker: SheltersDatePicker(
                             initialDateTime: addPetState.birthday ?? DateTime.now(),
                             onDone: () => 
-                              Provider.of<AddAnimalProvider>(context, listen: false).changeDate(),
+                              Provider.of<AddAnimalProvider>(context, listen: false).changeDate(context),
                             onDateTimeChanged: (DateTime value) =>
                               Provider.of<AddAnimalProvider>(context, listen: false).changeTempDate(value),
                           ),
@@ -161,7 +162,7 @@ class AddAnimalScreen extends StatelessWidget {
                           keyboardType: TextInputType.number,
                           controller: addPetState.heightController,
                           inputFormatters: [
-                            WhitelistingTextInputFormatter(RegExp('^[1-9][0-9]*\$'))
+                            FilteringTextInputFormatter.allow(RegExp('^[1-9][0-9]*\$'))
                           ],
                           onChanged: (String value){
                             Provider.of<AddAnimalProvider>(context, listen: false).changeHeight(value);
@@ -175,7 +176,7 @@ class AddAnimalScreen extends StatelessWidget {
                           keyboardType: TextInputType.number,
                           controller: addPetState.weightController,
                           inputFormatters: [
-                            WhitelistingTextInputFormatter(RegExp('^[1-9][0-9]*\$'))
+                            FilteringTextInputFormatter.allow(RegExp('^[1-9][0-9]*\$'))
                           ],
                           onChanged: (String value){
                             Provider.of<AddAnimalProvider>(context, listen: false).changeWeight(value);

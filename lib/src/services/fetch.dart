@@ -4,6 +4,6 @@ Future<String> fetchJson(String data) async{
   try{
     return await rootBundle.loadString('assets/data/$data.json');
   } catch(err){
-    throw err;
+    rethrow;
   }
 }

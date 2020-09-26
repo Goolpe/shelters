@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+// import 'package:get/get.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
 import 'package:shelters/index.dart';
 
 class AddAnimalProvider with ChangeNotifier{
@@ -129,31 +131,29 @@ class AddAnimalProvider with ChangeNotifier{
     }
   }
 
-  removeImage(Asset data){
+  void removeImage(Asset data){
     _images.remove(data);
     notifyListeners();
   }
 
-  Future<void> changeDate() async{
-    if(_tempDate == null){
-      _tempDate = DateTime.now();
-    }
+  Future<void> changeDate(BuildContext context) async{
+    _tempDate ??= DateTime.now();
     _birthday = _tempDate;
     _age = timeago.format(_birthday);
 
-    Get.back();
+    Navigator.pop(context);
     notifyListeners();
   }
 
-  void changeGender(String newGender){
+  void changeGender(String newGender, BuildContext context){
     _gender = newGender;
-    Get.back();
+    Navigator.pop(context);
     notifyListeners();
   }
 
-  void changeGenus(String newGenus){
+  void changeGenus(String newGenus, BuildContext context){
     _genus = newGenus;
-    Get.back();
+    Navigator.pop(context);
     notifyListeners();
   }
 

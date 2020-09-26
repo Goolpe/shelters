@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
 import 'package:shelters/index.dart';
 
 class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     Future.microtask((){
       Provider.of<SettingsProvider>(context, listen: false).init(context);
     });
@@ -16,7 +18,7 @@ class SettingsScreen extends StatelessWidget {
     return Consumer<SettingsProvider>(
       builder: (BuildContext context, SettingsProvider settingsState, Widget snapshot) {
         return SheltersScaffold(
-          appBar: SheltersAppBar(
+          appBar: const SheltersAppBar(
             leadingIcon: SheltersIcon.menu,
             title: 'Settings'
           ),
@@ -49,7 +51,7 @@ class SettingsScreen extends StatelessWidget {
             // ),
             ListTile(
               title: Text(FlutterI18n.translate(context, 'Language')),
-              trailing: Text(settingsState.currentLang.language ?? '', style: TextStyle(fontSize: 16)),
+              trailing: Text(settingsState.currentLang.language ?? '', style: const TextStyle(fontSize: 16)),
               onTap: (){
                 showCupertinoModalPopup(
                   context: context,
@@ -75,11 +77,19 @@ class SettingsScreen extends StatelessWidget {
             ),
             ListTile(
               title: Text(FlutterI18n.translate(context, 'About App')),
-              onTap: () => Get.to<Widget>(AboutAppScreen(), transition: Transition.cupertino),
+              onTap: () => Navigator.push(context, 
+                MaterialPageRoute(builder: (context) =>
+                  AboutAppScreen(),
+                )
+              )
             ),
             ListTile(
               title: Text(FlutterI18n.translate(context, 'Comments & Suggestions')),
-              onTap: () => Get.to<Widget>(ReviewScreen(), transition: Transition.cupertino),
+              onTap: () => Navigator.push(context, 
+                MaterialPageRoute(builder: (context) => 
+                  ReviewScreen()
+                )
+              ),
             ),
           ],
         );

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:shelters/index.dart';
 
 class ReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {   
-    return SheltersScaffold(
+    return const SheltersScaffold(
       appBar: SheltersAppBar(
         title: 'Review',
       ),

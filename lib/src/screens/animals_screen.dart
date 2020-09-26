@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
+
 import 'package:shelters/index.dart';
 
-class PetsScreen extends StatelessWidget {
+class AnimalsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - 180) / 2;
     final double itemWidth = size.width / 2;
 
@@ -25,41 +27,32 @@ class PetsScreen extends StatelessWidget {
               //   Provider.of<AnimalsProvider>(context, listen: false).filterController.open(),
               // ),
               IconButton(
-                icon: Icon(MdiIcons.tune),
+                icon: const Icon(MdiIcons.tune),
                 onPressed: () => 
                 Provider.of<AnimalsProvider>(context, listen: false).filterController.open(),
               ),
             ]
           ),
           bodyList: [
-            GridView.count(
-              // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              //   crossAxisCount: 3,
-              //   childAspectRatio: 0.8
-              // ),
-              // itemCount: animalsState.dataList.length,
-              crossAxisCount: 3,
+            GridView.builder(
               shrinkWrap: true,
               padding: EdgeInsets.zero,
-              physics: NeverScrollableScrollPhysics(),
-              childAspectRatio: itemWidth / itemHeight,
-              children: animalsState.dataList.map((data) => AnimalMiniCard(
-                tag: 'tag_animals_${data.id}',
-                data: data
-              )).toList(),
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 0,
+                childAspectRatio: itemWidth / itemHeight
+              ),
+              itemCount: animalsState.dataList.length,
+              itemBuilder: (context, index){
+                final _data = animalsState.dataList[index];
+                return AnimalMiniCard(
+                  tag: 'tag_animals_${_data.id}',
+                  data: _data
+                );
+              }
             ),
-            // ListView.builder(
-            //   shrinkWrap: true,
-            //   physics: NeverScrollableScrollPhysics(),
-            //   padding: EdgeInsets.zero,
-            //   itemCount: animalsState.dataList.length,
-            //   itemBuilder: (context, index) {
-            //     return AnimalMiniCard(
-            //       tag: 'tag_animals_$index',
-            //       data: animalsState.dataList[index]
-            //     );
-            //   },
-            // )
           ],
           panel: FilterScreen()
         );

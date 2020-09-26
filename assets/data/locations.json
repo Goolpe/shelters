@@ -1,0 +1,16 @@
+[
+    {
+      "id": 0,
+      "name": "Russia",
+      "regions": [
+        {
+          "regionID": 0,
+          "city": "Saint-Petersburg"
+        },
+        {
+          "regionID": 1,
+          "city": "Moscow"
+        }
+      ]
+    }
+  ]

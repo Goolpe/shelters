@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 class SheltersButton extends StatelessWidget {
@@ -23,7 +24,7 @@ class SheltersButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: ButtonTheme(
         height: height ?? 56,
         minWidth: 70,
@@ -37,7 +38,7 @@ class SheltersButton extends StatelessWidget {
             )
           ),
           child: child ?? Text(FlutterI18n.translate(context, title ?? ''), 
-            style: TextStyle(color: Colors.white, fontSize: 18)
+            style: const TextStyle(color: Colors.white, fontSize: 18)
           ),
           onPressed: onPressed ?? (){},
         ),
@@ -47,7 +48,7 @@ class SheltersButton extends StatelessWidget {
 }
 
 class SheltersOutlineButton extends StatelessWidget {
-  SheltersOutlineButton({
+  const SheltersOutlineButton({
     this.height,
     this.icon,
     this.title
@@ -60,21 +61,21 @@ class SheltersOutlineButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: ButtonTheme(
         height: height ?? 54,
         minWidth: 50,
         child: OutlineButton(
           highlightedBorderColor: Theme.of(context).accentColor,
           borderSide: BorderSide(color: Theme.of(context).accentColor),
-          shape: RoundedRectangleBorder(
-            borderRadius: const BorderRadius.all(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
               Radius.circular(16)
             )
           ),
           color: Theme.of(context).accentColor,
           textColor: Theme.of(context).accentColor,
-          child: icon != null ? Icon(icon) : Text(title, style: TextStyle(fontSize: 24)),
+          child: icon != null ? Icon(icon) : Text(title, style: const TextStyle(fontSize: 24)),
           onPressed: (){},
         ),
       )

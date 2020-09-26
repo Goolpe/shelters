@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
+
 import 'package:shelters/index.dart';
 
 class SheltersMenuItem extends StatelessWidget {
-  SheltersMenuItem({
+  const SheltersMenuItem({
     @required this.id,
     this.widget,
     this.icon,
     this.title,
     this.subtitle,
     this.leading,
-    this.authorized = true,
     this.textColor,
     this.onTap,
     this.contentPadding
   }) : assert(
-    id != null && authorized != null,
+    id != null,
     widget != null || onTap != null
   );
 
@@ -26,7 +27,6 @@ class SheltersMenuItem extends StatelessWidget {
   final String subtitle;
   final Widget leading;
   final Widget widget;
-  final bool authorized;
   final Color textColor;
   final Function() onTap;
   final EdgeInsets contentPadding;
@@ -64,16 +64,23 @@ class SheltersMenuItem extends StatelessWidget {
                       )
                     ),
                     if(subtitle != null)
-                      Text(subtitle, style: TextStyle(color: Theme.of(context).splashColor))
+                      Text(FlutterI18n.translate(context, subtitle ?? ''), style: TextStyle(color: Theme.of(context).splashColor))
                   ],
                 ),
               ]
             ),
           ),
-          onTap: onTap ?? () =>
-            !authorized 
-            ? Provider.of<LoginProvider>(context, listen: false).open()
-            : Provider.of<NavigationProvider>(context, listen: false).openScreen(id, widget)
+          onTap: onTap ?? () {
+            Navigator.push(context, 
+              MaterialPageRoute(builder: (context) => 
+                Hero(
+                  tag: 'nav_$id',
+                  child: widget
+                )
+              )
+            );
+            Provider.of<NavigationProvider>(context, listen: false).openScreen(id, widget);
+          }
         );
       }
     );

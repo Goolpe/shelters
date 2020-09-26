@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:shelters/index.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import 'package:shelters/index.dart';
+
 class AnimalScreen extends StatelessWidget {
-  AnimalScreen({
+  const AnimalScreen({
     @required this.tag,
     @required this.data
   }) : assert(data != null);
@@ -24,7 +25,7 @@ class AnimalScreen extends StatelessWidget {
       body: Consumer<CarouselProvider>(
         builder: (context, carouselState, snapshot) {
           return ListView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             padding: EdgeInsets.zero,
             children: [
               Stack(
@@ -40,7 +41,7 @@ class AnimalScreen extends StatelessWidget {
                     child: ShowUp(
                       delay: 300,
                       child: Text(data.name, 
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white, 
                           fontSize: 32
                         )
@@ -61,10 +62,6 @@ class AnimalScreen extends StatelessWidget {
                         child: Wrap(
                           spacing: 10.0,
                           children: [
-                            _sheltersChip(
-                              avatar: MdiIcons.paw,
-                              label: data.genus,
-                            ),
                             _sheltersChip(
                               avatar: data.gender == 'Female' 
                               ? MdiIcons.genderFemale : MdiIcons.genderMale,
@@ -90,21 +87,28 @@ class AnimalScreen extends StatelessWidget {
                         )
                       )
                     ),
+                    const ShowUp(
+                      delay: 600,
+                      child: ListTile(
+                        title: Text('Saint-Petersburg'),
+                        trailing: Icon(MdiIcons.mapMarker)
+                      ),
+                    ),
                     ShowUp(
                       delay: 500,
                       child: SheltersMenuItem(
                         id: 0,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 8),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                         leading: CircleAvatar(
                           radius: 18,
                           backgroundColor: Theme.of(context).accentColor,
-                          child: Icon(MdiIcons.camera, size: 18, color: Colors.white)
+                          child: const Icon(MdiIcons.camera, size: 18, color: Colors.white)
                         ),
                         textColor: Theme.of(context).textTheme.button.color,
                         icon: MdiIcons.faceProfile,
-                        title: 'Arthur Khabirov',
-                        subtitle: 'owner',
-                        onTap: () => Get.to(ProfileScreen())
+                        title: 'Ржевка',
+                        subtitle: 'Shelter',
+                        onTap: (){}
                       ),
                     ),
                     if(data.comment != null && data.comment.isNotEmpty)
@@ -118,7 +122,7 @@ class AnimalScreen extends StatelessWidget {
                     ShowUp(
                       delay: 600,
                       child: Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: SheltersButton(
                               title: 'Pets',
@@ -146,12 +150,12 @@ class AnimalScreen extends StatelessWidget {
   })
   {
       return label == null || label.isEmpty
-      ? SizedBox()
+      ? const SizedBox.shrink()
       : Builder(
         builder: (context) {
           return Chip(
             backgroundColor: Theme.of(context).backgroundColor,
-            labelPadding: EdgeInsets.all(2),
+            labelPadding: const EdgeInsets.all(2),
             avatar: Icon(avatar),
             label: Text(label ?? '')
           );

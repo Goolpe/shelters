@@ -1,11 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:shelters/index.dart';
 
 class AnimalMiniCard extends StatelessWidget {
   const AnimalMiniCard({
-    this.tag,
+    @required this.tag,
     @required this.data,
   }) : assert(tag != null);
 
@@ -14,39 +15,34 @@ class AnimalMiniCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(8),
-      child: GestureDetector(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Hero(
-                tag: tag,
-                child: Container(
-                  height: 120,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(16)),
-                    color: Colors.white,
-                    image: data.images != null && data.images.isNotEmpty
-                    ? DecorationImage(
-                      fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(data.images[0])
-                    )
-                    : SizedBox()
-                  ),
-                ),
-              ),
+
+    return GestureDetector(
+      child: Column(
+        children: [
+          Container(
+            height: 120,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+              color: Colors.white,
+              image: data.images != null && data.images.isNotEmpty
+              ? DecorationImage(
+                fit: BoxFit.cover,
+                image: CachedNetworkImageProvider(data.images[0])
+              )
+              : const SizedBox.shrink()
             ),
-            Text(data.name)
-          ],
-        ),
-        onTap: () => Get.to<Widget>(
+          ),
+          const SizedBox(height: 8),
+          Text(data.name)
+        ],
+      ),
+      onTap: () => Navigator.push(context, 
+        MaterialPageRoute(builder: (context) =>
           AnimalScreen(
             tag: tag,
             data: data,
           )
-        ),
+        )
       ),
     );
   }

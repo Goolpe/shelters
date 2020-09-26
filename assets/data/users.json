@@ -5,14 +5,16 @@
       "login": "Admin",
       "password": "12345",
       "favorites": [2,3],
+      "companyID": 0,
       "images": null
     },
     {
       "id": 1,
-      "name": "Nastya",
-      "login": "Nastya",
+      "name": "Moderator",
+      "login": "Moderator",
       "password": "12345",
       "favorites": null,
+      "companyID": 0,
       "images": null
     }
   ]

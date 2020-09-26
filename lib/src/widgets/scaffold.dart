@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SheltersScaffold extends StatelessWidget {
-  SheltersScaffold({
+  const SheltersScaffold({
     this.bodyList,
     this.body,
     this.appBar,
@@ -23,7 +23,7 @@ class SheltersScaffold extends StatelessWidget {
         body: Stack(
           children: <Widget>[
             _child(context),
-            panel ?? const SizedBox()
+            panel ?? const SizedBox.shrink()
           ]
         )
       )
@@ -35,7 +35,7 @@ class SheltersScaffold extends StatelessWidget {
       children: [
         if(appBar != null)
           Container(
-            padding: EdgeInsets.only(top: 24),
+            padding: const EdgeInsets.only(top: 24),
             child: appBar,
           ),
         Expanded(
@@ -43,7 +43,7 @@ class SheltersScaffold extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: body
             ?? ListView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               padding: padding ?? const EdgeInsets.all(8),
               children: bodyList
             )

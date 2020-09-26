@@ -1,13 +1,14 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+import 'package:extended_image/extended_image.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:shelters/index.dart';
 import 'package:share/share.dart';
 
+import 'package:shelters/index.dart';
+
 class SheltersAnimalImage extends StatelessWidget {
-  SheltersAnimalImage({
+  const SheltersAnimalImage({
     @required this.tag,
     @required this.images
   }) : assert(tag != null);
@@ -74,11 +75,11 @@ class SheltersAnimalImage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      icon: Icon(MdiIcons.chevronLeft, size: 40, color: Colors.white,),
-                      onPressed: () => Get.back(),
+                      icon: const Icon(MdiIcons.chevronLeft, size: 40, color: Colors.white,),
+                      onPressed: () => Navigator.pop(context),
                     ),
                     IconButton(
-                      icon: Icon(MdiIcons.shareVariant, size: 30, color: Colors.white),
+                      icon: const Icon(MdiIcons.shareVariant, size: 30, color: Colors.white),
                       onPressed: () => Share.share('check my github https://github.com/Goolpe'),
                     )
                   ],

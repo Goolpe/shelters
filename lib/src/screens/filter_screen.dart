@@ -1,18 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:shelters/index.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class FilterScreen extends StatefulWidget {
+import 'package:shelters/index.dart';
 
-  @override
-  _FilterScreenState createState() => _FilterScreenState();
-}
-
-class _FilterScreenState extends State<FilterScreen> {
+class FilterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +24,10 @@ class _FilterScreenState extends State<FilterScreen> {
           },
           panel: Stack(
             children: [
-              Column(
+              ListView(
+                shrinkWrap: true,
+                padding: EdgeInsets.zero,
+                physics: const BouncingScrollPhysics(),
                 children: [
                   SheltersAppBar(
                     title: 'Filters',
@@ -36,7 +35,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     automaticallyImplyLeading: false,
                     actions: [
                       IconButton(
-                        icon: Icon(MdiIcons.close),
+                        icon: const Icon(MdiIcons.close),
                         onPressed: () => 
                         Provider.of<AnimalsProvider>(context, listen: false).filterController.close(),
                       )
@@ -47,35 +46,50 @@ class _FilterScreenState extends State<FilterScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Container(
-                          margin: EdgeInsets.all(8),
+                        SheltersFilterItem(
                           child: CupertinoSlidingSegmentedControl(
                             groupValue: animalsState.tempConditions[2],
                             onValueChanged: (int index){
-                              Provider.of<AnimalsProvider>(context, listen: false).updateData(2, index);
+                              Provider.of<AnimalsProvider>(context, listen: false).updateTempData(2, index);
                             },
-                            children: _getMap(animalsState.title),
+                            children: _getMap(animalsState.title, context),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(FlutterI18n.translate(context, 'Genus'), style: TextStyle(fontSize: 18)),
+                        SheltersFilterItem(
+                          title: 'Location',
+                          child: GestureDetector(
+                            child: Container(
+                              height: 50,
+                              alignment: Alignment.centerLeft,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Theme.of(context).cardColor
+                              ),
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text(animalsState.location[animalsState.tempConditions[3]], 
+                                style: const TextStyle(fontSize: 18),)
+                            ),
+                            onTap: () => Navigator.push(context, 
+                              MaterialPageRoute(builder: (context) =>
+                                SearchScreen()
+                              ),
+                            )
+                          )
                         ),
-                        _shortPets(animalsState),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(FlutterI18n.translate(context, 'Gender'), style: TextStyle(fontSize: 18)),
+                        SheltersFilterItem(
+                          title: 'Genus',
+                          child: _shortPets(animalsState),
                         ),
-                        Container(
-                          margin: EdgeInsets.all(8),
+                        SheltersFilterItem(
+                          title: 'Gender',
                           child: CupertinoSlidingSegmentedControl(
                             groupValue: animalsState.tempConditions[1],
                             onValueChanged: (int index){
-                              Provider.of<AnimalsProvider>(context, listen: false).updateData(1, index);
+                              Provider.of<AnimalsProvider>(context, listen: false).updateTempData(1, index);
                             },
-                            children: _getMap(animalsState.gender),
+                            children: _getMap(animalsState.gender, context),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   )
@@ -92,9 +106,9 @@ class _FilterScreenState extends State<FilterScreen> {
                       borderRadius: BorderRadius.circular(8)
                     ),
                     color: Theme.of(context).accentColor,
-                    child: Text(FlutterI18n.translate(context, 'Done'), style: TextStyle(fontSize: 18, color: Colors.white)),
+                    child: Text(FlutterI18n.translate(context, 'Done'), style: const TextStyle(fontSize: 18, color: Colors.white)),
                     onPressed: (){ 
-                      Provider.of<AnimalsProvider>(context, listen: false).update();
+                      Provider.of<AnimalsProvider>(context, listen: false).updateData();
                       Provider.of<AnimalsProvider>(context, listen: false).filterController.close();
                     }
                   ),
@@ -127,7 +141,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   : Theme.of(context).textTheme.button.color
                 ),
                 onPressed: () => 
-                  Provider.of<AnimalsProvider>(context, listen: false).updateData(0, index),
+                  Provider.of<AnimalsProvider>(context, listen: false).updateTempData(0, index),
               ),
               Text(FlutterI18n.translate(context, animalsState.genus[index]))
             ],
@@ -137,21 +151,21 @@ class _FilterScreenState extends State<FilterScreen> {
     );
   }
 
-  Map<int, Widget> _getMap(List<String> data){
-    Map<int, Widget> _result = {};
+  Map<int, Widget> _getMap(List<String> data, BuildContext context){
+    final _result = <int, Widget>{};
 
     for(int i = 0; i < data.length; i++){
-      _result[i] = _segmentControl(data[i]);
+      _result[i] = _segmentControl(data[i], context);
     }
 
     return _result;
   }
 
-  Widget _segmentControl(String title){
+  Widget _segmentControl(String title, BuildContext context){
     return Container(
       height: 50,
       alignment: Alignment.center,
-      child: Text(FlutterI18n.translate(context, title ?? ''), style: TextStyle(fontSize: 18))
+      child: Text(FlutterI18n.translate(context, title ?? ''), style: const TextStyle(fontSize: 18))
     );
   }
 }

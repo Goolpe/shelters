@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class LoginProvider extends ChangeNotifier{

@@ -16,6 +16,8 @@ class Animal{
 
   int id;
   int userID;
+  int countryID;
+  int regionID;
   String name;
   String gender;
   String genus;
@@ -30,6 +32,8 @@ class Animal{
   Animal.fromJson(dynamic json)
     : id = json['id'] as int,
     userID = json['userID'] as int,
+    countryID = json['countryID'] as int,
+    regionID = json['regionID'] as int,
     name = json['name'] as String,
     gender = json['gender'] as String,
     genus = json['genus'] as String,

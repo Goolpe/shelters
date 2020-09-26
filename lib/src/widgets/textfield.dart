@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_i18n/flutter_i18n.dart';
 
 class SheltersTextfield extends StatelessWidget {
-  SheltersTextfield({
+  const SheltersTextfield({
     this.label,
     this.maxLines,
     this.maxLength,
@@ -38,7 +39,7 @@ class SheltersTextfield extends StatelessWidget {
           border: const OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.all(
-              Radius.circular(16),
+              Radius.circular(8),
             ),
           ),
           alignLabelWithHint: maxLines == null ? false : maxLines > 1,
@@ -47,7 +48,7 @@ class SheltersTextfield extends StatelessWidget {
           fillColor: Theme.of(context).cardColor,
           filled: true,
         ),
-        style: TextStyle(fontSize: 18),
+        style: const TextStyle(fontSize: 18),
         textCapitalization: TextCapitalization.sentences,
         keyboardType: keyboardType ?? TextInputType.text,
         inputFormatters: inputFormatters

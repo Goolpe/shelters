@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class SheltersAppBar extends StatelessWidget {
-  SheltersAppBar({
+  const SheltersAppBar({
     this.pretitle,
     this.title,
     this.actions,
@@ -33,8 +33,8 @@ class SheltersAppBar extends StatelessWidget {
       leading: automaticallyImplyLeading
       ? IconButton(
         icon: Icon(leadingIcon ?? MdiIcons.chevronLeft),
-        onPressed: () => Get.back(),
-      ) : SizedBox(),
+        onPressed: () => Navigator.pop(context),
+      ) : const SizedBox.shrink(),
       actions: actions,
     );
   }

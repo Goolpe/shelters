@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:shelters/index.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+import 'package:shelters/index.dart';
 
 class LoginScreen extends StatelessWidget {
 
@@ -21,7 +23,7 @@ class LoginScreen extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 actions: [
                   IconButton(
-                    icon: Icon(MdiIcons.close),
+                    icon: const Icon(MdiIcons.close),
                     onPressed: () => Provider.of<LoginProvider>(context, listen: false).close(),
                   )
                 ]

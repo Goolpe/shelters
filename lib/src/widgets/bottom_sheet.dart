@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:get/get.dart';
 
 class SheltersDatePicker{
   SheltersDatePicker({
@@ -16,7 +16,7 @@ class SheltersDatePicker{
 }
 
 class SheltersBottomSheet extends StatelessWidget {
-  SheltersBottomSheet({
+  const SheltersBottomSheet({
     this.active = false,
     this.title,
     this.value,
@@ -33,7 +33,7 @@ class SheltersBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(4),
+      padding: const EdgeInsets.all(4),
       child: GestureDetector(
         child: Stack(
           children: [
@@ -44,7 +44,7 @@ class SheltersBottomSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16)
               ),
               margin: const EdgeInsets.all(4),
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 12),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
               child: Text(FlutterI18n.translate(context, value ?? ''), 
                 style: TextStyle(fontSize: 18, 
                   color: active 
@@ -76,13 +76,13 @@ class SheltersBottomSheet extends StatelessWidget {
                         FlatButton(
                           textColor: Colors.blue,
                           child: Text(FlutterI18n.translate(context, 'Cancel'),
-                           style: TextStyle(fontSize: 18)),
-                          onPressed: () => Get.back(),
+                           style: const TextStyle(fontSize: 18)),
+                          onPressed: () => Navigator.pop(context),
                         ),
                         FlatButton(
                           textColor: Colors.blue,
                           child: Text(FlutterI18n.translate(context, 'Done'),
-                            style: TextStyle(fontSize: 18)),
+                            style: const TextStyle(fontSize: 18)),
                           onPressed: datePicker.onDone
                         )
                       ],
